@@ -16,8 +16,9 @@
   #intro-skip { position:absolute; bottom:32px; right:40px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:4px; color:rgba(255,255,255,0.3); text-transform:uppercase; pointer-events:none; }
 
   /* HERO */
-  .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 40px 80px; position:relative; overflow:hidden; padding-top:65px; }
-  .hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 70% 40%,rgba(224,26,45,.07),transparent 70%),linear-gradient(180deg,#080808,#0a0404); }
+  .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 40px 80px; position:relative; overflow:hidden; padding-top:65px; background:var(--bg); }
+  .hero-bg { position:absolute; inset:0; background:#080808; }
+  .hero-overlay { position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 70% 40%,rgba(224,26,45,.07),transparent 70%); }
   .hero-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(224,26,45,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(224,26,45,.03) 1px,transparent 1px); background-size:60px 60px; mask-image:radial-gradient(ellipse at center,transparent 30%,black 80%); }
   .ticker { position:absolute; top:65px; left:0; right:0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); overflow:hidden; height:25px; display:flex; align-items:center; background:rgba(224,26,45,.03); }
   .ticker-track { display:flex; gap:60px; animation:tick 32s linear infinite; white-space:nowrap; font-size:9px; letter-spacing:3px; color:var(--red); opacity:.55; padding-left:100%; }
@@ -81,10 +82,18 @@
   .act-link::after { content:'→'; }
 
   @media(max-width:768px){
-    .hero { padding:0 20px 56px; }
+    .hero { padding:0 24px 60px; justify-content:center; padding-top:100px; }
+    .h-kicker { font-size:10px; letter-spacing:3px; }
+    .h-title { font-size:clamp(56px,18vw,88px); }
+    .h-title .sub { font-size:14px; letter-spacing:2px; }
+    .h-desc { font-size:13px; letter-spacing:1px; max-width:100%; }
+    .h-cta { gap:14px; }
+    .h-cta .btn { font-size:12px; padding:14px 24px; }
+    .h-cta .btn-g { font-size:12px; }
     .latest-grid { grid-template-columns:1fr 1fr; }
     .act-grid { grid-template-columns:1fr; }
     .h-stats { display:none; }
+    .scroll-h { display:none; }
   }
 </style>
 </head>
@@ -114,6 +123,7 @@
 <!-- HERO -->
 <div class="hero">
   <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
   <div class="hero-grid"></div>
   <div class="ticker">
     <div class="ticker-track">
@@ -327,9 +337,12 @@ function setLang(lang) {
 const introEl = document.getElementById('intro');
 const introVideo = document.getElementById('intro-video');
 function endIntro() {
-  introEl.style.transition = 'opacity 0.8s ease';
+  introEl.style.transition = 'opacity 0.6s ease';
   introEl.style.opacity = '0';
-  setTimeout(()=>{ introEl.style.display='none'; }, 800);
+  setTimeout(()=>{
+    introEl.style.display='none';
+    introEl.remove();
+  }, 650);
 }
 function introClick() { if(introVideo.paused) introVideo.play(); }
 introVideo.addEventListener('ended', endIntro);

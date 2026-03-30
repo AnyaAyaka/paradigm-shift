@@ -71,4 +71,6 @@ footer { border-top:1px solid var(--border); padding:24px 40px; display:flex; ju
   .nav-links { display:none; }
   section { padding:60px 20px; }
   footer { flex-direction:column; gap:14px; text-align:center; padding:20px; }
+  .lbtn { font-size:12px; padding:7px 14px; }
+  .logo-name { font-size:16px; letter-spacing:3px; }
 }
