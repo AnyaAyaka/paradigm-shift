@@ -157,41 +157,41 @@
   <div class="latest-grid">
 
     <a href="films.html" class="lc">
-      <div class="lbg" style="background-image:url('echoes.jpg');background-size:cover;background-position:center top;"></div>
+      <div class="lbg" style="background-image:url('tuner.jpg');background-size:cover;background-position:center;"></div>
       <div class="award-badge" id="l1-badge"></div>
       <div class="lov">
-        <div class="lcity">LOS ANGELES</div>
-        <div class="lyear">2025</div>
-        <div class="ltitle">ECHOES</div>
+        <div class="ltitle">THE TUNER</div>
         <div class="lgenre" id="l1-genre"></div>
         <div class="ltags">
-          <span class="ltag" id="l1-t1"></span>
-          <span class="ltag" id="l1-t2"></span>
+          <span class="ltag">Yes We Cannes</span>
           <span class="ltag">Filmapalooza 2026</span>
         </div>
       </div>
     </a>
 
     <a href="films.html" class="lc">
-      <div class="lbg" style="background-image:url('phoenix.jpg');background-size:cover;background-position:center;"></div>
+      <div class="lbg"></div>
       <div class="lov">
-        <div class="lcity">LONDON</div>
-        <div class="lyear">2024</div>
-        <div class="ltitle">PHOENIX</div>
+        <div class="lcity">LOS ANGELES</div>
+        <div class="lyear">2025</div>
+        <div class="ltitle">@SMILE</div>
         <div class="lgenre" id="l2-genre"></div>
-        <div class="ltags"><span class="ltag">48HFP London</span></div>
+        <div class="ltags"><span class="ltag">48HFP LA</span></div>
       </div>
     </a>
 
     <a href="films.html" class="lc">
-      <div class="lbg"></div>
+      <div class="lbg" style="background-image:url('echoes.jpg');background-size:cover;background-position:center top;"></div>
       <div class="award-badge" id="l3-badge"></div>
       <div class="lov">
         <div class="lcity">LOS ANGELES</div>
-        <div class="lyear">2023</div>
-        <div class="ltitle">MetamoRphose</div>
+        <div class="lyear">2025</div>
+        <div class="ltitle">ECHOES</div>
         <div class="lgenre" id="l3-genre"></div>
-        <div class="ltags"><span class="ltag" id="l3-t1"></span></div>
+        <div class="ltags">
+          <span class="ltag" id="l3-t1"></span>
+          <span class="ltag">Filmapalooza 2026</span>
+        </div>
       </div>
     </a>
 
@@ -252,9 +252,9 @@ const T = {
     heroCta: '<a href="films.html" class="btn">View Films</a><a href="about.html" class="btn-g">About the Director</a>',
     stat1: 'Best Film', stat2: 'Cities', scrollTxt: 'SCROLL',
     latestLbl: 'Latest Works', latestTtl: 'RECENT FILMS',
-    l1Badge: '★ BEST FILM', l1Genre: 'Adventure / Sci-Fi', l1T1: 'Best Film', l1T2: 'Best Cinematography',
-    l2Genre: 'Action / Fantasy',
-    l3Badge: '★ 2ND PLACE', l3Genre: 'Drama', l3T1: '2nd Place Best Film',
+    l1Badge: '★ Filmapalooza 2026', l1Genre: 'Supernatural',
+    l2Genre: 'Action Thriller',
+    l3Badge: '★ BEST FILM', l3Genre: 'Adventure / Sci-Fi', l3T1: 'Best Film',
     viewAll: 'View All Films',
     actLbl: 'What We Do', actTtl: 'ACTIVITIES',
     act1Cat: 'SHORT FILM', act1Desc: 'Competing in the 48 Hour Film Project across Tokyo, Los Angeles, and London — writing, shooting, editing, and scoring a complete short film in just 48 hours.', act1Link: 'View Films',
@@ -271,9 +271,9 @@ const T = {
     heroCta: '<a href="films.html" class="btn">作品を見る</a><a href="about.html" class="btn-g">監督について</a>',
     stat1: '最優秀作品賞', stat2: '参加都市', scrollTxt: 'スクロール',
     latestLbl: '最新作品', latestTtl: '最近の作品',
-    l1Badge: '★ 最優秀作品賞', l1Genre: 'アドベンチャー / SF', l1T1: '最優秀作品賞', l1T2: '最優秀撮影賞',
-    l2Genre: 'アクション / ファンタジー',
-    l3Badge: '★ 第2位', l3Genre: 'ドラマ', l3T1: '準最優秀作品賞',
+    l1Badge: '★ Filmapalooza 2026', l1Genre: 'スーパーナチュラル',
+    l2Genre: 'アクション・スリラー',
+    l3Badge: '★ 最優秀作品賞', l3Genre: 'アドベンチャー / SF', l3T1: '最優秀作品賞',
     viewAll: '全作品を見る',
     actLbl: '活動内容', actTtl: '活動概要',
     act1Cat: '短編映画', act1Desc: '東京、ロサンゼルス、ロンドンの48時間映画祭に参加。48時間で脚本・撮影・編集・音楽を完成させる。', act1Link: '作品を見る',
@@ -304,12 +304,10 @@ function render(lang) {
   document.getElementById('latest-ttl').textContent = t.latestTtl;
   document.getElementById('l1-badge').textContent = t.l1Badge;
   document.getElementById('l1-genre').textContent = t.l1Genre;
-  document.getElementById('l1-t1').textContent = t.l1T1;
-  document.getElementById('l1-t2').textContent = t.l1T2;
   document.getElementById('l2-genre').textContent = t.l2Genre;
   document.getElementById('l3-badge').textContent = t.l3Badge;
   document.getElementById('l3-genre').textContent = t.l3Genre;
-  document.getElementById('l3-t1').textContent = t.l3T1;
+  const l3t1 = document.getElementById('l3-t1'); if(l3t1) l3t1.textContent = t.l3T1;
   document.getElementById('view-all-btn').textContent = t.viewAll;
   document.getElementById('act-lbl').textContent = t.actLbl;
   document.getElementById('act-ttl').textContent = t.actTtl;
