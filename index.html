@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PARADIGM SHIFT | Official</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #E01A2D;
+    --white: #F0EDE8;
+    --off: #8a8078;
+    --bg: #080808;
+    --panel: #0c0c0c;
+    --border: rgba(224,26,45,0.25);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--bg); color:var(--white); font-family:'Share Tech Mono',monospace; overflow-x:hidden; cursor:crosshair; }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background:repeating-linear-gradient(to bottom,rgba(255,255,255,0.012) 0px,rgba(255,255,255,0.012) 1px,transparent 1px,transparent 3px);
+    pointer-events:none; z-index:9999;
+  }
+  body.ja { font-family:'Noto Sans JP',sans-serif; }
+
+  /* INTRO */
+  #intro {
+    position:fixed; inset:0; z-index:9000; background:#000;
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
+    cursor:pointer;
+  }
+  #intro video { width:100%; height:100%; object-fit:cover; }
+  #intro-skip {
+    position:absolute; bottom:32px; right:40px;
+    font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:4px;
+    color:rgba(255,255,255,0.3); text-transform:uppercase;
+    pointer-events:none;
+  }
+
+  /* NAV */
+  .navbar {
+    position:fixed; top:0; left:0; right:0; z-index:2000;
+    background:rgba(8,8,8,0.94); border-bottom:1px solid var(--border);
+    backdrop-filter:blur(8px);
+    display:flex; align-items:center; justify-content:space-between; padding:14px 40px;
+  }
+  .logo { display:flex; align-items:center; gap:12px; }
+  .logo-icon {
+    width:34px; height:34px; border:2px solid var(--red); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Bebas Neue',sans-serif; font-size:11px; color:var(--red); letter-spacing:1px;
+    animation:pulse 3s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{box-shadow:0 0 0 0 rgba(224,26,45,.4)} 50%{box-shadow:0 0 0 6px rgba(224,26,45,0)} }
+  .logo-name { font-family:'Bebas Neue',sans-serif; font-size:19px; letter-spacing:4px; }
+  .logo-name span { color:var(--red); }
+  .nav-r { display:flex; align-items:center; gap:28px; }
+  .nav-links { display:flex; gap:24px; }
+  .nav-links a { color:var(--off); text-decoration:none; font-size:10px; letter-spacing:3px; text-transform:uppercase; transition:color .2s; }
+  .nav-links a:hover { color:var(--white); }
+  .lswitch { display:flex; border:1px solid var(--border); }
+  .lbtn { background:none; border:none; color:var(--off); font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; padding:5px 11px; cursor:pointer; transition:all .2s; }
+  .lbtn.on { background:var(--red); color:var(--white); }
+
+  /* HERO */
+  .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 40px 80px; position:relative; overflow:hidden; padding-top:65px; }
+  .hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 70% 40%,rgba(224,26,45,.07),transparent 70%),linear-gradient(180deg,#080808,#0a0404); }
+  .hero-grid {
+    position:absolute; inset:0;
+    background-image:linear-gradient(rgba(224,26,45,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(224,26,45,.03) 1px,transparent 1px);
+    background-size:60px 60px; mask-image:radial-gradient(ellipse at center,transparent 30%,black 80%);
+  }
+  .ticker { position:absolute; top:65px; left:0; right:0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); overflow:hidden; height:25px; display:flex; align-items:center; background:rgba(224,26,45,.03); }
+  .ticker-track { display:flex; gap:60px; animation:tick 32s linear infinite; white-space:nowrap; font-size:9px; letter-spacing:3px; color:var(--red); opacity:.55; padding-left:100%; }
+  @keyframes tick{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  .hud-tr { position:absolute; top:100px; right:40px; font-size:9px; letter-spacing:3px; color:var(--red); opacity:.35; }
+  .hud-c { position:absolute; width:16px; height:16px; opacity:.25; }
+  .hud-c.tl { top:98px; left:40px; border-top:1px solid var(--red); border-left:1px solid var(--red); }
+  .hud-c.br { bottom:84px; right:40px; border-bottom:1px solid var(--red); border-right:1px solid var(--red); }
+  .h-kicker { font-size:9px; letter-spacing:5px; color:var(--red); margin-bottom:14px; animation:fu .8s ease both; }
+  .h-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(60px,11vw,145px); line-height:.9; letter-spacing:2px; animation:fu .9s .1s ease both; }
+  .h-title .red { color:var(--red); }
+  .h-title .sub { font-family:'Share Tech Mono',monospace; font-size:18px; letter-spacing:4px; color:var(--off); display:block; margin-top:10px; }
+  body.ja .h-title .sub { font-family:'Noto Sans JP',sans-serif; font-size:16px; }
+  .h-desc { margin-top:20px; font-size:11px; letter-spacing:2px; color:var(--off); max-width:520px; line-height:1.9; border-left:2px solid var(--red); padding-left:16px; animation:fu 1s .2s ease both; }
+  body.ja .h-desc { font-family:'Noto Sans JP',sans-serif; font-size:12px; letter-spacing:.4px; }
+  .h-cta { margin-top:34px; display:flex; gap:20px; align-items:center; animation:fu 1s .3s ease both; }
+  .btn { background:var(--red); color:var(--white); text-decoration:none; font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:4px; padding:12px 26px; text-transform:uppercase; clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px)); transition:background .2s,transform .2s; }
+  .btn:hover { background:#ff1f36; transform:translateY(-2px); }
+  .btn-g { color:var(--off); text-decoration:none; font-size:10px; letter-spacing:3px; display:flex; align-items:center; gap:8px; transition:color .2s; }
+  .btn-g::before { content:'//'; color:var(--red); }
+  .btn-g:hover { color:var(--white); }
+  .h-stats { position:absolute; bottom:80px; right:40px; display:flex; flex-direction:column; gap:12px; text-align:right; animation:fu 1s .4s ease both; opacity:.65; }
+  .sn { font-family:'Bebas Neue',sans-serif; font-size:38px; color:var(--red); line-height:1; }
+  .sl { font-size:8px; letter-spacing:3px; color:var(--off); }
+  .scroll-h { position:absolute; bottom:26px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:7px; opacity:.35; animation:bounce 2s ease-in-out infinite; }
+  .scroll-h span { font-size:8px; letter-spacing:4px; color:var(--off); }
+  .scroll-h div { width:1px; height:34px; background:linear-gradient(to bottom,var(--red),transparent); }
+  @keyframes bounce{ 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+  @keyframes fu{ from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+  /* SECTIONS */
+  section { padding:100px 40px; }
+  .sec-lbl { font-size:9px; letter-spacing:5px; color:var(--red); margin-bottom:10px; display:flex; align-items:center; gap:10px; }
+  .sec-lbl::before { content:''; width:26px; height:1px; background:var(--red); }
+  .sec-ttl { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,5vw,70px); line-height:1; letter-spacing:2px; margin-bottom:56px; }
+
+  /* FILMS */
+  .films-sec { background:var(--panel); }
+  .films-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+  .fc { position:relative; aspect-ratio:2/3; overflow:hidden; cursor:pointer; background:#0d0d0d; }
+  .fc .fbg { position:absolute; inset:0; transition:transform .5s ease; }
+  .fc:nth-child(1) .fbg { background:radial-gradient(ellipse at 40% 60%,rgba(224,26,45,.35),#080008 70%); }
+  .fc:nth-child(2) .fbg { background:radial-gradient(ellipse at 60% 40%,rgba(200,100,20,.3),#0a0500 70%); }
+  .fc:nth-child(3) .fbg { background:radial-gradient(ellipse at 35% 65%,rgba(20,90,200,.3),#000810 70%); }
+  .fc:nth-child(4) .fbg { background:radial-gradient(ellipse at 65% 35%,rgba(180,60,20,.3),#100300 70%); }
+  .fc:nth-child(5) .fbg { background:radial-gradient(ellipse at 50% 50%,rgba(224,26,45,.2),#080010 70%); }
+  .fc:nth-child(6) .fbg { background:radial-gradient(ellipse at 40% 45%,rgba(50,180,100,.25),#001008 70%); }
+  .fc:nth-child(7) .fbg { background:radial-gradient(ellipse at 60% 55%,rgba(130,20,200,.28),#060008 70%); }
+  .fc:nth-child(8) .fbg { background:radial-gradient(ellipse at 50% 30%,rgba(224,26,45,.22),#0a0000 70%); }
+  .fc:nth-child(9) .fbg { background:radial-gradient(ellipse at 35% 55%,rgba(190,150,20,.22),#080500 70%); }
+  .fc:hover .fbg { transform:scale(1.08); }
+  .fov { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.97) 0%,rgba(0,0,0,.08) 60%); display:flex; flex-direction:column; justify-content:flex-end; padding:18px; transition:background .3s; }
+  .fc:hover .fov { background:linear-gradient(to top,rgba(0,0,0,.99) 35%,rgba(0,0,0,.2) 100%); }
+  .fidx { position:absolute; top:12px; right:12px; font-family:'Bebas Neue',sans-serif; font-size:46px; color:rgba(255,255,255,.04); line-height:1; }
+  .aflag { position:absolute; top:12px; left:12px; background:var(--red); font-size:7px; letter-spacing:2px; padding:3px 7px; color:var(--white); clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,0 100%); }
+  .fcity { font-size:8px; letter-spacing:3px; color:var(--red); margin-bottom:3px; }
+  .fyear { font-size:8px; letter-spacing:3px; color:var(--off); margin-bottom:5px; }
+  .ftitle { font-family:'Bebas Neue',sans-serif; font-size:23px; letter-spacing:2px; line-height:1; margin-bottom:5px; }
+  .fgenre { font-size:8px; letter-spacing:2px; color:var(--off); margin-bottom:8px; }
+  body.ja .fgenre { font-family:'Noto Sans JP',sans-serif; font-size:10px; letter-spacing:0; }
+  .ftags { display:flex; flex-wrap:wrap; gap:4px; opacity:0; transform:translateY(6px); transition:all .3s; }
+  .fc:hover .ftags { opacity:1; transform:translateY(0); }
+  .ftag { font-size:7px; letter-spacing:2px; border:1px solid var(--red); color:var(--red); padding:2px 5px; }
+  .fc-more { display:flex; align-items:center; justify-content:center; background:#0a0a0a; }
+  .fc-more-inner { text-align:center; opacity:.35; }
+  .fc-more-plus { font-family:'Bebas Neue',sans-serif; font-size:52px; color:var(--red); line-height:1; margin-bottom:8px; }
+  .fc-more-list { font-size:9px; letter-spacing:2px; color:var(--off); line-height:2; }
+
+  /* ABOUT */
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:start; }
+  .about-body p { font-size:12px; line-height:2.1; color:var(--off); margin-bottom:18px; }
+  body.ja .about-body p { font-family:'Noto Sans JP',sans-serif; font-size:13px; letter-spacing:.3px; }
+  .about-body strong { color:var(--white); }
+  .dir-card { border:1px solid var(--border); padding:26px; position:relative; background:rgba(224,26,45,.02); }
+  .dir-card::before { content:'DIRECTOR'; position:absolute; top:-8px; left:16px; background:var(--bg); padding:0 8px; font-size:7px; letter-spacing:4px; color:var(--red); }
+  .dir-name { font-family:'Bebas Neue',sans-serif; font-size:36px; letter-spacing:2px; line-height:1; margin-bottom:6px; }
+  .dir-name span { color:var(--red); }
+  .dir-meta { font-size:9px; letter-spacing:2px; color:var(--off); margin-bottom:18px; line-height:1.9; }
+  body.ja .dir-meta { font-family:'Noto Sans JP',sans-serif; font-size:11px; letter-spacing:.3px; }
+  .cr-list { list-style:none; }
+  .cr { display:flex; justify-content:space-between; align-items:baseline; font-size:10px; border-bottom:1px solid rgba(255,255,255,.04); padding:7px 0; color:var(--off); gap:8px; }
+  body.ja .cr { font-family:'Noto Sans JP',sans-serif; font-size:11px; }
+  .cr .yr { color:var(--red); font-size:9px; letter-spacing:2px; white-space:nowrap; flex-shrink:0; }
+  .cr .rl { font-size:7px; letter-spacing:2px; color:rgba(255,255,255,.2); white-space:nowrap; margin-left:4px; }
+
+  /* AWARDS */
+  .aw-sec { border-top:1px solid var(--border); }
+  .aw-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2px; background:var(--border); }
+  .aw-cell { background:var(--bg); padding:32px 26px; position:relative; overflow:hidden; transition:background .3s; }
+  .aw-cell:hover { background:#0e0305; }
+  .aw-cell::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--red); transform:scaleX(0); transform-origin:left; transition:transform .4s; }
+  .aw-cell:hover::before { transform:scaleX(1); }
+  .aw-ytag { font-size:8px; letter-spacing:3px; color:rgba(224,26,45,.5); margin-bottom:6px; }
+  .aw-film { font-family:'Bebas Neue',sans-serif; font-size:26px; color:var(--red); margin-bottom:8px; letter-spacing:2px; }
+  .aw-detail { font-size:10px; letter-spacing:2px; color:var(--off); line-height:1.9; }
+  body.ja .aw-detail { font-family:'Noto Sans JP',sans-serif; font-size:11px; letter-spacing:.3px; }
+
+  /* CONTACT */
+  .ct-grid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; border-top:1px solid var(--border); }
+  .ct-h { font-family:'Bebas Neue',sans-serif; font-size:clamp(32px,5vw,62px); line-height:1; letter-spacing:2px; margin-bottom:16px; }
+  .ct-h span { color:var(--red); }
+  .ct-sub { font-size:11px; color:var(--off); line-height:2.1; letter-spacing:2px; }
+  body.ja .ct-sub { font-family:'Noto Sans JP',sans-serif; font-size:12px; letter-spacing:.3px; }
+  .form { display:flex; flex-direction:column; gap:13px; }
+  .frow { display:flex; gap:13px; }
+  .fld { display:flex; flex-direction:column; gap:5px; flex:1; }
+  .fld label { font-size:7px; letter-spacing:4px; color:var(--red); }
+  body.ja .fld label { font-family:'Noto Sans JP',sans-serif; font-size:10px; letter-spacing:.3px; }
+  .fld input,.fld textarea,.fld select { background:transparent; border:1px solid rgba(255,255,255,.08); color:var(--white); font-family:'Share Tech Mono',monospace; font-size:11px; padding:10px 12px; outline:none; resize:none; transition:border-color .2s; appearance:none; }
+  .fld input:focus,.fld textarea:focus,.fld select:focus { border-color:var(--red); }
+  .fld select option { background:#111; }
+  .fsub { background:var(--red); color:var(--white); border:none; font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:4px; padding:13px; cursor:pointer; text-transform:uppercase; transition:background .2s; clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%); }
+  .fsub:hover { background:#ff1f36; }
+
+  /* FOOTER */
+  footer { border-top:1px solid var(--border); padding:24px 40px; display:flex; justify-content:space-between; align-items:center; }
+  .fc-copy { font-size:8px; letter-spacing:3px; color:var(--off); }
+  .fc-links { display:flex; gap:18px; }
+  .fc-links a { font-size:8px; letter-spacing:3px; color:var(--off); text-decoration:none; transition:color .2s; }
+  .fc-links a:hover { color:var(--red); }
+
+  @media(max-width:768px){
+    .navbar { padding:12px 20px; }
+    .nav-links { display:none; }
+    .hero { padding:0 20px 56px; }
+    .films-grid { grid-template-columns:repeat(2,1fr); }
+    .about-grid,.ct-grid { grid-template-columns:1fr; gap:40px; }
+    .aw-grid { grid-template-columns:1fr; }
+    section { padding:70px 20px; }
+    .h-stats { display:none; }
+    footer { flex-direction:column; gap:14px; text-align:center; padding:20px; }
+  }
+</style>
+</head>
+<body class="en">
+
+<!-- INTRO -->
+<div id="intro" onclick="introClick()">
+  <video id="intro-video" src="intro.mp4" playsinline muted preload="auto"></video>
+  <div id="intro-skip">SKIP //</div>
+</div>
+
+<!-- NAV -->
+<nav class="navbar">
+  <div class="logo">
+    <div class="logo-icon">PS</div>
+    <div class="logo-name">PARADIGM <span>SHIFT</span></div>
+  </div>
+  <div class="nav-r">
+    <div class="nav-links" id="nav-links"></div>
+    <div class="lswitch">
+      <button class="lbtn on" onclick="setLang('en')">EN</button>
+      <button class="lbtn" onclick="setLang('ja')">JP</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="ticker">
+    <div class="ticker-track">
+      <span>PARADIGM SHIFT</span><span>// BEST FILM 48HFP TOKYO 2021 //</span><span>BEST FILM 48HFP TOKYO 2022</span><span>// BEST FILM + BEST CINEMATOGRAPHY 48HFP LA 2025 //</span><span>CANNES 2022 · CANNES 2023 · FILMAPALOOZA 2022 · 2023 · 2026</span><span>// JUN YORIKO //</span>
+      <span>PARADIGM SHIFT</span><span>// BEST FILM 48HFP TOKYO 2021 //</span><span>BEST FILM 48HFP TOKYO 2022</span><span>// BEST FILM + BEST CINEMATOGRAPHY 48HFP LA 2025 //</span><span>CANNES 2022 · CANNES 2023 · FILMAPALOOZA 2022 · 2023 · 2026</span><span>// JUN YORIKO //</span>
+    </div>
+  </div>
+  <div class="hud-c tl"></div>
+  <div class="hud-c br"></div>
+  <div class="hud-tr" id="clock">--:--:--</div>
+  <p class="h-kicker" id="hero-kicker"></p>
+  <h1 class="h-title">
+    PARADIGM<br><span class="red">SHIFT</span>
+    <span class="sub" id="hero-sub-title"></span>
+  </h1>
+  <p class="h-desc" id="hero-desc"></p>
+  <div class="h-cta">
+    <a href="#films" class="btn" id="cta-films"></a>
+    <a href="#about" class="btn-g" id="cta-about"></a>
+  </div>
+  <div class="h-stats">
+    <div><div class="sn">3</div><div class="sl" id="stat-bestfilm"></div></div>
+    <div><div class="sn">5</div><div class="sl">Filmapalooza</div></div>
+    <div><div class="sn">3</div><div class="sl" id="stat-cities"></div></div>
+  </div>
+  <div class="scroll-h"><span id="scroll-txt"></span><div></div></div>
+</div>
+
+<!-- FILMS -->
+<section class="films-sec" id="films">
+  <div class="sec-lbl" id="films-lbl"></div>
+  <div class="sec-ttl" id="films-ttl"></div>
+  <div class="films-grid">
+    <div class="fc">
+      <div class="fbg"></div>
+      <div class="aflag" id="f1-flag"></div>
+      <div class="fov">
+        <div class="fidx">01</div>
+        <div class="fcity">LOS ANGELES</div>
+        <div class="fyear">2025</div>
+        <div class="ftitle">ECHOES</div>
+        <div class="fgenre" id="f1-genre"></div>
+        <div class="ftags">
+          <span class="ftag" id="f1-t1"></span>
+          <span class="ftag" id="f1-t2"></span>
+          <span class="ftag">Filmapalooza 2026</span>
+        </div>
+      </div>
+    </div>
+    <div class="fc">
+      <div class="fbg"></div>
+      <div class="fov">
+        <div class="fidx">02</div>
+        <div class="fcity">LONDON</div>
+        <div class="fyear">2024</div>
+        <div class="ftitle">PHOENIX</div>
+        <div class="fgenre" id="f2-genre"></div>
+        <div class="ftags"><span class="ftag">48HFP London</span></div>
+      </div>
+    </div>
+    <div class="fc">
+      <div class="fbg"></div>
+      <div class="fov">
+        <div class="fidx">03</div>
+        <div class="fcity">LOS ANGELES</div>
+        <div class="fyear">2024</div>
+        <div class="ftitle">@SMILE</div>
+        <div class="fgenre" id="f3-genre"></div>
+        <div class="ftags"><span class="ftag">48HFP LA</span></div>
+      </div>
+    </div>
+    <div class="fc">
+      <div class="fbg"></div>
+      <div class="aflag" id="f4-flag"></div>
+      <div class="fov">
+        <div class="fidx">04</div>
+        <div class="fcity">LOS ANGELES</div>
+        <div class="fyear">2023</div>
+        <div class="ftitle">MetamoRphose</div>
+        <div class="fgenre" id="f4-genre"></div>
+        <div class="ftags"><span class="ftag" id="f4-t1"></span></div>
+      </div>
+    </div>
+    <div class="fc">
+      <div class="fbg"></div>
+      <div class="fov">
+        <div class="fidx">05</div>
+        <div class="fcity">LOS ANGELES</div>
+        <div class="fyear">2023</div>
+        <div class="ftitle">HITMAN</div>
+        <div class="fgenre" id="f5-genre"></div>
+        <div class="ftags"><span class="ftag">48HFP LA Horror Comedy</span></div>
+      </div>
+    </div>
+    <div class="fc">
+      <div class="fbg"></div>
+      <div class="aflag" id="f6-flag"></div>
+      <div class="fov">
+        <div class="fidx">06</div>
+        <div class="fcity">TOKYO</div>
+        <div class="fyear">2022</div>
+        <div class="ftitle">POSTMAN</div>
+        <div class="fgenre" id="f6-genre"></div>
+        <div class="ftags">
+          <span class="ftag" id="f6-t1"></span>
+          <span class="ftag">Filmapalooza 2023</span>
+          <span class="ftag">Cannes 2023</span>
+        </div>
+      </div>
+    </div>
+    <div class="fc">
+      <div class="fbg"></div>
+      <div class="aflag" id="f7-flag"></div>
+      <div class="fov">
+        <div class="fidx">07</div>
+        <div class="fcity">TOKYO</div>
+        <div class="fyear">2021</div>
+        <div class="ftitle">BIRTH DAY</div>
+        <div class="fgenre" id="f7-genre"></div>
+        <div class="ftags">
+          <span class="ftag" id="f7-t1"></span>
+          <span class="ftag">Filmapalooza 2022</span>
+          <span class="ftag">Cannes 2022</span>
+        </div>
+      </div>
+    </div>
+    <div class="fc">
+      <div class="fbg"></div>
+      <div class="fov">
+        <div class="fidx">08</div>
+        <div class="ftitle">THE TUNER</div>
+        <div class="fgenre" id="f8-genre"></div>
+        <div class="ftags"><span class="ftag">Yes We Cannes</span></div>
+      </div>
+    </div>
+    <div class="fc fc-more">
+      <div class="fc-more-inner">
+        <div class="fc-more-plus">+</div>
+        <div class="fc-more-list" id="more-list"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-lbl" id="about-lbl"></div>
+  <div class="sec-ttl" id="about-ttl"></div>
+  <div class="about-grid">
+    <div class="about-body" id="about-body"></div>
+    <div class="dir-card">
+      <div class="dir-name">JUN <span>YORIKO</span></div>
+      <div class="dir-meta" id="dir-meta"></div>
+      <ul class="cr-list" id="cr-list"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section class="aw-sec" id="awards">
+  <div class="sec-lbl" id="awards-lbl"></div>
+  <div class="sec-ttl" id="awards-ttl"></div>
+  <div class="aw-grid" id="aw-grid"></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="ct-grid">
+    <div>
+      <div class="sec-lbl" id="ct-lbl"></div>
+      <h2 class="ct-h" id="ct-h"></h2>
+      <p class="ct-sub" id="ct-sub"></p>
+    </div>
+    <div class="form">
+      <div class="frow">
+        <div class="fld"><label id="f-name-lbl"></label><input type="text"></div>
+        <div class="fld"><label id="f-email-lbl"></label><input type="email"></div>
+      </div>
+      <div class="fld">
+        <label id="f-subject-lbl"></label>
+        <select id="f-subject-sel"></select>
+      </div>
+      <div class="fld"><label id="f-msg-lbl"></label><textarea rows="5"></textarea></div>
+      <button class="fsub" id="f-submit"></button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fc-copy" id="footer-copy"></div>
+  <div class="fc-links">
+    <a href="#">Instagram</a>
+    <a href="#">Vimeo</a>
+    <a href="#">IMDb</a>
+  </div>
+</footer>
+
+<script>
+const T = {
+  en: {
+    nav: ['Works','About','Awards','Contact'],
+    heroKicker: '// INDEPENDENT FILM COLLECTIVE — TOKYO × LOS ANGELES × LONDON',
+    heroSubTitle: 'by Jun Yoriko',
+    heroDesc: 'Award-winning short films made in 48 hours. Tokyo. Los Angeles. London.<br>Three cities, one vision — cinematic storytelling without limits.',
+    ctaFilms: 'View Films',
+    ctaAbout: 'About the Director',
+    statBestFilm: 'Best Film',
+    statCities: 'Cities',
+    scrollTxt: 'SCROLL',
+    filmsLbl: '48 Hour Film Project',
+    filmsTtl: 'FILMOGRAPHY',
+    f1Flag:'BEST FILM', f1Genre:'Adventure / Sci-Fi', f1T1:'Best Film', f1T2:'Best Cinematography',
+    f2Genre:'Action / Fantasy',
+    f3Genre:'Action Thriller',
+    f4Flag:'2ND PLACE', f4Genre:'Drama', f4T1:'2nd Place Best Film',
+    f5Genre:'Horror Comedy',
+    f6Flag:'BEST FILM', f6Genre:'Drama', f6T1:'Best Film + 3 Awards',
+    f7Flag:'BEST FILM', f7Genre:'Drama / Sci-Fi', f7T1:'Best Film · Art · VFX',
+    f8Genre:'Supernatural',
+    moreList:'MERMAID · DIANO LIVE\nUNDERTALE · 物の怪\n2FATE · and more',
+    aboutLbl:'The Collective', aboutTtl:'ABOUT',
+    aboutBody:`
+      <p><strong>Paradigm Shift</strong> is an award-winning independent film collective led by director Jun Yoriko, competing in the <strong>48 Hour Film Project</strong> across Tokyo, Los Angeles, and London.</p>
+      <p>In 48 hours, the team writes, shoots, edits, and scores a complete short film from scratch — earning <strong>Best Film</strong> in Tokyo (2021, 2022) and Los Angeles (2025), with screenings at Cannes and Filmapalooza Hollywood Chinese Theatre.</p>
+      <p>Beyond the 48HFP, Jun Yoriko's work spans feature films, major stage productions, and live events — from <em>Biohazard: The Stage</em> to <em>Gin'eiyuudensetsu</em> to <em>HEDWIG AND THE ANGRY INCH</em> and the 2026 stage adaptation of <em>2FATE</em>.</p>`,
+    dirMeta:'Director · Writer · Cinematographer · Editor · Stage Director\nb. 22 January 1973, Tokyo\nJapan Directors Guild · Japan Playwrights Association',
+    credits:[
+      ['家出レスラー (Runaway Wrestler)','2024',''],
+      ['2FATE','2022','13 int\'l awards'],
+      ['COLOR CROW 緋彩之翼','2022',''],
+      ['モノノ怪〜座敷童子〜','2023','Stage · Direction'],
+      ['劇場版モノノ怪 前日譚〜二首女〜','2026','Stage'],
+      ['DEVIL MAY CRY THE LIVE HACKER','2019','Stage'],
+      ['HEDWIG AND THE ANGRY INCH','2017','Stage'],
+      ['BIOHAZARD THE STAGE','2015','Stage'],
+      ['銀河英雄伝説','2011–','Stage series'],
+      ['花鳥籠 (The Caged Flower)','2013',''],
+    ],
+    awardsLbl:'Recognition', awardsTtl:'AWARDS',
+    awards:[
+      {ytag:'2025 — LOS ANGELES', film:'ECHOES', detail:'Best Film · Best Cinematography\n48HFP Los Angeles\n→ Filmapalooza 2026'},
+      {ytag:'2023 — LOS ANGELES', film:'MetamoRphose', detail:'2nd Place Best Film\n48HFP Los Angeles'},
+      {ytag:'2022 — TOKYO', film:'POSTMAN', detail:'Best Film · Audience · Editing · Genre\n48HFP Tokyo\n→ Filmapalooza 2023 Hollywood Chinese Theatre\n→ Cannes Short Film Corner 2023'},
+      {ytag:'2021 — TOKYO', film:'BIRTH DAY', detail:'Best Film · Best Art · Best VFX\n48HFP Tokyo\n→ Filmapalooza 2022\n→ Cannes Short Film Corner 2022'},
+      {ytag:'2022 — NY · LONDON · PARIS · FLORENCE', film:'2FATE', detail:'Best Short Film + Best Screenplay — New York\nSpecial Jury Award — London\nBest Drama — Paris\nBest Short Director + 8 awards — Florence'},
+      {ytag:'—', film:'THE TUNER', detail:'Official Selection — Yes We Cannes'},
+    ],
+    ctLbl:'Get In Touch', ctH:'LET\'S<br><span>MAKE</span><br>SOMETHING.',
+    ctSub:'Collaborations, screening requests,<br>press enquiries & project opportunities.',
+    fNameLbl:'NAME', fEmailLbl:'EMAIL', fSubjectLbl:'SUBJECT', fMsgLbl:'MESSAGE',
+    fSubjectOpts:['-- Select --','Collaboration','Screening Request','Press / Media','Other'],
+    fSubmit:'TRANSMIT MESSAGE',
+    footerCopy:'© 2025 PARADIGM SHIFT — ALL RIGHTS RESERVED',
+  },
+  ja: {
+    nav: ['作品','概要','受賞','お問合せ'],
+    heroKicker: '// 独立系映画集団 — 東京 × ロサンゼルス × ロンドン',
+    heroSubTitle: 'ヨリコジュン 監督',
+    heroDesc: '48時間で作る受賞短編映画。東京、ロサンゼルス、ロンドン。<br>3都市、ひとつのビジョン——限界なき映画的表現を追求する。',
+    ctaFilms: '作品を見る',
+    ctaAbout: '監督について',
+    statBestFilm: '最優秀作品賞',
+    statCities: '参加都市',
+    scrollTxt: 'スクロール',
+    filmsLbl: '48時間映画祭 作品',
+    filmsTtl: 'フィルモグラフィー',
+    f1Flag:'最優秀作品賞', f1Genre:'アドベンチャー / SF', f1T1:'最優秀作品賞', f1T2:'最優秀撮影賞',
+    f2Genre:'アクション / ファンタジー',
+    f3Genre:'アクション・スリラー',
+    f4Flag:'第2位', f4Genre:'ドラマ', f4T1:'準最優秀作品賞',
+    f5Genre:'ホラーコメディ',
+    f6Flag:'最優秀作品賞', f6Genre:'ドラマ', f6T1:'最優秀作品賞 他3部門',
+    f7Flag:'最優秀作品賞', f7Genre:'ドラマ / SF', f7T1:'作品賞・美術賞・VFX賞',
+    f8Genre:'スーパーナチュラル',
+    moreList:'MERMAID · DIANO LIVE\nUNDERTALE · 物の怪\n2FATE · その他多数',
+    aboutLbl:'チームについて', aboutTtl:'概要',
+    aboutBody:`
+      <p><strong>Paradigm Shift</strong>は、ヨリコジュン監督率いる受賞歴のある独立系映画集団です。東京、ロサンゼルス、ロンドンで開催される<strong>48時間映画祭</strong>に参加しています。</p>
+      <p>48時間で脚本・撮影・編集・音楽を完成させ、東京（2021・2022年）とロサンゼルス（2025年）で<strong>最優秀作品賞</strong>を受賞。カンヌ映画祭・Filmapaloozaハリウッド・チャイニーズ・シアターでも上映されています。</p>
+      <p>48HFP以外でも、長編映画・大型舞台・ライブイベントなど幅広い作品を手掛けており、2026年2月には舞台「2FATE」の音楽劇版が上演されます。</p>`,
+    dirMeta:'監督・脚本・撮影・編集・演出家\n1973年1月22日生まれ、東京都出身\n日本映画監督協会 / 日本劇作家協会',
+    credits:[
+      ['家出レスラー','2024',''],
+      ['2FATE','2022','国際受賞13部門'],
+      ['COLOR CROW 緋彩之翼','2022',''],
+      ['モノノ怪〜座敷童子〜','2023','舞台・演出'],
+      ['劇場版モノノ怪 前日譚〜二首女〜','2026','舞台'],
+      ['DEVIL MAY CRY THE LIVE HACKER','2019','舞台'],
+      ['HEDWIG AND THE ANGRY INCH','2017','舞台'],
+      ['BIOHAZARD THE STAGE','2015','舞台'],
+      ['銀河英雄伝説','2011–','舞台シリーズ'],
+      ['花鳥籠','2013',''],
+    ],
+    awardsLbl:'受賞・上映歴', awardsTtl:'受賞歴',
+    awards:[
+      {ytag:'2025 — LOS ANGELES', film:'ECHOES', detail:'最優秀作品賞・最優秀撮影賞\n48時間映画祭 ロサンゼルス\n→ Filmapalooza 2026 正式出品'},
+      {ytag:'2023 — LOS ANGELES', film:'MetamoRphose', detail:'準最優秀作品賞\n48時間映画祭 ロサンゼルス'},
+      {ytag:'2022 — TOKYO', film:'POSTMAN', detail:'最優秀作品賞・観客賞・編集賞・ジャンル賞\n48時間映画祭 東京\n→ Filmapalooza 2023 ハリウッド・チャイニーズ・シアター\n→ カンヌ映画祭 短編部門 2023'},
+      {ytag:'2021 — TOKYO', film:'BIRTH DAY', detail:'最優秀作品賞・美術賞・VFX賞\n48時間映画祭 東京\n→ Filmapalooza 2022\n→ カンヌ映画祭 短編部門 2022'},
+      {ytag:'2022 — NY · LONDON · PARIS · FLORENCE', film:'2FATE', detail:'最優秀短編賞・最優秀脚本賞 — NY\n審査員特別賞 — ロンドン\n最優秀ドラマ賞 — パリ\n最優秀短編監督賞 他8部門 — フィレンツェ'},
+      {ytag:'—', film:'THE TUNER', detail:'正式出品 — Yes We Cannes'},
+    ],
+    ctLbl:'お問い合わせ', ctH:'一緒に<br><span>作ろう</span>',
+    ctSub:'コラボレーション、上映依頼、<br>取材・プロジェクトのご相談はこちら。',
+    fNameLbl:'お名前', fEmailLbl:'メール', fSubjectLbl:'件名', fMsgLbl:'メッセージ',
+    fSubjectOpts:['-- 選択 --','コラボレーション','上映依頼','取材・メディア','その他'],
+    fSubmit:'送信する',
+    footerCopy:'© 2025 PARADIGM SHIFT — 無断転載禁止',
+  }
+};
+
+let currentLang = 'en';
+
+function render(lang) {
+  const t = T[lang];
+  document.body.className = lang;
+  document.documentElement.lang = lang;
+
+  // nav
+  const navLinks = document.getElementById('nav-links');
+  const hrefs = ['#films','#about','#awards','#contact'];
+  navLinks.innerHTML = t.nav.map((n,i)=>`<a href="${hrefs[i]}">${n}</a>`).join('');
+
+  // hero
+  document.getElementById('hero-kicker').textContent = t.heroKicker;
+  document.getElementById('hero-sub-title').textContent = t.heroSubTitle;
+  document.getElementById('hero-desc').innerHTML = t.heroDesc;
+  document.getElementById('cta-films').textContent = t.ctaFilms;
+  document.getElementById('cta-about').textContent = t.ctaAbout;
+  document.getElementById('stat-bestfilm').textContent = t.statBestFilm;
+  document.getElementById('stat-cities').textContent = t.statCities;
+  document.getElementById('scroll-txt').textContent = t.scrollTxt;
+
+  // films
+  document.getElementById('films-lbl').textContent = t.filmsLbl;
+  document.getElementById('films-ttl').textContent = t.filmsTtl;
+  document.getElementById('f1-flag').textContent = t.f1Flag;
+  document.getElementById('f1-genre').textContent = t.f1Genre;
+  document.getElementById('f1-t1').textContent = t.f1T1;
+  document.getElementById('f1-t2').textContent = t.f1T2;
+  document.getElementById('f2-genre').textContent = t.f2Genre;
+  document.getElementById('f3-genre').textContent = t.f3Genre;
+  document.getElementById('f4-flag').textContent = t.f4Flag;
+  document.getElementById('f4-genre').textContent = t.f4Genre;
+  document.getElementById('f4-t1').textContent = t.f4T1;
+  document.getElementById('f5-genre').textContent = t.f5Genre;
+  document.getElementById('f6-flag').textContent = t.f6Flag;
+  document.getElementById('f6-genre').textContent = t.f6Genre;
+  document.getElementById('f6-t1').textContent = t.f6T1;
+  document.getElementById('f7-flag').textContent = t.f7Flag;
+  document.getElementById('f7-genre').textContent = t.f7Genre;
+  document.getElementById('f7-t1').textContent = t.f7T1;
+  document.getElementById('f8-genre').textContent = t.f8Genre;
+  document.getElementById('more-list').innerHTML = t.moreList.replace(/\n/g,'<br>');
+
+  // about
+  document.getElementById('about-lbl').textContent = t.aboutLbl;
+  document.getElementById('about-ttl').textContent = t.aboutTtl;
+  document.getElementById('about-body').innerHTML = t.aboutBody;
+  document.getElementById('dir-meta').innerHTML = t.dirMeta.replace(/\n/g,'<br>');
+  document.getElementById('cr-list').innerHTML = t.credits.map(([name,yr,rl])=>
+    `<li class="cr"><span>${name}${rl?` <span class="rl">${rl}</span>`:''}</span><span class="yr">${yr}</span></li>`
+  ).join('');
+
+  // awards
+  document.getElementById('awards-lbl').textContent = t.awardsLbl;
+  document.getElementById('awards-ttl').textContent = t.awardsTtl;
+  document.getElementById('aw-grid').innerHTML = t.awards.map(a=>
+    `<div class="aw-cell">
+      <div class="aw-ytag">${a.ytag}</div>
+      <div class="aw-film">${a.film}</div>
+      <div class="aw-detail">${a.detail.replace(/\n/g,'<br>')}</div>
+    </div>`
+  ).join('');
+
+  // contact
+  document.getElementById('ct-lbl').textContent = t.ctLbl;
+  document.getElementById('ct-h').innerHTML = t.ctH;
+  document.getElementById('ct-sub').innerHTML = t.ctSub;
+  document.getElementById('f-name-lbl').textContent = t.fNameLbl;
+  document.getElementById('f-email-lbl').textContent = t.fEmailLbl;
+  document.getElementById('f-subject-lbl').textContent = t.fSubjectLbl;
+  document.getElementById('f-msg-lbl').textContent = t.fMsgLbl;
+  document.getElementById('f-subject-sel').innerHTML = t.fSubjectOpts.map(o=>`<option>${o}</option>`).join('');
+  document.getElementById('f-submit').textContent = t.fSubmit;
+  document.getElementById('footer-copy').textContent = t.footerCopy;
+}
+
+function setLang(lang) {
+  currentLang = lang;
+  render(lang);
+  document.querySelectorAll('.lbtn').forEach(b=>b.classList.remove('on'));
+  document.querySelector(`.lbtn[onclick="setLang('${lang}')"]`).classList.add('on');
+}
+
+// INTRO
+const introEl = document.getElementById('intro');
+const introVideo = document.getElementById('intro-video');
+
+function endIntro() {
+  introEl.style.transition = 'opacity 0.8s ease';
+  introEl.style.opacity = '0';
+  setTimeout(()=>{ introEl.style.display='none'; }, 800);
+}
+
+function introClick() {
+  if(introVideo.paused) {
+    introVideo.play();
+  }
+}
+
+introVideo.addEventListener('ended', endIntro);
+introVideo.play().catch(()=>{ /* autoplay blocked — click to play */ });
+
+// clock
+setInterval(()=>{ const e=document.getElementById('clock'); if(e) e.textContent=new Date().toTimeString().slice(0,8); },1000);
+
+// init
+render('en');
+</script>
+</body>
+</html>
