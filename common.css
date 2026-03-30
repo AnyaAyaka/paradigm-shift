@@ -66,6 +66,10 @@ footer { border-top:1px solid var(--border); padding:24px 40px; display:flex; ju
 .btn-g::before { content:'//'; color:var(--red); }
 .btn-g:hover { color:var(--white); }
 
+/* Hamburger - hidden on desktop */
+.hamburger { display:none; }
+.mobile-menu { display:none; }
+
 @media(max-width:768px){
   .navbar { padding:12px 20px; }
   .nav-links { display:none; }

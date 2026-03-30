@@ -82,18 +82,20 @@
   .act-link::after { content:'→'; }
 
   @media(max-width:768px){
-    .hero { padding:0 24px 60px; justify-content:center; padding-top:100px; }
-    .h-kicker { font-size:10px; letter-spacing:3px; }
+    .hero { min-height:0; height:auto; padding:100px 24px 60px; justify-content:flex-start; }
+    .h-kicker { font-size:11px; letter-spacing:3px; }
     .h-title { font-size:clamp(56px,18vw,88px); }
-    .h-title .sub { font-size:14px; letter-spacing:2px; }
-    .h-desc { font-size:13px; letter-spacing:1px; max-width:100%; }
-    .h-cta { gap:14px; }
-    .h-cta .btn { font-size:12px; padding:14px 24px; }
-    .h-cta .btn-g { font-size:12px; }
+    .h-title .sub { font-size:15px; letter-spacing:2px; }
+    .h-desc { font-size:14px; letter-spacing:.3px; max-width:100%; }
+    .h-cta { gap:14px; margin-bottom:40px; }
+    .h-cta .btn { font-size:14px; padding:14px 24px; }
+    .h-cta .btn-g { font-size:14px; }
     .latest-grid { grid-template-columns:1fr 1fr; }
     .act-grid { grid-template-columns:1fr; }
     .h-stats { display:none; }
     .scroll-h { display:none; }
+    .hud-tr { display:none; }
+    .hud-c { display:none; }
   }
 </style>
 </head>
