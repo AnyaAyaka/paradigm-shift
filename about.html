@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | PARADIGM SHIFT</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="common.css">
+<style>
+  .page-hero { padding:120px 40px 60px; position:relative; overflow:hidden; }
+  .page-hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse 80% 100% at 50% 0%,rgba(224,26,45,.06),transparent 70%); }
+  .page-hero h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(48px,8vw,110px); line-height:.9; letter-spacing:2px; position:relative; }
+  .page-hero h1 span { color:var(--red); }
+
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
+  .about-body p { font-size:12px; line-height:2.1; color:var(--off); margin-bottom:18px; }
+  body.ja .about-body p { font-family:'Noto Sans JP',sans-serif; font-size:13px; letter-spacing:.3px; }
+  .about-body strong { color:var(--white); }
+
+  .dir-card { border:1px solid var(--border); padding:28px; position:relative; background:rgba(224,26,45,.02); }
+  .dir-card::before { content:'DIRECTOR'; position:absolute; top:-8px; left:16px; background:var(--bg); padding:0 8px; font-size:7px; letter-spacing:4px; color:var(--red); }
+  .dir-name { font-family:'Bebas Neue',sans-serif; font-size:38px; letter-spacing:2px; line-height:1; margin-bottom:6px; }
+  .dir-name span { color:var(--red); }
+  .dir-meta { font-size:9px; letter-spacing:2px; color:var(--off); margin-bottom:20px; line-height:1.9; }
+  body.ja .dir-meta { font-family:'Noto Sans JP',sans-serif; font-size:11px; letter-spacing:.3px; }
+
+  .awards-sec { background:var(--panel); }
+  .aw-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2px; background:var(--border); }
+  .aw-cell { background:var(--bg); padding:32px 26px; position:relative; overflow:hidden; transition:background .3s; }
+  .aw-cell:hover { background:#0e0305; }
+  .aw-cell::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--red); transform:scaleX(0); transform-origin:left; transition:transform .4s; }
+  .aw-cell:hover::before { transform:scaleX(1); }
+  .aw-ytag { font-size:8px; letter-spacing:3px; color:rgba(224,26,45,.5); margin-bottom:6px; }
+  .aw-film { font-family:'Bebas Neue',sans-serif; font-size:26px; color:var(--red); margin-bottom:8px; letter-spacing:2px; }
+  .aw-detail { font-size:10px; letter-spacing:2px; color:var(--off); line-height:1.9; }
+  body.ja .aw-detail { font-family:'Noto Sans JP',sans-serif; font-size:11px; letter-spacing:.3px; }
+
+  @media(max-width:768px){
+    .page-hero { padding:100px 20px 40px; }
+    .about-grid { grid-template-columns:1fr; gap:40px; }
+    .aw-grid { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body class="en">
+<nav class="navbar">
+  <a href="index.html" class="logo">
+    <div class="logo-icon">PS</div>
+    <div class="logo-name">PARADIGM <span>SHIFT</span></div>
+  </a>
+  <div class="nav-r">
+    <div class="nav-links" id="nav-links"></div>
+    <div class="lswitch">
+      <button class="lbtn on" onclick="setLang('en')">EN</button>
+      <button class="lbtn" onclick="setLang('ja')">JP</button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <h1 id="ph-title"></h1>
+  </div>
+  <section>
+    <div class="about-grid">
+      <div class="about-body" id="about-body"></div>
+      <div class="dir-card">
+        <div class="dir-name">JUN <span>YORIKO</span></div>
+        <div class="dir-meta" id="dir-meta"></div>
+        <a href="contact.html" class="btn" id="contact-btn"></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="awards-sec">
+    <div class="sec-lbl" id="aw-lbl"></div>
+    <div class="sec-ttl" id="aw-ttl"></div>
+    <div class="aw-grid" id="aw-grid"></div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-copy" id="footer-copy"></div>
+  <div class="footer-links"><a href="#">Instagram</a><a href="#">Vimeo</a><a href="#">IMDb</a></div>
+</footer>
+
+<script>
+const NAV_HREFS = ['index.html','films.html','stage.html','about.html','contact.html'];
+const AWARDS = {
+  en: [
+    {ytag:'2025 — LOS ANGELES', film:'ECHOES', detail:'Best Film · Best Cinematography\n48HFP Los Angeles → Filmapalooza 2026'},
+    {ytag:'2023 — LOS ANGELES', film:'MetamoRphose', detail:'2nd Place Best Film\n48HFP Los Angeles'},
+    {ytag:'2022 — TOKYO', film:'POSTMAN', detail:'Best Film · Audience · Editing · Genre\n48HFP Tokyo → Filmapalooza 2023\n→ Cannes Short Film Corner 2023'},
+    {ytag:'2021 — TOKYO', film:'BIRTH DAY', detail:'Best Film · Best Art · Best VFX\n48HFP Tokyo → Filmapalooza 2022\n→ Cannes Short Film Corner 2022'},
+    {ytag:'2022 — INTERNATIONAL', film:'2FATE', detail:'Best Short + Best Screenplay — New York\nSpecial Jury Award — London\nBest Drama — Paris\nBest Short Director + 8 awards — Florence'},
+    {ytag:'—', film:'THE TUNER', detail:'Official Selection — Yes We Cannes'},
+  ],
+  ja: [
+    {ytag:'2025 — LOS ANGELES', film:'ECHOES', detail:'最優秀作品賞・最優秀撮影賞\n48時間映画祭 LA → Filmapalooza 2026'},
+    {ytag:'2023 — LOS ANGELES', film:'MetamoRphose', detail:'準最優秀作品賞\n48時間映画祭 LA'},
+    {ytag:'2022 — TOKYO', film:'POSTMAN', detail:'最優秀作品賞・観客賞・編集賞・ジャンル賞\n48時間映画祭 東京 → Filmapalooza 2023\n→ カンヌ映画祭 短編部門 2023'},
+    {ytag:'2021 — TOKYO', film:'BIRTH DAY', detail:'最優秀作品賞・美術賞・VFX賞\n48時間映画祭 東京 → Filmapalooza 2022\n→ カンヌ映画祭 短編部門 2022'},
+    {ytag:'2022 — INTERNATIONAL', film:'2FATE', detail:'最優秀短編賞・最優秀脚本賞 — NY\n審査員特別賞 — ロンドン\n最優秀ドラマ賞 — パリ\n最優秀短編監督賞 他8部門 — フィレンツェ'},
+    {ytag:'—', film:'THE TUNER', detail:'正式出品 — Yes We Cannes'},
+  ]
+};
+const T = {
+  en: {
+    nav:['Home','Films','Stage','About','Contact'],
+    phTitle:'ABOUT<br><span>US</span>',
+    aboutBody:`<p><strong>Paradigm Shift</strong> is an award-winning independent film collective led by director Jun Yoriko, competing in the <strong>48 Hour Film Project</strong> across Tokyo, Los Angeles, and London.</p><p>In 48 hours, the team writes, shoots, edits, and scores a complete short film from scratch — earning <strong>Best Film</strong> in Tokyo (2021, 2022) and Los Angeles (2025), with screenings at Cannes and Filmapalooza Hollywood Chinese Theatre.</p><p>Beyond the 48HFP, Jun Yoriko's work spans feature films, major stage productions, and live events — from <em>Biohazard: The Stage</em> to <em>Mononoke</em> to <em>HEDWIG AND THE ANGRY INCH</em>.</p>`,
+    dirMeta:'Director · Writer · Cinematographer · Editor · Stage Director\nb. 22 January 1973, Tokyo\nJapan Directors Guild · Japan Playwrights Association',
+    contactBtn:'Get In Touch',
+    awLbl:'Recognition', awTtl:'AWARDS',
+    footer:'© 2025 PARADIGM SHIFT — ALL RIGHTS RESERVED',
+  },
+  ja: {
+    nav:['ホーム','作品','舞台','概要','お問合せ'],
+    phTitle:'概要<br><span>について</span>',
+    aboutBody:`<p><strong>Paradigm Shift</strong>は、ヨリコジュン監督率いる受賞歴のある独立系映画集団です。東京、ロサンゼルス、ロンドンで開催される<strong>48時間映画祭</strong>に参加しています。</p><p>48時間で脚本・撮影・編集・音楽を完成させ、東京（2021・2022年）とロサンゼルス（2025年）で<strong>最優秀作品賞</strong>を受賞。カンヌ映画祭・Filmapaloozaハリウッド・チャイニーズ・シアターでも上映されています。</p><p>48HFP以外でも、長編映画・大型舞台・ライブイベントなど幅広い作品を手掛けています。</p>`,
+    dirMeta:'監督・脚本・撮影・編集・演出家\n1973年1月22日生まれ、東京都出身\n日本映画監督協会 / 日本劇作家協会',
+    contactBtn:'お問い合わせ',
+    awLbl:'受賞・上映歴', awTtl:'受賞歴',
+    footer:'© 2025 PARADIGM SHIFT — 無断転載禁止',
+  }
+};
+function render(lang) {
+  const t = T[lang];
+  document.body.className = lang;
+  document.documentElement.lang = lang;
+  document.getElementById('nav-links').innerHTML = t.nav.map((n,i)=>
+    `<a href="${NAV_HREFS[i]}" class="nav-link${i===3?' active':''}">${n}</a>`).join('');
+  document.getElementById('ph-title').innerHTML = t.phTitle;
+  document.getElementById('about-body').innerHTML = t.aboutBody;
+  document.getElementById('dir-meta').innerHTML = t.dirMeta.replace(/\n/g,'<br>');
+  document.getElementById('contact-btn').textContent = t.contactBtn;
+  document.getElementById('aw-lbl').textContent = t.awLbl;
+  document.getElementById('aw-ttl').textContent = t.awTtl;
+  document.getElementById('aw-grid').innerHTML = AWARDS[lang].map(a=>
+    `<div class="aw-cell"><div class="aw-ytag">${a.ytag}</div><div class="aw-film">${a.film}</div><div class="aw-detail">${a.detail.replace(/\n/g,'<br>')}</div></div>`
+  ).join('');
+  document.getElementById('footer-copy').textContent = t.footer;
+}
+function setLang(lang) {
+  localStorage.setItem('ps-lang',lang);
+  render(lang);
+  document.querySelectorAll('.lbtn').forEach(b=>b.classList.remove('on'));
+  document.querySelector(`.lbtn[onclick="setLang('${lang}')"]`).classList.add('on');
+}
+const saved = localStorage.getItem('ps-lang')||'en';
+render(saved);
+if(saved==='ja'){document.querySelector('.lbtn.on').classList.remove('on');document.querySelector('.lbtn[onclick="setLang(\'ja\')"]').classList.add('on');}
+</script>
+</body>
+</html>

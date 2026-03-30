@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stage | PARADIGM SHIFT</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="common.css">
+<style>
+  .page-hero { padding:120px 40px 60px; position:relative; overflow:hidden; }
+  .page-hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse 80% 100% at 50% 0%,rgba(224,26,45,.06),transparent 70%); }
+  .page-hero h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(48px,8vw,110px); line-height:.9; letter-spacing:2px; position:relative; }
+  .page-hero h1 span { color:var(--red); }
+  .page-hero p { font-size:11px; letter-spacing:3px; color:var(--off); margin-top:16px; position:relative; }
+  body.ja .page-hero p { font-family:'Noto Sans JP',sans-serif; font-size:12px; letter-spacing:.3px; }
+
+  .stage-list { display:flex; flex-direction:column; gap:2px; }
+  .stage-item { display:grid; grid-template-columns:120px 1fr auto; gap:24px; align-items:center; padding:24px 28px; background:var(--panel); border-left:2px solid transparent; transition:all .3s; cursor:default; }
+  .stage-item:hover { background:#0f0f0f; border-left-color:var(--red); }
+  .stage-item.award { border-left-color:var(--red); }
+  .si-year { font-family:'Bebas Neue',sans-serif; font-size:22px; color:var(--red); letter-spacing:2px; }
+  .si-main {}
+  .si-title { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:2px; margin-bottom:4px; }
+  .si-role { font-size:9px; letter-spacing:3px; color:var(--off); margin-bottom:4px; }
+  body.ja .si-role { font-family:'Noto Sans JP',sans-serif; font-size:11px; letter-spacing:.3px; }
+  .si-venue { font-size:9px; letter-spacing:2px; color:rgba(255,255,255,.2); }
+  .si-badge { background:var(--red); font-size:7px; letter-spacing:2px; padding:3px 8px; color:var(--white); clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,0 100%); white-space:nowrap; display:flex; align-items:center; gap:4px; }
+  .si-badge::before { content:'★'; font-size:8px; }
+
+  @media(max-width:768px){
+    .page-hero { padding:100px 20px 40px; }
+    .stage-item { grid-template-columns:80px 1fr; gap:16px; padding:18px 20px; }
+    .si-badge { display:none; }
+    section { padding:40px 20px; }
+  }
+</style>
+</head>
+<body class="en">
+<nav class="navbar">
+  <a href="index.html" class="logo">
+    <div class="logo-icon">PS</div>
+    <div class="logo-name">PARADIGM <span>SHIFT</span></div>
+  </a>
+  <div class="nav-r">
+    <div class="nav-links" id="nav-links"></div>
+    <div class="lswitch">
+      <button class="lbtn on" onclick="setLang('en')">EN</button>
+      <button class="lbtn" onclick="setLang('ja')">JP</button>
+    </div>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <h1 id="ph-title"></h1>
+    <p id="ph-sub"></p>
+  </div>
+  <section>
+    <div class="stage-list" id="stage-list"></div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-copy" id="footer-copy"></div>
+  <div class="footer-links"><a href="#">Instagram</a><a href="#">Vimeo</a><a href="#">IMDb</a></div>
+</footer>
+
+<script>
+const NAV_HREFS = ['index.html','films.html','stage.html','about.html','contact.html'];
+const STAGE_DATA = {
+  en: [
+    { year:'2026', title:'劇場版モノノ怪 前日譚〜二首女〜', role:'Direction · Video', venue:'Shinagawa Prince Hotel Stella Ball', award:'Stage' },
+    { year:'2026', title:'音楽劇「2FATE」', role:'Script · Direction', venue:'—', award:'' },
+    { year:'2023', title:'モノノ怪〜座敷童子〜', role:'Direction · Video', venue:'Hikosentheatre', award:'' },
+    { year:'2022', title:'殺人の告白', role:'Script · Direction · Video', venue:'Sunshine Theatre', award:'' },
+    { year:'2022', title:'モノノ怪〜化猫〜', role:'Direction · Video', venue:'Hikosentheatre', award:'' },
+    { year:'2021', title:'家庭教師ヒットマンREBORN! the STAGE', role:'Direction · Video', venue:'Tenzuza Ginga Theatre', award:'' },
+    { year:'2019', title:'DEVIL MAY CRY THE LIVE HACKER', role:'Script · Direction · Video', venue:'Zepp DiverCity Tokyo', award:'' },
+    { year:'2017', title:'HEDWIG AND THE ANGRY INCH SPECIAL SHOW', role:'Script · Direction · Video · Art', venue:'Tokyu Theatre Orb', award:'' },
+    { year:'2015', title:'BIOHAZARD THE STAGE', role:'Script · Direction · Video', venue:'EX THEATER ROPPONGI', award:'World Premiere Stage' },
+    { year:'2015', title:'Musical FAUST ~The Last Holy War~', role:'Script · Lyrics · Direction · Video', venue:'Tokyo Geijutsu Gekijo Playhouse', award:'' },
+    { year:'2011–', title:'銀河英雄伝説 Stage Series', role:'Script · Direction · Video', venue:'Various', award:'' },
+  ],
+  ja: [
+    { year:'2026', title:'劇場版モノノ怪 前日譚〜二首女〜', role:'演出・映像', venue:'品川プリンスホテル ステラボール', award:'舞台' },
+    { year:'2026', title:'音楽劇「2FATE」', role:'脚本・演出', venue:'—', award:'' },
+    { year:'2023', title:'モノノ怪〜座敷童子〜', role:'演出・映像', venue:'飛行船シアター', award:'' },
+    { year:'2022', title:'殺人の告白', role:'脚本・演出・映像', venue:'サンシャイン劇場', award:'' },
+    { year:'2022', title:'モノノ怪〜化猫〜', role:'演出・映像', venue:'飛行船シアター', award:'' },
+    { year:'2021', title:'家庭教師ヒットマンREBORN! the STAGE', role:'演出・映像', venue:'天王洲 銀河劇場', award:'' },
+    { year:'2019', title:'DEVIL MAY CRY THE LIVE HACKER', role:'脚本・演出・映像', venue:'Zepp DiverCity（TOKYO）', award:'' },
+    { year:'2017', title:'HEDWIG AND THE ANGRY INCH SPECIAL SHOW', role:'脚本・演出・映像・美術', venue:'東急シアターオーブ', award:'' },
+    { year:'2015', title:'BIOHAZARD THE STAGE', role:'脚本・演出・映像', venue:'EX THEATER ROPPONGI', award:'世界初舞台化' },
+    { year:'2015', title:'ミュージカルファウスト〜最後の聖戦〜', role:'脚本・作詞・演出・映像', venue:'東京芸術劇場プレイハウス', award:'' },
+    { year:'2011–', title:'銀河英雄伝説 舞台シリーズ', role:'脚本・演出・映像', venue:'各地', award:'' },
+  ]
+};
+const T = {
+  en: { nav:['Home','Films','Stage','About','Contact'], phTitle:'STAGE<br><span>WORKS</span>', phSub:'Direction, script and video for major stage productions.', footer:'© 2025 PARADIGM SHIFT — ALL RIGHTS RESERVED' },
+  ja: { nav:['ホーム','作品','舞台','概要','お問合せ'], phTitle:'舞台<br><span>作品</span>', phSub:'主要舞台作品の演出・脚本・映像を担当。', footer:'© 2025 PARADIGM SHIFT — 無断転載禁止' }
+};
+function render(lang) {
+  const t = T[lang];
+  document.body.className = lang;
+  document.documentElement.lang = lang;
+  document.getElementById('nav-links').innerHTML = t.nav.map((n,i)=>
+    `<a href="${NAV_HREFS[i]}" class="nav-link${i===2?' active':''}">${n}</a>`).join('');
+  document.getElementById('ph-title').innerHTML = t.phTitle;
+  document.getElementById('ph-sub').textContent = t.phSub;
+  document.getElementById('stage-list').innerHTML = STAGE_DATA[lang].map(s=>`
+    <div class="stage-item${s.award?' award':''}">
+      <div class="si-year">${s.year}</div>
+      <div class="si-main">
+        <div class="si-title">${s.title}</div>
+        <div class="si-role">${s.role}</div>
+        <div class="si-venue">${s.venue}</div>
+      </div>
+      ${s.award ? `<div class="si-badge">${s.award}</div>` : '<div></div>'}
+    </div>`).join('');
+  document.getElementById('footer-copy').textContent = t.footer;
+}
+function setLang(lang) {
+  localStorage.setItem('ps-lang',lang);
+  render(lang);
+  document.querySelectorAll('.lbtn').forEach(b=>b.classList.remove('on'));
+  document.querySelector(`.lbtn[onclick="setLang('${lang}')"]`).classList.add('on');
+}
+const saved = localStorage.getItem('ps-lang')||'en';
+render(saved);
+if(saved==='ja'){document.querySelector('.lbtn.on').classList.remove('on');document.querySelector('.lbtn[onclick="setLang(\'ja\')"]').classList.add('on');}
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+:root {
+  --red: #E01A2D;
+  --white: #F0EDE8;
+  --off: #8a8078;
+  --bg: #080808;
+  --panel: #0c0c0c;
+  --border: rgba(224,26,45,0.25);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--bg); color:var(--white); font-family:'Share Tech Mono',monospace; overflow-x:hidden; cursor:crosshair; }
+body::before {
+  content:''; position:fixed; inset:0;
+  background:repeating-linear-gradient(to bottom,rgba(255,255,255,0.012) 0px,rgba(255,255,255,0.012) 1px,transparent 1px,transparent 3px);
+  pointer-events:none; z-index:9999;
+}
+body.ja { font-family:'Noto Sans JP',sans-serif; }
+
+/* NAV */
+.navbar {
+  position:fixed; top:0; left:0; right:0; z-index:2000;
+  background:rgba(8,8,8,0.94); border-bottom:1px solid var(--border);
+  backdrop-filter:blur(8px);
+  display:flex; align-items:center; justify-content:space-between; padding:14px 40px;
+}
+.logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
+.logo-icon {
+  width:34px; height:34px; border:2px solid var(--red); border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Bebas Neue',sans-serif; font-size:11px; color:var(--red); letter-spacing:1px;
+  animation:pulse 3s ease-in-out infinite;
+}
+@keyframes pulse{ 0%,100%{box-shadow:0 0 0 0 rgba(224,26,45,.4)} 50%{box-shadow:0 0 0 6px rgba(224,26,45,0)} }
+.logo-name { font-family:'Bebas Neue',sans-serif; font-size:19px; letter-spacing:4px; color:var(--white); }
+.logo-name span { color:var(--red); }
+.nav-r { display:flex; align-items:center; gap:24px; }
+.nav-links { display:flex; gap:20px; }
+.nav-link { color:var(--off); text-decoration:none; font-size:10px; letter-spacing:3px; text-transform:uppercase; transition:color .2s; position:relative; }
+.nav-link::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:1px; background:var(--red); transition:width .3s; }
+.nav-link:hover { color:var(--white); }
+.nav-link:hover::after { width:100%; }
+.nav-link.active { color:var(--white); }
+.nav-link.active::after { width:100%; }
+.lswitch { display:flex; border:1px solid var(--border); }
+.lbtn { background:none; border:none; color:var(--off); font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; padding:5px 11px; cursor:pointer; transition:all .2s; }
+.lbtn.on { background:var(--red); color:var(--white); }
+
+/* SECTION BASE */
+.page-wrap { padding-top:65px; }
+section { padding:90px 40px; }
+.sec-lbl { font-size:9px; letter-spacing:5px; color:var(--red); margin-bottom:10px; display:flex; align-items:center; gap:10px; }
+.sec-lbl::before { content:''; width:26px; height:1px; background:var(--red); }
+.sec-ttl { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,5vw,70px); line-height:1; letter-spacing:2px; margin-bottom:50px; }
+
+/* FOOTER */
+footer { border-top:1px solid var(--border); padding:24px 40px; display:flex; justify-content:space-between; align-items:center; }
+.footer-copy { font-size:8px; letter-spacing:3px; color:var(--off); }
+.footer-links { display:flex; gap:18px; }
+.footer-links a { font-size:8px; letter-spacing:3px; color:var(--off); text-decoration:none; transition:color .2s; }
+.footer-links a:hover { color:var(--red); }
+
+/* BUTTONS */
+.btn { background:var(--red); color:var(--white); text-decoration:none; font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:4px; padding:12px 26px; text-transform:uppercase; clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px)); transition:background .2s,transform .2s; display:inline-block; }
+.btn:hover { background:#ff1f36; transform:translateY(-2px); }
+.btn-g { color:var(--off); text-decoration:none; font-size:10px; letter-spacing:3px; display:inline-flex; align-items:center; gap:8px; transition:color .2s; }
+.btn-g::before { content:'//'; color:var(--red); }
+.btn-g:hover { color:var(--white); }
+
+@media(max-width:768px){
+  .navbar { padding:12px 20px; }
+  .nav-links { display:none; }
+  section { padding:60px 20px; }
+  footer { flex-direction:column; gap:14px; text-align:center; padding:20px; }
+}

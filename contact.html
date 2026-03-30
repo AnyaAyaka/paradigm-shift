@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | PARADIGM SHIFT</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="common.css">
+<style>
+  .contact-wrap { min-height:calc(100vh - 65px); display:flex; align-items:center; padding:120px 40px 80px; }
+  .ct-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; width:100%; }
+  .ct-h { font-family:'Bebas Neue',sans-serif; font-size:clamp(40px,7vw,80px); line-height:.9; letter-spacing:2px; margin-bottom:20px; }
+  .ct-h span { color:var(--red); }
+  .ct-sub { font-size:11px; color:var(--off); line-height:2.1; letter-spacing:2px; }
+  body.ja .ct-sub { font-family:'Noto Sans JP',sans-serif; font-size:12px; letter-spacing:.3px; }
+  .form { display:flex; flex-direction:column; gap:14px; }
+  .frow { display:flex; gap:14px; }
+  .fld { display:flex; flex-direction:column; gap:5px; flex:1; }
+  .fld label { font-size:7px; letter-spacing:4px; color:var(--red); }
+  body.ja .fld label { font-family:'Noto Sans JP',sans-serif; font-size:10px; letter-spacing:.3px; }
+  .fld input,.fld textarea,.fld select { background:transparent; border:1px solid rgba(255,255,255,.08); color:var(--white); font-family:'Share Tech Mono',monospace; font-size:11px; padding:11px 13px; outline:none; resize:none; transition:border-color .2s; appearance:none; }
+  .fld input:focus,.fld textarea:focus,.fld select:focus { border-color:var(--red); }
+  .fld select option { background:#111; }
+  .fsub { background:var(--red); color:var(--white); border:none; font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:4px; padding:14px; cursor:pointer; text-transform:uppercase; transition:background .2s; clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,0 100%); }
+  .fsub:hover { background:#ff1f36; }
+  @media(max-width:768px){
+    .contact-wrap { padding:100px 20px 60px; }
+    .ct-grid { grid-template-columns:1fr; gap:40px; }
+  }
+</style>
+</head>
+<body class="en">
+<nav class="navbar">
+  <a href="index.html" class="logo">
+    <div class="logo-icon">PS</div>
+    <div class="logo-name">PARADIGM <span>SHIFT</span></div>
+  </a>
+  <div class="nav-r">
+    <div class="nav-links" id="nav-links"></div>
+    <div class="lswitch">
+      <button class="lbtn on" onclick="setLang('en')">EN</button>
+      <button class="lbtn" onclick="setLang('ja')">JP</button>
+    </div>
+  </div>
+</nav>
+
+<div class="contact-wrap">
+  <div class="ct-grid">
+    <div>
+      <h2 class="ct-h" id="ct-h"></h2>
+      <p class="ct-sub" id="ct-sub"></p>
+    </div>
+    <div class="form">
+      <div class="frow">
+        <div class="fld"><label id="f-name"></label><input type="text"></div>
+        <div class="fld"><label id="f-email"></label><input type="email"></div>
+      </div>
+      <div class="fld"><label id="f-subject"></label><select id="f-sel"></select></div>
+      <div class="fld"><label id="f-msg"></label><textarea rows="6"></textarea></div>
+      <button class="fsub" id="f-submit"></button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-copy" id="footer-copy"></div>
+  <div class="footer-links"><a href="#">Instagram</a><a href="#">Vimeo</a><a href="#">IMDb</a></div>
+</footer>
+
+<script>
+const NAV_HREFS = ['index.html','films.html','stage.html','about.html','contact.html'];
+const T = {
+  en: {
+    nav:['Home','Films','Stage','About','Contact'],
+    ctH:'GET IN<br><span>TOUCH</span>',
+    ctSub:'Collaborations, screening requests,<br>press enquiries & project opportunities.',
+    fName:'NAME', fEmail:'EMAIL', fSubject:'SUBJECT', fMsg:'MESSAGE',
+    fOpts:['-- Select --','Collaboration','Screening Request','Press / Media','Other'],
+    fSubmit:'TRANSMIT MESSAGE',
+    footer:'© 2025 PARADIGM SHIFT — ALL RIGHTS RESERVED',
+  },
+  ja: {
+    nav:['ホーム','作品','舞台','概要','お問合せ'],
+    ctH:'お問い<br><span>合わせ</span>',
+    ctSub:'コラボレーション、上映依頼、<br>取材・プロジェクトのご相談はこちら。',
+    fName:'お名前', fEmail:'メール', fSubject:'件名', fMsg:'メッセージ',
+    fOpts:['-- 選択 --','コラボレーション','上映依頼','取材・メディア','その他'],
+    fSubmit:'送信する',
+    footer:'© 2025 PARADIGM SHIFT — 無断転載禁止',
+  }
+};
+function render(lang) {
+  const t = T[lang];
+  document.body.className = lang;
+  document.documentElement.lang = lang;
+  document.getElementById('nav-links').innerHTML = t.nav.map((n,i)=>
+    `<a href="${NAV_HREFS[i]}" class="nav-link${i===4?' active':''}">${n}</a>`).join('');
+  document.getElementById('ct-h').innerHTML = t.ctH;
+  document.getElementById('ct-sub').innerHTML = t.ctSub;
+  document.getElementById('f-name').textContent = t.fName;
+  document.getElementById('f-email').textContent = t.fEmail;
+  document.getElementById('f-subject').textContent = t.fSubject;
+  document.getElementById('f-msg').textContent = t.fMsg;
+  document.getElementById('f-sel').innerHTML = t.fOpts.map(o=>`<option>${o}</option>`).join('');
+  document.getElementById('f-submit').textContent = t.fSubmit;
+  document.getElementById('footer-copy').textContent = t.footer;
+}
+function setLang(lang) {
+  localStorage.setItem('ps-lang',lang);
+  render(lang);
+  document.querySelectorAll('.lbtn').forEach(b=>b.classList.remove('on'));
+  document.querySelector(`.lbtn[onclick="setLang('${lang}')"]`).classList.add('on');
+}
+const saved = localStorage.getItem('ps-lang')||'en';
+render(saved);
+if(saved==='ja'){document.querySelector('.lbtn.on').classList.remove('on');document.querySelector('.lbtn[onclick="setLang(\'ja\')"]').classList.add('on');}
+</script>
+</body>
+</html>
