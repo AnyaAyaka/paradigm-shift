@@ -37,12 +37,14 @@
   </a>
   <div class="nav-r">
     <div class="nav-links" id="nav-links"></div>
+    <div class="hamburger" onclick="toggleMenu()" id="hamburger"><span></span><span></span><span></span></div>
     <div class="lswitch">
       <button class="lbtn on" onclick="setLang('en')">EN</button>
       <button class="lbtn" onclick="setLang('ja')">JP</button>
     </div>
   </div>
 </nav>
+<div class="mobile-menu" id="mobile-menu"></div>
 
 <div class="contact-wrap">
   <div class="ct-grid">
@@ -95,6 +97,7 @@ function render(lang) {
   document.documentElement.lang = lang;
   document.getElementById('nav-links').innerHTML = t.nav.map((n,i)=>
     `<a href="${NAV_HREFS[i]}" class="nav-link${i===4?' active':''}">${n}</a>`).join('');
+  if(document.getElementById('mobile-menu')) document.getElementById('mobile-menu').innerHTML=t.nav.map((n,i)=>`<a href="${NAV_HREFS[i]}" class="nav-link${i===4?' active':''}" onclick="document.getElementById('mobile-menu').classList.remove('open')">${n}</a>`).join('');
   document.getElementById('ct-h').innerHTML = t.ctH;
   document.getElementById('ct-sub').innerHTML = t.ctSub;
   document.getElementById('f-name').textContent = t.fName;
@@ -114,6 +117,11 @@ function setLang(lang) {
 const saved = localStorage.getItem('ps-lang')||'en';
 render(saved);
 if(saved==='ja'){document.querySelector('.lbtn.on').classList.remove('on');document.querySelector('.lbtn[onclick="setLang(\'ja\')"]').classList.add('on');}
+
+function toggleMenu(){
+  const m=document.getElementById('mobile-menu');
+  m.classList.toggle('open');
+}
 </script>
 </body>
 </html>

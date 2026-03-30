@@ -50,8 +50,10 @@
 <body class="en">
 <nav class="navbar">
   <a href="index.html" class="logo"><div class="logo-icon">PS</div><div class="logo-name">PARADIGM <span>SHIFT</span></div></a>
-  <div class="nav-r"><div class="nav-links" id="nav-links"></div><div class="lswitch"><button class="lbtn on" onclick="setLang('en')">EN</button><button class="lbtn" onclick="setLang('ja')">JP</button></div></div>
+  <div class="nav-r"><div class="nav-links" id="nav-links"></div>
+    <div class="hamburger" onclick="toggleMenu()" id="hamburger"><span></span><span></span><span></span></div><div class="lswitch"><button class="lbtn on" onclick="setLang('en')">EN</button><button class="lbtn" onclick="setLang('ja')">JP</button></div></div>
 </nav>
+<div class="mobile-menu" id="mobile-menu"></div>
 <div class="page-wrap">
   <div class="page-hero"><div class="page-hero-bg"></div><h1 id="ph-title"></h1><p id="ph-sub"></p></div>
   <section>
@@ -114,6 +116,11 @@ function render(lang){
 function setLang(lang){localStorage.setItem('ps-lang',lang);render(lang);document.querySelectorAll('.lbtn').forEach(b=>b.classList.remove('on'));document.querySelector(`.lbtn[onclick="setLang('${lang}')"]`).classList.add('on');}
 const saved=localStorage.getItem('ps-lang')||'en';render(saved);
 if(saved==='ja'){document.querySelector('.lbtn.on').classList.remove('on');document.querySelector(".lbtn[onclick=\"setLang('ja')\"]").classList.add('on');}
+
+function toggleMenu(){
+  const m=document.getElementById('mobile-menu');
+  m.classList.toggle('open');
+}
 </script>
 </body>
 </html>

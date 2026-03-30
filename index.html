@@ -13,7 +13,7 @@
     display:flex; align-items:center; justify-content:center; overflow:hidden; cursor:pointer;
   }
   #intro video { width:100%; height:100%; object-fit:cover; }
-  #intro-skip { position:absolute; bottom:32px; right:40px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:4px; color:rgba(255,255,255,0.4); text-transform:uppercase; cursor:pointer; z-index:10; padding:10px; }
+  #intro-skip { position:absolute; bottom:32px; right:40px; font-family:'Share Tech Mono',monospace; font-size:13px; letter-spacing:4px; color:rgba(255,255,255,0.4); text-transform:uppercase; cursor:pointer; z-index:10; padding:10px; }
 
   /* HERO */
   .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 40px 80px; position:relative; overflow:hidden; padding-top:65px; background:var(--bg); }
@@ -37,9 +37,9 @@
   .h-cta { margin-top:34px; display:flex; gap:20px; align-items:center; flex-wrap:wrap; animation:fu 1s .3s ease both; }
   .h-stats { position:absolute; bottom:80px; right:40px; display:flex; flex-direction:column; gap:12px; text-align:right; animation:fu 1s .4s ease both; opacity:.65; }
   .sn { font-family:'Bebas Neue',sans-serif; font-size:38px; color:var(--red); line-height:1; }
-  .sl { font-size:8px; letter-spacing:3px; color:var(--off); }
+  .sl { font-size:13px; letter-spacing:2px; color:var(--off); }
   .scroll-h { position:absolute; bottom:26px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:7px; opacity:.35; animation:bounce 2s ease-in-out infinite; }
-  .scroll-h span { font-size:8px; letter-spacing:4px; color:var(--off); }
+  .scroll-h span { font-size:12px; letter-spacing:3px; color:var(--off); }
   .scroll-h div { width:1px; height:34px; background:linear-gradient(to bottom,var(--red),transparent); }
   @keyframes bounce{ 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
   @keyframes fu{ from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
@@ -55,16 +55,16 @@
   .lc:hover .lbg { transform:scale(1.08); }
   .lov { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.97) 0%,rgba(0,0,0,.08) 60%); display:flex; flex-direction:column; justify-content:flex-end; padding:20px; transition:background .3s; }
   .lc:hover .lov { background:linear-gradient(to top,rgba(0,0,0,.99) 35%,rgba(0,0,0,.2) 100%); }
-  .award-badge { position:absolute; top:12px; left:12px; background:var(--red); font-size:7px; letter-spacing:2px; padding:3px 8px; color:var(--white); clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,0 100%); display:flex; align-items:center; gap:4px; }
-  .award-badge::before { content:'★'; font-size:8px; }
-  .lcity { font-size:8px; letter-spacing:3px; color:var(--red); margin-bottom:3px; }
-  .lyear { font-size:8px; letter-spacing:3px; color:var(--off); margin-bottom:5px; }
+  .award-badge { position:absolute; top:12px; left:12px; background:var(--red); font-size:11px; letter-spacing:2px; padding:4px 10px; color:var(--white); clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,0 100%); display:flex; align-items:center; gap:4px; }
+  .award-badge::before { content:'★'; font-size:11px; }
+  .lcity { font-size:12px; letter-spacing:3px; color:var(--red); margin-bottom:4px; }
+  .lyear { font-size:12px; letter-spacing:3px; color:var(--off); margin-bottom:6px; }
   .ltitle { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:2px; line-height:1; margin-bottom:5px; color:var(--white); }
-  .lgenre { font-size:8px; letter-spacing:2px; color:var(--off); margin-bottom:10px; }
-  body.ja .lgenre { font-family:'Noto Sans JP',sans-serif; font-size:10px; letter-spacing:0; }
+  .lgenre { font-size:13px; letter-spacing:1px; color:var(--off); margin-bottom:10px; }
+  body.ja .lgenre { font-family:'Noto Sans JP',sans-serif; font-size:13px; letter-spacing:0; }
   .ltags { display:flex; flex-wrap:wrap; gap:4px; opacity:0; transform:translateY(6px); transition:all .3s; }
   .lc:hover .ltags { opacity:1; transform:translateY(0); }
-  .ltag { font-size:7px; letter-spacing:2px; border:1px solid var(--red); color:var(--red); padding:2px 5px; }
+  .ltag { font-size:11px; letter-spacing:2px; border:1px solid var(--red); color:var(--red); padding:2px 5px; }
   .view-all { display:flex; justify-content:center; margin-top:40px; }
 
   /* ACTIVITY */
@@ -73,11 +73,11 @@
   .act-cell:hover { background:#0e0305; }
   .act-cell::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--red); transform:scaleX(0); transform-origin:left; transition:transform .4s; }
   .act-cell:hover::before { transform:scaleX(1); }
-  .act-cat { font-size:8px; letter-spacing:4px; color:var(--red); margin-bottom:10px; }
+  .act-cat { font-size:12px; letter-spacing:3px; color:var(--red); margin-bottom:10px; }
   .act-title { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:2px; margin-bottom:10px; }
-  .act-desc { font-size:10px; letter-spacing:2px; color:var(--off); line-height:1.9; }
-  body.ja .act-desc { font-family:'Noto Sans JP',sans-serif; font-size:11px; letter-spacing:.3px; }
-  .act-link { display:inline-flex; align-items:center; gap:6px; margin-top:16px; font-size:9px; letter-spacing:3px; color:var(--red); text-decoration:none; transition:opacity .2s; }
+  .act-desc { font-size:14px; letter-spacing:.5px; color:var(--off); line-height:1.9; }
+  body.ja .act-desc { font-family:'Noto Sans JP',sans-serif; font-size:14px; letter-spacing:.3px; }
+  .act-link { display:inline-flex; align-items:center; gap:6px; margin-top:16px; font-size:13px; letter-spacing:2px; color:var(--red); text-decoration:none; transition:opacity .2s; }
   .act-link:hover { opacity:.7; }
   .act-link::after { content:'→'; }
 
@@ -113,12 +113,14 @@
   </a>
   <div class="nav-r">
     <div class="nav-links" id="nav-links"></div>
+    <div class="hamburger" onclick="toggleMenu()" id="hamburger"><span></span><span></span><span></span></div>
     <div class="lswitch">
       <button class="lbtn on" onclick="setLang('en')">EN</button>
       <button class="lbtn" onclick="setLang('ja')">JP</button>
     </div>
   </div>
 </nav>
+<div class="mobile-menu" id="mobile-menu"></div>
 
 <!-- HERO -->
 <div class="hero">
@@ -288,6 +290,7 @@ function render(lang) {
   document.documentElement.lang = lang;
   document.getElementById('nav-links').innerHTML = t.nav.map((n,i)=>
     `<a href="${NAV_HREFS[i]}" class="nav-link${i===0?' active':''}">${n}</a>`).join('');
+  if(document.getElementById('mobile-menu')) document.getElementById('mobile-menu').innerHTML=t.nav.map((n,i)=>`<a href="${NAV_HREFS[i]}" class="nav-link${i===0?' active':''}" onclick="document.getElementById('mobile-menu').classList.remove('open')">${n}</a>`).join('');
   document.getElementById('hero-kicker').textContent = t.heroKicker;
   document.getElementById('hero-sub').textContent = t.heroSub;
   document.getElementById('hero-desc').innerHTML = t.heroDesc;
@@ -354,6 +357,11 @@ setInterval(()=>{ const e=document.getElementById('clock'); if(e) e.textContent=
 const savedLang = localStorage.getItem('ps-lang') || 'en';
 render(savedLang);
 if(savedLang==='ja') { document.querySelector('.lbtn.on').classList.remove('on'); document.querySelector('.lbtn[onclick="setLang(\'ja\')"]').classList.add('on'); }
+
+function toggleMenu(){
+  const m=document.getElementById('mobile-menu');
+  m.classList.toggle('open');
+}
 </script>
 </body>
 </html>
