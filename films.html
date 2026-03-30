@@ -32,11 +32,11 @@
   .fidx { position:absolute; top:12px; right:12px; font-family:'Bebas Neue',sans-serif; font-size:46px; color:rgba(255,255,255,.04); line-height:1; }
   .award-badge { position:absolute; top:12px; left:12px; background:var(--red); font-size:7px; letter-spacing:2px; padding:3px 8px; color:var(--white); clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,0 100%); display:flex; align-items:center; gap:4px; }
   .award-badge::before { content:'★'; font-size:8px; }
-  .fcity { font-size:8px; letter-spacing:3px; color:var(--red); margin-bottom:3px; }
-  .fyear { font-size:8px; letter-spacing:3px; color:var(--off); margin-bottom:5px; }
-  .ftitle { font-family:'Bebas Neue',sans-serif; font-size:23px; letter-spacing:2px; line-height:1; margin-bottom:5px; }
-  .fgenre { font-size:8px; letter-spacing:2px; color:var(--off); margin-bottom:8px; }
-  body.ja .fgenre { font-family:'Noto Sans JP',sans-serif; font-size:10px; letter-spacing:0; }
+  .fcity { font-size:11px; letter-spacing:3px; color:var(--red); margin-bottom:3px; }
+  .fyear { font-size:11px; letter-spacing:3px; color:var(--off); margin-bottom:5px; }
+  .ftitle { font-family:'Bebas Neue',sans-serif; font-size:24px; letter-spacing:2px; line-height:1; margin-bottom:5px; }
+  .fgenre { font-size:12px; letter-spacing:1px; color:var(--off); margin-bottom:8px; }
+  body.ja .fgenre { font-family:'Noto Sans JP',sans-serif; font-size:12px; letter-spacing:0; }
   .ftags { display:flex; flex-wrap:wrap; gap:4px; opacity:0; transform:translateY(6px); transition:all .3s; }
   .fc:hover .ftags { opacity:1; transform:translateY(0); }
   .ftag { font-size:7px; letter-spacing:2px; border:1px solid var(--red); color:var(--red); padding:2px 5px; }
@@ -78,11 +78,12 @@
       <div class="fc"><div class="fbg"></div><div class="award-badge" id="f1b"></div><div class="fov"><div class="fidx">01</div><div class="fcity">LOS ANGELES</div><div class="fyear">2025</div><div class="ftitle">ECHOES</div><div class="fgenre" id="f1g"></div><div class="ftags"><span class="ftag" id="f1t1"></span><span class="ftag" id="f1t2"></span><span class="ftag">Filmapalooza 2026</span></div></div></div>
       <div class="fc"><div class="fbg"></div><div class="fov"><div class="fidx">02</div><div class="fcity">LONDON</div><div class="fyear">2024</div><div class="ftitle">PHOENIX</div><div class="fgenre" id="f2g"></div><div class="ftags"><span class="ftag">48HFP London</span></div></div></div>
       <div class="fc"><div class="fbg"></div><div class="fov"><div class="fidx">03</div><div class="fcity">LOS ANGELES</div><div class="fyear">2024</div><div class="ftitle">@SMILE</div><div class="fgenre" id="f3g"></div><div class="ftags"><span class="ftag">48HFP LA</span></div></div></div>
-      <div class="fc"><div class="fbg"></div><div class="award-badge" id="f4b"></div><div class="fov"><div class="fidx">04</div><div class="fcity">LOS ANGELES</div><div class="fyear">2023</div><div class="ftitle">MetamoRphose</div><div class="fgenre" id="f4g"></div><div class="ftags"><span class="ftag" id="f4t1"></span></div></div></div>
-      <div class="fc"><div class="fbg"></div><div class="fov"><div class="fidx">05</div><div class="fcity">LOS ANGELES</div><div class="fyear">2023</div><div class="ftitle">HITMAN</div><div class="fgenre" id="f5g"></div><div class="ftags"><span class="ftag">48HFP LA Horror Comedy</span></div></div></div>
-      <div class="fc"><div class="fbg"></div><div class="award-badge" id="f6b"></div><div class="fov"><div class="fidx">06</div><div class="fcity">TOKYO</div><div class="fyear">2022</div><div class="ftitle">POSTMAN</div><div class="fgenre" id="f6g"></div><div class="ftags"><span class="ftag" id="f6t1"></span><span class="ftag">Filmapalooza 2023</span><span class="ftag">Cannes 2023</span></div></div></div>
-      <div class="fc"><div class="fbg"></div><div class="award-badge" id="f7b"></div><div class="fov"><div class="fidx">07</div><div class="fcity">TOKYO</div><div class="fyear">2021</div><div class="ftitle">BIRTH DAY</div><div class="fgenre" id="f7g"></div><div class="ftags"><span class="ftag" id="f7t1"></span><span class="ftag">Filmapalooza 2022</span><span class="ftag">Cannes 2022</span></div></div></div>
-      <div class="fc"><div class="fbg"></div><div class="fov"><div class="fidx">08</div><div class="ftitle">THE TUNER</div><div class="fgenre" id="f8g"></div><div class="ftags"><span class="ftag">Yes We Cannes</span></div></div></div>
+      <div class="fc"><div class="fbg"></div><div class="fov"><div class="fidx">04</div><div class="fcity">PARIS</div><div class="fyear">2024</div><div class="ftitle">DÉJÀ VU</div><div class="fgenre" id="f3bg"></div><div class="ftags"><span class="ftag">48HFP Paris</span><span class="ftag">Finale du 48HFP Paris</span></div></div></div>
+      <div class="fc"><div class="fbg"></div><div class="award-badge" id="f4b"></div><div class="fov"><div class="fidx">05</div><div class="fcity">LOS ANGELES</div><div class="fyear">2023</div><div class="ftitle">MetamoRphose</div><div class="fgenre" id="f4g"></div><div class="ftags"><span class="ftag" id="f4t1"></span></div></div></div>
+      <div class="fc"><div class="fbg"></div><div class="fov"><div class="fidx">06</div><div class="fcity">LOS ANGELES</div><div class="fyear">2023</div><div class="ftitle">HITMAN</div><div class="fgenre" id="f5g"></div><div class="ftags"><span class="ftag">48HFP LA Horror Comedy</span></div></div></div>
+      <div class="fc"><div class="fbg"></div><div class="award-badge" id="f6b"></div><div class="fov"><div class="fidx">07</div><div class="fcity">TOKYO</div><div class="fyear">2022</div><div class="ftitle">POSTMAN</div><div class="fgenre" id="f6g"></div><div class="ftags"><span class="ftag" id="f6t1"></span><span class="ftag">Filmapalooza 2023</span><span class="ftag">Cannes 2023</span></div></div></div>
+      <div class="fc"><div class="fbg"></div><div class="award-badge" id="f7b"></div><div class="fov"><div class="fidx">08</div><div class="fcity">TOKYO</div><div class="fyear">2021</div><div class="ftitle">BIRTH DAY</div><div class="fgenre" id="f7g"></div><div class="ftags"><span class="ftag" id="f7t1"></span><span class="ftag">Filmapalooza 2022</span><span class="ftag">Cannes 2022</span></div></div></div>
+      <div class="fc"><div class="fbg"></div><div class="fov"><div class="fidx">09</div><div class="ftitle">THE TUNER</div><div class="fgenre" id="f8g"></div><div class="ftags"><span class="ftag">Yes We Cannes</span></div></div></div>
       <div class="fc fc-more"><div class="fc-more-inner"><div class="fc-more-plus">+</div><div class="fc-more-list" id="more-list"></div></div></div>
     </div>
   </section>
@@ -100,26 +101,26 @@ const T = {
     nav:['Home','Films','Stage','About','Contact'],
     phTitle:'48 HOUR<br><span>FILMS</span>', phSub:'All films made in 48 hours — written, shot, edited & scored from scratch.',
     f1b:'★ BEST FILM', f1g:'Adventure / Sci-Fi', f1t1:'Best Film', f1t2:'Best Cinematography',
-    f2g:'Action / Fantasy', f3g:'Action Thriller',
+    f2g:'Action / Fantasy', f3g:'Action Thriller', f3bg:'Drama / Thriller',
     f4b:'★ 2ND PLACE', f4g:'Drama', f4t1:'2nd Place Best Film',
     f5g:'Horror Comedy',
     f6b:'★ BEST FILM', f6g:'Drama', f6t1:'Best Film + 3 Awards',
     f7b:'★ BEST FILM', f7g:'Drama / Sci-Fi', f7t1:'Best Film · Art · VFX',
     f8g:'Supernatural',
-    moreList:'MERMAID · DIANO LIVE\nUNDERTALE · 物の怪\n2FATE · and more',
+    moreList:'SOUTHPAW (2025, Tokyo)\nMERMAID · DIANO LIVE\nUNDERTALE · 物の怪\n2FATE · and more',
     footer:'© 2025 PARADIGM SHIFT — ALL RIGHTS RESERVED',
   },
   ja: {
     nav:['ホーム','作品','舞台','概要','お問合せ'],
     phTitle:'48時間<br><span>映画作品</span>', phSub:'48時間で脚本・撮影・編集・音楽をゼロから作り上げた全作品。',
     f1b:'★ 最優秀作品賞', f1g:'アドベンチャー / SF', f1t1:'最優秀作品賞', f1t2:'最優秀撮影賞',
-    f2g:'アクション / ファンタジー', f3g:'アクション・スリラー',
+    f2g:'アクション / ファンタジー', f3g:'アクション・スリラー', f3bg:'ドラマ / スリラー',
     f4b:'★ 第2位', f4g:'ドラマ', f4t1:'準最優秀作品賞',
     f5g:'ホラーコメディ',
     f6b:'★ 最優秀作品賞', f6g:'ドラマ', f6t1:'最優秀作品賞 他3部門',
     f7b:'★ 最優秀作品賞', f7g:'ドラマ / SF', f7t1:'作品賞・美術賞・VFX賞',
     f8g:'スーパーナチュラル',
-    moreList:'MERMAID · DIANO LIVE\nUNDERTALE · 物の怪\n2FATE · その他多数',
+    moreList:'SOUTHPAW（2025, Tokyo）\nMERMAID · DIANO LIVE\nUNDERTALE · 物の怪\n2FATE · その他多数',
     footer:'© 2025 PARADIGM SHIFT — 無断転載禁止',
   }
 };
@@ -131,7 +132,7 @@ function render(lang) {
     `<a href="${NAV_HREFS[i]}" class="nav-link${i===1?' active':''}">${n}</a>`).join('');
   document.getElementById('ph-title').innerHTML = t.phTitle;
   document.getElementById('ph-sub').textContent = t.phSub;
-  ['f1b','f1g','f1t1','f1t2','f2g','f3g','f4b','f4g','f4t1','f5g','f6b','f6g','f6t1','f7b','f7g','f7t1','f8g'].forEach(id=>{
+  ['f1b','f1g','f1t1','f1t2','f2g','f3g','f3bg','f4b','f4g','f4t1','f5g','f6b','f6g','f6t1','f7b','f7g','f7t1','f8g'].forEach(id=>{
     if(document.getElementById(id)) document.getElementById(id).textContent = t[id];
   });
   document.getElementById('more-list').innerHTML = t.moreList.replace(/\n/g,'<br>');

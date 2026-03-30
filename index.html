@@ -13,7 +13,7 @@
     display:flex; align-items:center; justify-content:center; overflow:hidden; cursor:pointer;
   }
   #intro video { width:100%; height:100%; object-fit:cover; }
-  #intro-skip { position:absolute; bottom:32px; right:40px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:4px; color:rgba(255,255,255,0.4); text-transform:uppercase; cursor:pointer; z-index:10; padding:10px; }
+  #intro-skip { position:absolute; bottom:32px; right:40px; font-family:'Share Tech Mono',monospace; font-size:12px; letter-spacing:4px; color:rgba(255,255,255,0.4); text-transform:uppercase; cursor:pointer; z-index:10; padding:10px; }
 
   /* HERO */
   .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 40px 80px; position:relative; overflow:hidden; padding-top:65px; background:var(--bg); }
@@ -21,19 +21,19 @@
   .hero-overlay { position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 70% 40%,rgba(224,26,45,.07),transparent 70%); }
   .hero-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(224,26,45,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(224,26,45,.03) 1px,transparent 1px); background-size:60px 60px; mask-image:radial-gradient(ellipse at center,transparent 30%,black 80%); }
   .ticker { position:absolute; top:65px; left:0; right:0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); overflow:hidden; height:25px; display:flex; align-items:center; background:rgba(224,26,45,.03); }
-  .ticker-track { display:flex; gap:60px; animation:tick 32s linear infinite; white-space:nowrap; font-size:9px; letter-spacing:3px; color:var(--red); opacity:.55; padding-left:100%; }
+  .ticker-track { display:flex; gap:60px; animation:tick 32s linear infinite; white-space:nowrap; font-size:12px; letter-spacing:3px; color:rgba(240,237,232,0.55); padding-left:100%; }
   @keyframes tick{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
   .hud-tr { position:absolute; top:100px; right:40px; font-size:9px; letter-spacing:3px; color:var(--red); opacity:.35; }
   .hud-c { position:absolute; width:16px; height:16px; opacity:.25; }
   .hud-c.tl { top:98px; left:40px; border-top:1px solid var(--red); border-left:1px solid var(--red); }
   .hud-c.br { bottom:84px; right:40px; border-bottom:1px solid var(--red); border-right:1px solid var(--red); }
-  .h-kicker { font-size:9px; letter-spacing:5px; color:var(--red); margin-bottom:14px; animation:fu .8s ease both; }
-  .h-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(60px,11vw,145px); line-height:.9; letter-spacing:2px; animation:fu .9s .1s ease both; }
+  .h-kicker { font-size:12px; letter-spacing:4px; color:var(--red); margin-bottom:14px; animation:fu .8s ease both; position:relative; }
+  .h-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(64px,11vw,148px); line-height:.9; letter-spacing:2px; animation:fu .9s .1s ease both; position:relative; }
   .h-title .red { color:var(--red); }
-  .h-title .sub { font-family:'Share Tech Mono',monospace; font-size:18px; letter-spacing:4px; color:var(--off); display:block; margin-top:10px; }
-  body.ja .h-title .sub { font-family:'Noto Sans JP',sans-serif; font-size:16px; }
-  .h-desc { margin-top:20px; font-size:11px; letter-spacing:2px; color:var(--off); max-width:520px; line-height:1.9; border-left:2px solid var(--red); padding-left:16px; animation:fu 1s .2s ease both; }
-  body.ja .h-desc { font-family:'Noto Sans JP',sans-serif; font-size:12px; letter-spacing:.4px; }
+  .h-title .sub { font-family:'Share Tech Mono',monospace; font-size:20px; letter-spacing:4px; color:var(--off); display:block; margin-top:10px; }
+  body.ja .h-title .sub { font-family:'Noto Sans JP',sans-serif; font-size:17px; }
+  .h-desc { margin-top:20px; font-size:14px; letter-spacing:1px; color:var(--off); max-width:520px; line-height:2; border-left:2px solid var(--red); padding-left:16px; animation:fu 1s .2s ease both; position:relative; }
+  body.ja .h-desc { font-family:'Noto Sans JP',sans-serif; font-size:14px; letter-spacing:.3px; }
   .h-cta { margin-top:34px; display:flex; gap:20px; align-items:center; flex-wrap:wrap; animation:fu 1s .3s ease both; }
   .h-stats { position:absolute; bottom:80px; right:40px; display:flex; flex-direction:column; gap:12px; text-align:right; animation:fu 1s .4s ease both; opacity:.65; }
   .sn { font-family:'Bebas Neue',sans-serif; font-size:38px; color:var(--red); line-height:1; }
