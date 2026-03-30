@@ -35,34 +35,34 @@ body.ja { font-family:'Noto Sans JP',sans-serif; }
 .logo-name span { color:var(--red); }
 .nav-r { display:flex; align-items:center; gap:24px; }
 .nav-links { display:flex; gap:20px; }
-.nav-link { color:var(--off); text-decoration:none; font-size:13px; letter-spacing:2px; text-transform:uppercase; transition:color .2s; position:relative; }
+.nav-link { color:var(--off); text-decoration:none; font-size:14px; letter-spacing:2px; text-transform:uppercase; transition:color .2s; position:relative; }
 .nav-link::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:1px; background:var(--red); transition:width .3s; }
 .nav-link:hover { color:var(--white); }
 .nav-link:hover::after { width:100%; }
 .nav-link.active { color:var(--white); }
 .nav-link.active::after { width:100%; }
 .lswitch { display:flex; border:1px solid var(--border); }
-.lbtn { background:none; border:none; color:var(--off); font-family:'Share Tech Mono',monospace; font-size:13px; letter-spacing:2px; padding:6px 13px; cursor:pointer; transition:all .2s; }
+.lbtn { background:none; border:none; color:var(--off); font-family:'Share Tech Mono',monospace; font-size:14px; letter-spacing:2px; padding:7px 14px; cursor:pointer; transition:all .2s; }
 .lbtn.on { background:var(--red); color:var(--white); }
 
 /* SECTION BASE */
 .page-wrap { padding-top:65px; }
 section { padding:90px 40px; }
-.sec-lbl { font-size:9px; letter-spacing:5px; color:var(--red); margin-bottom:10px; display:flex; align-items:center; gap:10px; }
+.sec-lbl { font-size:12px; letter-spacing:4px; color:var(--red); margin-bottom:10px; display:flex; align-items:center; gap:10px; }
 .sec-lbl::before { content:''; width:26px; height:1px; background:var(--red); }
 .sec-ttl { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,5vw,70px); line-height:1; letter-spacing:2px; margin-bottom:50px; }
 
 /* FOOTER */
 footer { border-top:1px solid var(--border); padding:24px 40px; display:flex; justify-content:space-between; align-items:center; }
-.footer-copy { font-size:12px; letter-spacing:2px; color:var(--off); }
+.footer-copy { font-size:12px; letter-spacing:3px; color:var(--off); }
 .footer-links { display:flex; gap:18px; }
-.footer-links a { font-size:12px; letter-spacing:2px; color:var(--off); text-decoration:none; transition:color .2s; }
+.footer-links a { font-size:12px; letter-spacing:3px; color:var(--off); text-decoration:none; transition:color .2s; }
 .footer-links a:hover { color:var(--red); }
 
 /* BUTTONS */
-.btn { background:var(--red); color:var(--white); text-decoration:none; font-family:'Share Tech Mono',monospace; font-size:13px; letter-spacing:3px; padding:14px 28px; text-transform:uppercase; clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px)); transition:background .2s,transform .2s; display:inline-block; }
+.btn { background:var(--red); color:var(--white); text-decoration:none; font-family:'Share Tech Mono',monospace; font-size:14px; letter-spacing:3px; padding:14px 28px; text-transform:uppercase; clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px)); transition:background .2s,transform .2s; display:inline-block; }
 .btn:hover { background:#ff1f36; transform:translateY(-2px); }
-.btn-g { color:var(--off); text-decoration:none; font-size:13px; letter-spacing:3px; display:inline-flex; align-items:center; gap:8px; transition:color .2s; }
+.btn-g { color:var(--off); text-decoration:none; font-size:14px; letter-spacing:3px; display:inline-flex; align-items:center; gap:8px; transition:color .2s; }
 .btn-g::before { content:'//'; color:var(--red); }
 .btn-g:hover { color:var(--white); }
 

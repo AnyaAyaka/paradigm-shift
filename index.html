@@ -13,7 +13,7 @@
     display:flex; align-items:center; justify-content:center; overflow:hidden; cursor:pointer;
   }
   #intro video { width:100%; height:100%; object-fit:cover; }
-  #intro-skip { position:absolute; bottom:32px; right:40px; font-family:'Share Tech Mono',monospace; font-size:12px; letter-spacing:4px; color:rgba(255,255,255,0.4); text-transform:uppercase; cursor:pointer; z-index:10; padding:10px; }
+  #intro-skip { position:absolute; bottom:32px; right:40px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:4px; color:rgba(255,255,255,0.4); text-transform:uppercase; cursor:pointer; z-index:10; padding:10px; }
 
   /* HERO */
   .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 40px 80px; position:relative; overflow:hidden; padding-top:65px; background:var(--bg); }
@@ -27,13 +27,13 @@
   .hud-c { position:absolute; width:16px; height:16px; opacity:.25; }
   .hud-c.tl { top:98px; left:40px; border-top:1px solid var(--red); border-left:1px solid var(--red); }
   .hud-c.br { bottom:84px; right:40px; border-bottom:1px solid var(--red); border-right:1px solid var(--red); }
-  .h-kicker { font-size:12px; letter-spacing:4px; color:var(--red); margin-bottom:14px; animation:fu .8s ease both; position:relative; }
-  .h-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(64px,11vw,148px); line-height:.9; letter-spacing:2px; animation:fu .9s .1s ease both; position:relative; }
+  .h-kicker { font-size:12px; letter-spacing:4px; color:var(--red); margin-bottom:14px; animation:fu .8s ease both; }
+  .h-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(60px,11vw,145px); line-height:.9; letter-spacing:2px; animation:fu .9s .1s ease both; }
   .h-title .red { color:var(--red); }
   .h-title .sub { font-family:'Share Tech Mono',monospace; font-size:20px; letter-spacing:4px; color:var(--off); display:block; margin-top:10px; }
-  body.ja .h-title .sub { font-family:'Noto Sans JP',sans-serif; font-size:17px; }
-  .h-desc { margin-top:20px; font-size:14px; letter-spacing:1px; color:var(--off); max-width:520px; line-height:2; border-left:2px solid var(--red); padding-left:16px; animation:fu 1s .2s ease both; position:relative; }
-  body.ja .h-desc { font-family:'Noto Sans JP',sans-serif; font-size:14px; letter-spacing:.3px; }
+  body.ja .h-title .sub { font-family:'Noto Sans JP',sans-serif; font-size:16px; }
+  .h-desc { margin-top:20px; font-size:14px; letter-spacing:1px; color:var(--off); max-width:520px; line-height:2; border-left:2px solid var(--red); padding-left:16px; animation:fu 1s .2s ease both; }
+  body.ja .h-desc { font-family:'Noto Sans JP',sans-serif; font-size:12px; letter-spacing:.4px; }
   .h-cta { margin-top:34px; display:flex; gap:20px; align-items:center; flex-wrap:wrap; animation:fu 1s .3s ease both; }
   .h-stats { position:absolute; bottom:80px; right:40px; display:flex; flex-direction:column; gap:12px; text-align:right; animation:fu 1s .4s ease both; opacity:.65; }
   .sn { font-family:'Bebas Neue',sans-serif; font-size:38px; color:var(--red); line-height:1; }
@@ -127,8 +127,8 @@
   <div class="hero-grid"></div>
   <div class="ticker">
     <div class="ticker-track">
-      <span>PARADIGM SHIFT</span><span>// BEST FILM 48HFP TOKYO 2021 //</span><span>BEST FILM 48HFP TOKYO 2022</span><span>// BEST FILM + BEST CINEMATOGRAPHY 48HFP LA 2025 //</span><span>CANNES 2022 · CANNES 2023 · FILMAPALOOZA 2022 · 2023 · 2026</span><span>// JUN YORIKO //</span>
-      <span>PARADIGM SHIFT</span><span>// BEST FILM 48HFP TOKYO 2021 //</span><span>BEST FILM 48HFP TOKYO 2022</span><span>// BEST FILM + BEST CINEMATOGRAPHY 48HFP LA 2025 //</span><span>CANNES 2022 · CANNES 2023 · FILMAPALOOZA 2022 · 2023 · 2026</span><span>// JUN YORIKO //</span>
+      <span>PARADIGM SHIFT</span><span>// BEST FILM 48HFP TOKYO 2021 //</span><span>BEST FILM 48HFP TOKYO 2022</span><span>// BEST FILM + BEST CINEMATOGRAPHY 48HFP LA 2025 //</span><span>CANNES 2022 · CANNES 2023 · FILMAPALOOZA 2022 · 2023 · 2026</span><span>// TOKYO · LOS ANGELES · LONDON · PARIS //</span><span>// JUN YORIKO //</span>
+      <span>PARADIGM SHIFT</span><span>// BEST FILM 48HFP TOKYO 2021 //</span><span>BEST FILM 48HFP TOKYO 2022</span><span>// BEST FILM + BEST CINEMATOGRAPHY 48HFP LA 2025 //</span><span>CANNES 2022 · CANNES 2023 · FILMAPALOOZA 2022 · 2023 · 2026</span><span>// TOKYO · LOS ANGELES · LONDON · PARIS //</span><span>// JUN YORIKO //</span>
     </div>
   </div>
   <div class="hud-c tl"></div>
@@ -242,7 +242,7 @@
 const T = {
   en: {
     nav: ['Home','Films','Stage','About','Contact'],
-    heroKicker: '// INDEPENDENT FILM COLLECTIVE — TOKYO × LOS ANGELES × LONDON',
+    heroKicker: '// INDEPENDENT FILM COLLECTIVE — TOKYO × LA × LONDON × PARIS',
     heroSub: 'by Jun Yoriko',
     heroDesc: 'Award-winning short films made in 48 hours. Tokyo. Los Angeles. London.<br>Three cities, one vision — cinematic storytelling without limits.',
     heroCta: '<a href="films.html" class="btn">View Films</a><a href="about.html" class="btn-g">About the Director</a>',
@@ -261,7 +261,7 @@ const T = {
   },
   ja: {
     nav: ['ホーム','作品','舞台','概要','お問合せ'],
-    heroKicker: '// 独立系映画集団 — 東京 × ロサンゼルス × ロンドン',
+    heroKicker: '// 独立系映画集団 — 東京 × LA × ロンドン × パリ',
     heroSub: 'ヨリコジュン 監督',
     heroDesc: '48時間で作る受賞短編映画。東京、ロサンゼルス、ロンドン。<br>3都市、ひとつのビジョン——限界なき映画的表現を追求する。',
     heroCta: '<a href="films.html" class="btn">作品を見る</a><a href="about.html" class="btn-g">監督について</a>',
