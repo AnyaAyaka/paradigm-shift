@@ -4,110 +4,96 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PARADIGM SHIFT | Official</title>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Bebas+Neue&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="common.css">
 <style>
-  /* INTRO */
-  #intro {
-    position:fixed; inset:0; z-index:9000; background:#000;
-    display:flex; align-items:center; justify-content:center; overflow:hidden; cursor:pointer;
-  }
+  #intro { position:fixed; inset:0; z-index:9000; background:#000; display:flex; align-items:center; justify-content:center; overflow:hidden; cursor:pointer; }
   #intro video { width:100%; height:100%; object-fit:cover; }
-  #intro-skip { position:absolute; bottom:32px; right:40px; font-family:'Share Tech Mono',monospace; font-size:13px; letter-spacing:4px; color:rgba(255,255,255,0.4); text-transform:uppercase; cursor:pointer; z-index:10; padding:10px; }
+  #intro-skip { position:absolute; bottom:28px; right:32px; font-family:'Inter',sans-serif; font-size:13px; font-weight:500; letter-spacing:1.5px; color:rgba(255,255,255,0.5); text-transform:uppercase; cursor:pointer; z-index:10; padding:10px; }
+  #intro-skip:hover { color:#fff; }
 
-  /* HERO */
-  .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 40px 80px; position:relative; overflow:hidden; padding-top:65px; background:var(--bg); }
-  .hero-bg { position:absolute; inset:0; background:#080808; }
-  .hero-overlay { position:absolute; inset:0; background:radial-gradient(ellipse 60% 80% at 70% 40%,rgba(224,26,45,.07),transparent 70%); }
-  .hero-grid { position:absolute; inset:0; background-image:linear-gradient(rgba(224,26,45,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(224,26,45,.03) 1px,transparent 1px); background-size:60px 60px; mask-image:radial-gradient(ellipse at center,transparent 30%,black 80%); }
-  .ticker { position:absolute; top:65px; left:0; right:0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); overflow:hidden; height:25px; display:flex; align-items:center; background:rgba(224,26,45,.03); }
-  .ticker-track { display:flex; gap:60px; animation:tick 32s linear infinite; white-space:nowrap; font-size:12px; letter-spacing:3px; color:rgba(240,237,232,0.55); padding-left:100%; }
-  @keyframes tick{ from{transform:translateX(0)} to{transform:translateX(-50%)} }
-  .hud-tr { position:absolute; top:100px; right:40px; font-size:9px; letter-spacing:3px; color:var(--red); opacity:.35; }
-  .hud-c { position:absolute; width:16px; height:16px; opacity:.25; }
-  .hud-c.tl { top:98px; left:40px; border-top:1px solid var(--red); border-left:1px solid var(--red); }
-  .hud-c.br { bottom:84px; right:40px; border-bottom:1px solid var(--red); border-right:1px solid var(--red); }
-  .h-kicker { font-size:12px; letter-spacing:4px; color:var(--red); margin-bottom:14px; animation:fu .8s ease both; }
-  .h-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(60px,11vw,145px); line-height:.9; letter-spacing:2px; animation:fu .9s .1s ease both; }
+  .watch-now-btn { display:inline-flex; align-items:center; gap:8px; background:var(--red); color:var(--white); text-decoration:none; font-family:'Inter',sans-serif; font-size:13px; font-weight:600; letter-spacing:1px; padding:10px 18px; border-radius:4px; text-transform:uppercase; transition:all .2s; }
+  body.ja .watch-now-btn { font-family:'Noto Sans JP',sans-serif; letter-spacing:0.5px; }
+  .watch-now-btn:hover { background:var(--red-hover); transform:translateY(-1px); }
+  .watch-now-btn .wn-play { font-size:10px; }
+
+  .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:100px 32px 80px; position:relative; overflow:hidden; max-width:1400px; margin:0 auto; }
+  .hero-bg { position:absolute; inset:0; background: radial-gradient(ellipse 80% 60% at 30% 40%, rgba(200,50,61,0.08), transparent 60%), var(--bg); z-index:-1; }
+
+  .h-kicker { font-family:'Inter',sans-serif; font-size:13px; font-weight:600; letter-spacing:2.5px; color:var(--red); margin-bottom:20px; text-transform:uppercase; animation:fu .8s ease both; }
+  body.ja .h-kicker { font-family:'Noto Sans JP',sans-serif; letter-spacing:1.5px; font-size:12px; }
+
+  .h-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(56px,9vw,128px); line-height:0.95; letter-spacing:1px; margin-bottom:16px; animation:fu .9s .1s ease both; }
   .h-title .red { color:var(--red); }
-  .h-title .sub { font-family:'Share Tech Mono',monospace; font-size:20px; letter-spacing:4px; color:var(--off); display:block; margin-top:10px; }
-  body.ja .h-title .sub { font-family:'Noto Sans JP',sans-serif; font-size:16px; }
-  .h-desc { margin-top:20px; font-size:14px; letter-spacing:1px; color:var(--off); max-width:520px; line-height:2; border-left:2px solid var(--red); padding-left:16px; animation:fu 1s .2s ease both; }
-  body.ja .h-desc { font-family:'Noto Sans JP',sans-serif; font-size:12px; letter-spacing:.4px; }
-  .h-cta { margin-top:34px; display:flex; gap:20px; align-items:center; flex-wrap:wrap; animation:fu 1s .3s ease both; }
-  .h-stats { position:absolute; bottom:80px; right:40px; display:flex; flex-direction:column; gap:12px; text-align:right; animation:fu 1s .4s ease both; opacity:.65; }
-  .sn { font-family:'Bebas Neue',sans-serif; font-size:38px; color:var(--red); line-height:1; }
-  .sl { font-size:13px; letter-spacing:2px; color:var(--off); }
-  .scroll-h { position:absolute; bottom:26px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:7px; opacity:.35; animation:bounce 2s ease-in-out infinite; }
-  .scroll-h span { font-size:12px; letter-spacing:3px; color:var(--off); }
-  .scroll-h div { width:1px; height:34px; background:linear-gradient(to bottom,var(--red),transparent); }
-  @keyframes bounce{ 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
-  @keyframes fu{ from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+  .h-title .sub { display:block; font-family:'Inter',sans-serif; font-weight:400; font-size:16px; letter-spacing:1.5px; color:var(--off); margin-top:12px; text-transform:uppercase; }
+  body.ja .h-title .sub { font-family:'Noto Sans JP',sans-serif; font-size:14px; letter-spacing:1px; }
 
-  /* LATEST WORKS */
+  .h-desc { margin-top:24px; font-size:17px; line-height:1.7; color:var(--off); max-width:560px; animation:fu 1s .2s ease both; }
+  body.ja .h-desc { font-size:15px; line-height:1.8; }
+
+  .h-cta { margin-top:36px; display:flex; gap:14px; align-items:center; flex-wrap:wrap; animation:fu 1s .3s ease both; }
+
+  @keyframes fu { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
   .latest-sec { background:var(--panel); }
-  .latest-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
-  .lc { position:relative; aspect-ratio:2/3; overflow:hidden; cursor:pointer; background:#0d0d0d; text-decoration:none; display:block; }
+  .latest-inner { max-width:1400px; margin:0 auto; }
+  .latest-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .lc { position:relative; aspect-ratio:2/3; overflow:hidden; border-radius:6px; cursor:pointer; background:#0d0d0d; text-decoration:none; display:block; }
   .lc .lbg { position:absolute; inset:0; transition:transform .5s ease; }
-  .lc:nth-child(1) .lbg { background:radial-gradient(ellipse at 40% 60%,rgba(224,26,45,.35),#080008 70%); }
-  .lc:nth-child(2) .lbg { background:radial-gradient(ellipse at 60% 40%,rgba(200,100,20,.3),#0a0500 70%); }
-  .lc:nth-child(3) .lbg { background:radial-gradient(ellipse at 35% 65%,rgba(20,90,200,.3),#000810 70%); }
-  .lc:hover .lbg { transform:scale(1.08); }
-  .lov { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.97) 0%,rgba(0,0,0,.08) 60%); display:flex; flex-direction:column; justify-content:flex-end; padding:20px; transition:background .3s; }
-  .lc:hover .lov { background:linear-gradient(to top,rgba(0,0,0,.99) 35%,rgba(0,0,0,.2) 100%); }
-  .award-badge { position:absolute; top:12px; left:12px; background:var(--red); font-size:11px; letter-spacing:2px; padding:4px 10px; color:var(--white); clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,0 100%); display:flex; align-items:center; gap:4px; }
-  .award-badge::before { content:'★'; font-size:11px; }
-  .lcity { font-size:12px; letter-spacing:3px; color:var(--red); margin-bottom:4px; }
-  .lyear { font-size:12px; letter-spacing:3px; color:var(--off); margin-bottom:6px; }
-  .ltitle { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:2px; line-height:1; margin-bottom:5px; color:var(--white); }
-  .lgenre { font-size:13px; letter-spacing:1px; color:var(--off); margin-bottom:10px; }
-  body.ja .lgenre { font-family:'Noto Sans JP',sans-serif; font-size:13px; letter-spacing:0; }
-  .ltags { display:flex; flex-wrap:wrap; gap:4px; opacity:0; transform:translateY(6px); transition:all .3s; }
-  .lc:hover .ltags { opacity:1; transform:translateY(0); }
-  .ltag { font-size:11px; letter-spacing:2px; border:1px solid var(--red); color:var(--red); padding:2px 5px; }
-  .view-all { display:flex; justify-content:center; margin-top:40px; }
+  .lc:hover .lbg { transform:scale(1.04); }
+  .lov { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 50%, transparent 100%); display:flex; flex-direction:column; justify-content:flex-end; padding:24px; }
+  .award-badge { position:absolute; top:16px; left:16px; background:var(--red); font-family:'Inter',sans-serif; font-size:11px; font-weight:600; letter-spacing:1px; padding:5px 10px; color:var(--white); border-radius:3px; text-transform:uppercase; }
+  body.ja .award-badge { font-family:'Noto Sans JP',sans-serif; letter-spacing:0.5px; }
+  .lcity { font-family:'Inter',sans-serif; font-size:11px; font-weight:600; letter-spacing:1.5px; color:var(--red); margin-bottom:4px; text-transform:uppercase; }
+  .lyear { font-family:'Inter',sans-serif; font-size:12px; color:var(--off); letter-spacing:0.5px; margin-bottom:8px; }
+  .ltitle { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:1.5px; line-height:1; margin-bottom:8px; color:var(--white); }
+  .lgenre { font-family:'Inter',sans-serif; font-size:13px; color:var(--off); letter-spacing:0.3px; }
+  body.ja .lgenre { font-family:'Noto Sans JP',sans-serif; }
 
-  /* ACTIVITY */
-  .act-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--border); }
-  .act-cell { background:var(--bg); padding:36px 28px; position:relative; overflow:hidden; transition:background .3s; }
-  .act-cell:hover { background:#0e0305; }
-  .act-cell::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--red); transform:scaleX(0); transform-origin:left; transition:transform .4s; }
-  .act-cell:hover::before { transform:scaleX(1); }
-  .act-cat { font-size:12px; letter-spacing:3px; color:var(--red); margin-bottom:10px; }
-  .act-title { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:2px; margin-bottom:10px; }
-  .act-desc { font-size:14px; letter-spacing:.5px; color:var(--off); line-height:1.9; }
-  body.ja .act-desc { font-family:'Noto Sans JP',sans-serif; font-size:14px; letter-spacing:.3px; }
-  .act-link { display:inline-flex; align-items:center; gap:6px; margin-top:16px; font-size:13px; letter-spacing:2px; color:var(--red); text-decoration:none; transition:opacity .2s; }
-  .act-link:hover { opacity:.7; }
-  .act-link::after { content:'→'; }
+  .view-all { display:flex; justify-content:center; margin-top:48px; }
+
+  #activity { max-width:1400px; margin:0 auto; }
+  .act-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .act-cell { background:var(--panel); padding:36px 28px; border-radius:6px; border:1px solid var(--border); transition:all .3s; }
+  .act-cell:hover { border-color:var(--red); transform:translateY(-2px); }
+  .act-cat { font-family:'Inter',sans-serif; font-size:12px; font-weight:600; letter-spacing:2px; color:var(--red); margin-bottom:12px; text-transform:uppercase; }
+  body.ja .act-cat { font-family:'Noto Sans JP',sans-serif; letter-spacing:1px; }
+  .act-title { font-family:'Bebas Neue',sans-serif; font-size:30px; letter-spacing:1.5px; margin-bottom:14px; color:var(--white); }
+  .act-desc { font-size:15px; line-height:1.7; color:var(--off); }
+  body.ja .act-desc { font-size:14px; line-height:1.85; }
+  .act-link { display:inline-flex; align-items:center; gap:6px; margin-top:20px; font-family:'Inter',sans-serif; font-size:13px; font-weight:600; letter-spacing:1px; color:var(--red); text-decoration:none; transition:all .2s; text-transform:uppercase; }
+  body.ja .act-link { font-family:'Noto Sans JP',sans-serif; letter-spacing:0.5px; }
+  .act-link::after { content:'→'; transition:transform .2s; }
+  .act-link:hover { color:var(--red-hover); }
+  .act-link:hover::after { transform:translateX(4px); }
 
   @media(max-width:768px){
-    .hero { min-height:0; height:auto; padding:100px 24px 60px; justify-content:flex-start; }
-    .h-kicker { font-size:11px; letter-spacing:3px; }
-    .h-title { font-size:clamp(56px,18vw,88px); }
-    .h-title .sub { font-size:15px; letter-spacing:2px; }
-    .h-desc { font-size:14px; letter-spacing:.3px; max-width:100%; }
-    .h-cta { gap:14px; margin-bottom:40px; }
-    .h-cta .btn { font-size:14px; padding:14px 24px; }
-    .h-cta .btn-g { font-size:14px; }
-    .latest-grid { grid-template-columns:1fr 1fr; }
+    .hero { min-height:auto; padding:100px 20px 60px; }
+    .h-title { font-size:clamp(52px,15vw,84px); }
+    .h-desc { font-size:16px; }
+    .latest-grid { grid-template-columns:1fr 1fr; gap:16px; }
+    .ltitle { font-size:22px; }
     .act-grid { grid-template-columns:1fr; }
-    .h-stats { display:none; }
-    .scroll-h { display:none; }
-    .hud-tr { display:none; }
-    .hud-c { display:none; }
+    .watch-now-btn { padding:8px 12px; font-size:11px; gap:6px; }
+    .watch-now-btn .wn-text { display:none; }
+    .watch-now-btn::after { content:'WATCH'; }
+    body.ja .watch-now-btn::after { content:'視聴'; }
+  }
+  @media(max-width:480px){
+    .latest-grid { grid-template-columns:1fr; }
+    .h-title { font-size:64px; }
   }
 </style>
 </head>
 <body class="en">
 
-<!-- INTRO -->
 <div id="intro" onclick="introClick()">
   <video id="intro-video" src="intro.mp4" playsinline muted preload="auto"></video>
-  <div id="intro-skip" onclick="event.stopPropagation(); endIntro();">SKIP //</div>
+  <div id="intro-skip" onclick="event.stopPropagation(); endIntro();">Skip intro</div>
 </div>
 
-<!-- NAV -->
 <nav class="navbar">
   <a href="index.html" class="logo">
     <div class="logo-icon">PS</div>
@@ -115,6 +101,10 @@
   </a>
   <div class="nav-r">
     <div class="nav-links" id="nav-links"></div>
+    <a href="watch/index.html" class="watch-now-btn">
+      <span class="wn-play">▶</span>
+      <span class="wn-text" data-en="WATCH NOW" data-ja="今すぐ視聴">WATCH NOW</span>
+    </a>
     <div class="hamburger" onclick="toggleMenu()" id="hamburger"><span></span><span></span><span></span></div>
     <div class="lswitch">
       <button class="lbtn on" onclick="setLang('en')">EN</button>
@@ -124,87 +114,54 @@
 </nav>
 <div class="mobile-menu" id="mobile-menu"></div>
 
-<!-- HERO -->
-<div class="hero">
+<section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-grid"></div>
-  <div class="ticker">
-    <div class="ticker-track">
-      <span>PARADIGM SHIFT</span><span>// BEST FILM 48HFP TOKYO 2021 //</span><span>BEST FILM 48HFP TOKYO 2022</span><span>// BEST FILM + BEST CINEMATOGRAPHY 48HFP LA 2025 //</span><span>CANNES 2022 · CANNES 2023 · FILMAPALOOZA 2022 · 2023 · 2026</span><span>// TOKYO · LOS ANGELES · LONDON · PARIS //</span><span>// JUN YORIKO //</span>
-      <span>PARADIGM SHIFT</span><span>// BEST FILM 48HFP TOKYO 2021 //</span><span>BEST FILM 48HFP TOKYO 2022</span><span>// BEST FILM + BEST CINEMATOGRAPHY 48HFP LA 2025 //</span><span>CANNES 2022 · CANNES 2023 · FILMAPALOOZA 2022 · 2023 · 2026</span><span>// TOKYO · LOS ANGELES · LONDON · PARIS //</span><span>// JUN YORIKO //</span>
-    </div>
-  </div>
-  <div class="hud-c tl"></div>
-  <div class="hud-c br"></div>
-  <div class="hud-tr" id="clock">--:--:--</div>
   <p class="h-kicker" id="hero-kicker"></p>
   <h1 class="h-title">PARADIGM<br><span class="red">SHIFT</span><span class="sub" id="hero-sub"></span></h1>
   <p class="h-desc" id="hero-desc"></p>
   <div class="h-cta" id="hero-cta"></div>
-  <div class="h-stats">
-    <div><div class="sn">3</div><div class="sl" id="stat1"></div></div>
-    <div><div class="sn">5</div><div class="sl">Filmapalooza</div></div>
-    <div><div class="sn">3</div><div class="sl" id="stat2"></div></div>
-  </div>
-  <div class="scroll-h"><span id="scroll-txt"></span><div></div></div>
-</div>
+</section>
 
-<!-- LATEST WORKS -->
-<section class="latest-sec" id="latest">
-  <div class="sec-lbl" id="latest-lbl"></div>
-  <div class="sec-ttl" id="latest-ttl"></div>
-  <div class="latest-grid">
-
-    <a href="films.html" class="lc">
-      <div class="lbg" style="background-image:url('tuner.jpg');background-size:cover;background-position:center;"></div>
-      <div class="award-badge" id="l1-badge"></div>
-      <div class="lov">
-        <div class="ltitle">THE TUNER</div>
-        <div class="lgenre" id="l1-genre"></div>
-        <div class="ltags">
-          <span class="ltag">Yes We Cannes</span>
-          <span class="ltag">Filmapalooza 2026</span>
+<section class="latest-sec">
+  <div class="latest-inner">
+    <div class="sec-lbl" id="latest-lbl"></div>
+    <h2 class="sec-ttl" id="latest-ttl"></h2>
+    <div class="latest-grid">
+      <a href="films.html" class="lc">
+        <div class="lbg" style="background-image:url('tuner.jpg');background-size:cover;background-position:center;"></div>
+        <div class="award-badge" id="l1-badge"></div>
+        <div class="lov">
+          <div class="ltitle">THE TUNER</div>
+          <div class="lgenre" id="l1-genre"></div>
         </div>
-      </div>
-    </a>
-
-    <a href="films.html" class="lc">
-      <div class="lbg" style="background-image:url('smile.jpg');background-size:cover;background-position:center;"></div>
-      <div class="lov">
-        <div class="lcity">LOS ANGELES</div>
-        <div class="lyear">2025</div>
-        <div class="ltitle">@SMILE</div>
-        <div class="lgenre" id="l2-genre"></div>
-        <div class="ltags"><span class="ltag">48HFP LA</span></div>
-      </div>
-    </a>
-
-    <a href="films.html" class="lc">
-      <div class="lbg" style="background-image:url('echoes.jpg');background-size:cover;background-position:center top;"></div>
-      <div class="award-badge" id="l3-badge"></div>
-      <div class="lov">
-        <div class="lcity">LOS ANGELES</div>
-        <div class="lyear">2025</div>
-        <div class="ltitle">ECHOES</div>
-        <div class="lgenre" id="l3-genre"></div>
-        <div class="ltags">
-          <span class="ltag" id="l3-t1"></span>
-          <span class="ltag">Filmapalooza 2026</span>
+      </a>
+      <a href="films.html" class="lc">
+        <div class="lbg" style="background-image:url('smile.jpg');background-size:cover;background-position:center;"></div>
+        <div class="lov">
+          <div class="lcity">LOS ANGELES · 2025</div>
+          <div class="ltitle">@SMILE</div>
+          <div class="lgenre" id="l2-genre"></div>
         </div>
-      </div>
-    </a>
-
-  </div>
-  <div class="view-all">
-    <a href="films.html" class="btn" id="view-all-btn"></a>
+      </a>
+      <a href="films.html" class="lc">
+        <div class="lbg" style="background-image:url('echoes.jpg');background-size:cover;background-position:center top;"></div>
+        <div class="award-badge" id="l3-badge"></div>
+        <div class="lov">
+          <div class="lcity">LOS ANGELES · 2025</div>
+          <div class="ltitle">ECHOES</div>
+          <div class="lgenre" id="l3-genre"></div>
+        </div>
+      </a>
+    </div>
+    <div class="view-all">
+      <a href="films.html" class="btn" id="view-all-btn"></a>
+    </div>
   </div>
 </section>
 
-<!-- ACTIVITY -->
 <section id="activity">
   <div class="sec-lbl" id="act-lbl"></div>
-  <div class="sec-ttl" id="act-ttl"></div>
+  <h2 class="sec-ttl" id="act-ttl"></h2>
   <div class="act-grid">
     <div class="act-cell">
       <div class="act-cat" id="act1-cat"></div>
@@ -245,46 +202,44 @@
 <script>
 const T = {
   en: {
-    nav: ['Home','Films','Watch','Stage','About','Contact'],
-    heroKicker: '// INDEPENDENT FILM COLLECTIVE — TOKYO × LA × LONDON × PARIS',
+    nav: ['Home','Films','Stage','About','Contact'],
+    heroKicker: 'Independent Film Collective · Tokyo · LA · London',
     heroSub: 'by Jun Yoriko',
-    heroDesc: 'Award-winning short films made in 48 hours. Tokyo. Los Angeles. London.<br>Three cities, one vision — cinematic storytelling without limits.',
+    heroDesc: 'Award-winning short films made in 48 hours. Three cities, one vision — cinematic storytelling without limits.',
     heroCta: '<a href="films.html" class="btn">View Films</a><a href="about.html" class="btn-g">About the Director</a>',
-    stat1: 'Best Film', stat2: 'Cities', scrollTxt: 'SCROLL',
     latestLbl: 'Latest Works', latestTtl: 'RECENT FILMS',
     l1Badge: '★ Filmapalooza 2026', l1Genre: 'Supernatural',
     l2Genre: 'Action Thriller',
-    l3Badge: '★ BEST FILM', l3Genre: 'Adventure / Sci-Fi', l3T1: 'Best Film',
+    l3Badge: '★ BEST FILM', l3Genre: 'Adventure / Sci-Fi',
     viewAll: 'View All Films',
     actLbl: 'What We Do', actTtl: 'ACTIVITIES',
-    act1Cat: 'SHORT FILM', act1Desc: 'Competing in the 48 Hour Film Project across Tokyo, Los Angeles, and London — writing, shooting, editing, and scoring a complete short film in just 48 hours.', act1Link: 'View Films',
-    act2Cat: 'STAGE', act2Title: 'STAGE WORKS', act2Desc: 'Jun Yoriko directs and writes for major stage productions — from Biohazard: The Stage to Mononoke, 2FATE, and Gin\'eiyuudensetsu.', act2Link: 'View Stage',
-    act3Cat: 'DIRECTOR', act3Title: 'JUN YORIKO', act3Desc: 'Director, writer, cinematographer and stage director. Born 1973, Tokyo. 20+ years across film, stage, and live entertainment.', act3Link: 'About',
-    act4Cat: 'CONTACT', act4Title: 'GET IN TOUCH', act4Desc: 'Collaborations, screening requests, press enquiries and project opportunities welcome.', act4Link: 'Contact',
-    footer: '© 2025 PARADIGM SHIFT — ALL RIGHTS RESERVED',
+    act1Cat: 'Short Film', act1Desc: 'Competing in the 48 Hour Film Project across Tokyo, Los Angeles, and London — writing, shooting, editing, and scoring a complete short film in just 48 hours.', act1Link: 'View Films',
+    act2Cat: 'Stage', act2Title: 'STAGE WORKS', act2Desc: 'Jun Yoriko directs and writes for major stage productions — from Biohazard: The Stage to Mononoke, 2FATE, and Gin\'eiyuudensetsu.', act2Link: 'View Stage',
+    act3Cat: 'Director', act3Title: 'JUN YORIKO', act3Desc: 'Director, writer, cinematographer and stage director. Born 1973 in Tokyo. Over 20 years of experience across film, stage, and live entertainment.', act3Link: 'About',
+    act4Cat: 'Contact', act4Title: 'GET IN TOUCH', act4Desc: 'Collaborations, screening requests, press enquiries and project opportunities welcome.', act4Link: 'Contact',
+    footer: '© 2026 PARADIGM SHIFT',
   },
   ja: {
-    nav: ['ホーム','作品','視聴','舞台','概要','お問合せ'],
-    heroKicker: '// 独立系映画集団 — 東京 × LA × ロンドン × パリ',
+    nav: ['ホーム','作品','舞台','概要','お問合せ'],
+    heroKicker: '独立系映画集団 · 東京 · LA · ロンドン',
     heroSub: 'ヨリコジュン 監督',
-    heroDesc: '48時間で作る受賞短編映画。東京、ロサンゼルス、ロンドン。<br>3都市、ひとつのビジョン——限界なき映画的表現を追求する。',
+    heroDesc: '48時間で作る受賞短編映画。3都市、ひとつのビジョン——限界なき映画的表現を追求する。',
     heroCta: '<a href="films.html" class="btn">作品を見る</a><a href="about.html" class="btn-g">監督について</a>',
-    stat1: '最優秀作品賞', stat2: '参加都市', scrollTxt: 'スクロール',
-    latestLbl: '最新作品', latestTtl: '最近の作品',
+    latestLbl: '最新作品', latestTtl: 'RECENT FILMS',
     l1Badge: '★ Filmapalooza 2026', l1Genre: 'スーパーナチュラル',
     l2Genre: 'アクション・スリラー',
-    l3Badge: '★ 最優秀作品賞', l3Genre: 'アドベンチャー / SF', l3T1: '最優秀作品賞',
+    l3Badge: '★ 最優秀作品賞', l3Genre: 'アドベンチャー / SF',
     viewAll: '全作品を見る',
-    actLbl: '活動内容', actTtl: '活動概要',
-    act1Cat: '短編映画', act1Desc: '東京、ロサンゼルス、ロンドンの48時間映画祭に参加。48時間で脚本・撮影・編集・音楽を完成させる。', act1Link: '作品を見る',
-    act2Cat: '舞台', act2Title: '舞台作品', act2Desc: 'ヨリコジュンはバイオハザード THE STAGE、モノノ怪、2FATE、銀河英雄伝説など多数の舞台作品の脚本・演出を担当。', act2Link: '舞台作品を見る',
-    act3Cat: '監督', act3Title: 'ヨリコジュン', act3Desc: '監督・脚本・撮影・演出家。1973年東京生まれ。映画・舞台・ライブエンタメと幅広く活動。', act3Link: '詳細を見る',
-    act4Cat: 'コンタクト', act4Title: 'お問い合わせ', act4Desc: 'コラボレーション、上映依頼、取材・プロジェクトのご相談はこちら。', act4Link: 'お問い合わせ',
-    footer: '© 2025 PARADIGM SHIFT — 無断転載禁止',
+    actLbl: '活動内容', actTtl: 'ACTIVITIES',
+    act1Cat: '短編映画', act1Desc: '東京、ロサンゼルス、ロンドンの48時間映画祭に参加。48時間で脚本・撮影・編集・音楽をすべて完成させる。', act1Link: '作品を見る',
+    act2Cat: '舞台', act2Title: 'STAGE WORKS', act2Desc: 'ヨリコジュンはバイオハザード THE STAGE、モノノ怪、2FATE、銀河英雄伝説など多数の舞台作品の脚本・演出を担当。', act2Link: '舞台作品を見る',
+    act3Cat: '監督', act3Title: 'JUN YORIKO', act3Desc: '監督・脚本・撮影・演出家。1973年東京生まれ。映画・舞台・ライブエンタメと幅広く活動。', act3Link: '詳細を見る',
+    act4Cat: 'コンタクト', act4Title: 'CONTACT', act4Desc: 'コラボレーション、上映依頼、取材・プロジェクトのご相談はこちら。', act4Link: 'お問い合わせ',
+    footer: '© 2026 PARADIGM SHIFT',
   }
 };
 
-const NAV_HREFS = ['index.html','films.html','watch/index.html','stage.html','about.html','contact.html'];
+const NAV_HREFS = ['index.html','films.html','stage.html','about.html','contact.html'];
 
 function render(lang) {
   const t = T[lang];
@@ -295,11 +250,8 @@ function render(lang) {
   if(document.getElementById('mobile-menu')) document.getElementById('mobile-menu').innerHTML=t.nav.map((n,i)=>`<a href="${NAV_HREFS[i]}" class="nav-link${i===0?' active':''}" onclick="document.getElementById('mobile-menu').classList.remove('open')">${n}</a>`).join('');
   document.getElementById('hero-kicker').textContent = t.heroKicker;
   document.getElementById('hero-sub').textContent = t.heroSub;
-  document.getElementById('hero-desc').innerHTML = t.heroDesc;
+  document.getElementById('hero-desc').textContent = t.heroDesc;
   document.getElementById('hero-cta').innerHTML = t.heroCta;
-  document.getElementById('stat1').textContent = t.stat1;
-  document.getElementById('stat2').textContent = t.stat2;
-  document.getElementById('scroll-txt').textContent = t.scrollTxt;
   document.getElementById('latest-lbl').textContent = t.latestLbl;
   document.getElementById('latest-ttl').textContent = t.latestTtl;
   document.getElementById('l1-badge').textContent = t.l1Badge;
@@ -307,7 +259,6 @@ function render(lang) {
   document.getElementById('l2-genre').textContent = t.l2Genre;
   document.getElementById('l3-badge').textContent = t.l3Badge;
   document.getElementById('l3-genre').textContent = t.l3Genre;
-  const l3t1 = document.getElementById('l3-t1'); if(l3t1) l3t1.textContent = t.l3T1;
   document.getElementById('view-all-btn').textContent = t.viewAll;
   document.getElementById('act-lbl').textContent = t.actLbl;
   document.getElementById('act-ttl').textContent = t.actTtl;
@@ -327,41 +278,30 @@ function render(lang) {
   document.getElementById('act4-desc').textContent = t.act4Desc;
   document.getElementById('act4-link').textContent = t.act4Link;
   document.getElementById('footer-copy').textContent = t.footer;
+  document.querySelectorAll('[data-en][data-ja]').forEach(el=>{
+    el.textContent = el.dataset[lang];
+  });
 }
-
 function setLang(lang) {
   localStorage.setItem('ps-lang', lang);
   render(lang);
   document.querySelectorAll('.lbtn').forEach(b=>b.classList.remove('on'));
   document.querySelector(`.lbtn[onclick="setLang('${lang}')"]`).classList.add('on');
 }
-
-// INTRO
 const introEl = document.getElementById('intro');
 const introVideo = document.getElementById('intro-video');
 function endIntro() {
   introEl.style.transition = 'opacity 0.6s ease';
   introEl.style.opacity = '0';
-  setTimeout(()=>{
-    introEl.style.display='none';
-    introEl.remove();
-  }, 650);
+  setTimeout(()=>{ introEl.style.display='none'; introEl.remove(); }, 650);
 }
 function introClick() { if(introVideo.paused) introVideo.play(); }
 introVideo.addEventListener('ended', endIntro);
 introVideo.play().catch(()=>{});
-
-setInterval(()=>{ const e=document.getElementById('clock'); if(e) e.textContent=new Date().toTimeString().slice(0,8); },1000);
-
-// init lang
 const savedLang = localStorage.getItem('ps-lang') || 'en';
 render(savedLang);
 if(savedLang==='ja') { document.querySelector('.lbtn.on').classList.remove('on'); document.querySelector('.lbtn[onclick="setLang(\'ja\')"]').classList.add('on'); }
-
-function toggleMenu(){
-  const m=document.getElementById('mobile-menu');
-  m.classList.toggle('open');
-}
+function toggleMenu(){ document.getElementById('mobile-menu').classList.toggle('open'); }
 </script>
 </body>
 </html>
