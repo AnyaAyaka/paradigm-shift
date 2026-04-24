@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Watch — Paradigm Shift</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:       #0A0E14;
+    --ink-2:     #121722;
+    --card:      #1A2030;
+    --card-hov:  #242D42;
+    --text:      #ECE8DF;
+    --text-dim:  #8B8680;
+    --muted:     #5A5750;
+    --accent:    #C7A46B;
+    --accent-2:  #A84B2A;
+    --border:    #2B3245;
+    --border-soft: #1F2636;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    background: var(--ink);
+    color: var(--text);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background:
+      radial-gradient(ellipse at top, rgba(199,164,107,0.04) 0%, transparent 55%),
+      var(--ink);
+    min-height: 100vh;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(10, 14, 20, 0.72);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .nav-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+  }
+  .logo .sep { color: var(--accent); margin: 0 6px; }
+  .nav-links { display: flex; gap: 32px; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .nav-links a { color: var(--text-dim); transition: color 0.3s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a.active { color: var(--text); }
+
+  /* BREADCRUMB */
+  .breadcrumb {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 48px 0;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+  .breadcrumb a:hover { color: var(--accent); }
+  .breadcrumb .sep { color: var(--muted); margin: 0 12px; }
+  .breadcrumb .current { color: var(--text); }
+
+  /* MAIN LAYOUT */
+  .wrap {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 48px 80px;
+  }
+
+  /* PLAYER SECTION */
+  .player-section {
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.1s forwards;
+  }
+
+  .player-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .player-wrap {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    overflow: hidden;
+    box-shadow:
+      0 40px 80px rgba(0,0,0,0.5),
+      0 0 0 1px var(--border);
+  }
+  .player-wrap video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  /* PAYWALL OVERLAY */
+  .paywall {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background:
+      linear-gradient(180deg, rgba(10,14,20,0.55) 0%, rgba(10,14,20,0.9) 100%),
+      linear-gradient(135deg, #1a2030 0%, #2a1f35 100%);
+    text-align: center;
+    padding: 40px 20px;
+    z-index: 2;
+    transition: opacity 0.5s;
+  }
+  .paywall.hidden { opacity: 0; pointer-events: none; }
+
+  .paywall-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .paywall-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+  .paywall-sub {
+    font-size: 13px;
+    color: var(--text-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+  .paywall-buy {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--accent);
+    color: var(--ink);
+    padding: 18px 44px;
+    border: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .paywall-buy:hover {
+    background: #d9b57b;
+    transform: translateY(-2px);
+  }
+  .paywall-buy .price {
+    font-weight: 600;
+    font-style: italic;
+  }
+  .paywall-buy .arrow {
+    font-size: 22px;
+    line-height: 0;
+  }
+
+  .paywall-note {
+    margin-top: 20px;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+  }
+
+  .demo-badge {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: var(--accent);
+    color: var(--ink);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    z-index: 3;
+  }
+
+  /* FILM INFO */
+  .film-info-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 80px;
+    margin-top: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.3s forwards;
+  }
+
+  .film-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(44px, 6vw, 72px);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.015em;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .film-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .film-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--accent);
+    margin-bottom: 40px;
+  }
+  .film-synopsis {
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--text-dim);
+    max-width: 640px;
+    margin-bottom: 40px;
+  }
+
+  .meta-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 32px;
+    padding: 32px 0;
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .meta-item .label {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .meta-item .value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: var(--text);
+    letter-spacing: 0.01em;
+  }
+
+  /* SIDEBAR - Credits / Price */
+  .sidebar {
+    padding: 32px;
+    background: var(--card);
+    border: 1px solid var(--border-soft);
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+  }
+  .price-box {
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .price-box .label {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .price-box .price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .price-box .price .decimal { font-size: 28px; }
+  .price-box .note {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+  .sidebar-buy {
+    display: block;
+    width: 100%;
+    background: var(--accent);
+    color: var(--ink);
+    padding: 16px;
+    border: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-bottom: 12px;
+  }
+  .sidebar-buy:hover { background: #d9b57b; }
+
+  .sidebar-rent {
+    display: block;
+    width: 100%;
+    background: transparent;
+    color: var(--text);
+    padding: 16px;
+    border: 1px solid var(--border);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .sidebar-rent:hover { border-color: var(--accent); color: var(--accent); }
+
+  .credits {
+    margin-top: 40px;
+  }
+  .credits h3 {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+  .credit-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 13px;
+  }
+  .credit-row:last-child { border-bottom: none; }
+  .credit-row .role {
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+  .credit-row .name {
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+  }
+
+  /* MORE FILMS */
+  .more {
+    margin-top: 100px;
+    border-top: 1px solid var(--border-soft);
+    padding-top: 80px;
+  }
+  .more-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .more-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 48px;
+  }
+  .more-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .more-film {
+    aspect-ratio: 2 / 3;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .more-film .poster {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    transition: transform 0.5s;
+  }
+  .more-film:nth-child(1) .poster { background: linear-gradient(140deg, #1c1822 0%, #2d2332 100%); }
+  .more-film:nth-child(2) .poster { background: linear-gradient(135deg, #1a2030 0%, #2a1f35 100%); }
+  .more-film:nth-child(3) .poster { background: linear-gradient(160deg, #0d1520 0%, #1f2f3a 100%); }
+  .more-film:nth-child(4) .poster { background: linear-gradient(155deg, #1f1a15 0%, #251c1a 100%); }
+
+  .more-film:hover .poster { transform: scale(1.06); }
+  .more-film .m-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text);
+    text-align: center;
+  }
+  .more-film .m-year {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+    margin-top: 8px;
+  }
+
+  /* FOOTER */
+  footer {
+    max-width: 1400px;
+    margin: 60px auto 0;
+    padding: 48px;
+    border-top: 1px solid var(--border-soft);
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 900px) {
+    .nav-inner, .breadcrumb, .wrap, footer { padding-left: 24px; padding-right: 24px; }
+    .film-info-grid { grid-template-columns: 1fr; gap: 40px; }
+    .sidebar { position: static; }
+    .more-grid { grid-template-columns: repeat(2, 1fr); }
+    .nav-links { gap: 20px; }
+    .nav-links a:not(.active) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="../index.html" class="logo">PARADIGM<span class="sep">·</span>SHIFT</a>
+    <div class="nav-links">
+      <a href="../index.html">Works</a>
+      <a href="../index.html#about">About</a>
+      <a href="index.html" class="active">Watch</a>
+      <a href="../index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">Watch</a>
+  <span class="sep">/</span>
+  <span class="current" id="bc-title">Echoes</span>
+</div>
+
+<div class="wrap">
+
+  <section class="player-section">
+    <div class="player-label">— Now Playing</div>
+    <div class="player-wrap">
+      <span class="demo-badge">Demo</span>
+      <video id="video" controls preload="metadata" poster="">
+        <!-- Place your MP4 file here, e.g., videos/echoes.mp4 -->
+        <source src="videos/echoes.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <div class="paywall" id="paywall">
+        <div class="paywall-mark">— Paradigm Shift · PS 010</div>
+        <div class="paywall-title" id="pw-title">Echoes</div>
+        <div class="paywall-sub">7 min · 2024 · 日本語 with English subtitles</div>
+        <button class="paywall-buy" id="pw-buy">
+          <span>Unlock film</span>
+          <span class="price">£4.99</span>
+          <span class="arrow">→</span>
+        </button>
+        <div class="paywall-note">One-time purchase · Stream anytime · No subscription</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="film-info-grid">
+    <div>
+      <h1 class="film-title" id="title"><em>Echoes</em></h1>
+      <p class="film-tagline" id="tagline">"The sound of what is no longer there."</p>
+      <p class="film-synopsis" id="synopsis">
+        Paradigm Shiftの短編シリーズ第10作。日常の静けさの中に潜む、消えない記憶の残響を描く。
+        48 Hour Film Project London部門への参加作として48時間で制作された、
+        Paradigm Shiftを代表する一本。
+      </p>
+
+      <div class="meta-list">
+        <div class="meta-item">
+          <div class="label">— Year</div>
+          <div class="value">2024</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">— Duration</div>
+          <div class="value">7 minutes</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">— Format</div>
+          <div class="value">Short Film · HD</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">— Language</div>
+          <div class="value">日本語 / English subtitles</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">— Festival</div>
+          <div class="value">48HFP London 2024</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">— Rating</div>
+          <div class="value">PG · All ages</div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <div class="price-box">
+        <div class="label">— Own the film</div>
+        <div class="price">£4<span class="decimal">.99</span></div>
+        <div class="note">One-time · Stream anytime</div>
+      </div>
+      <button class="sidebar-buy">Buy · Stream forever</button>
+      <button class="sidebar-rent">Rent 48h · £2.99</button>
+
+      <div class="credits">
+        <h3>— Credits</h3>
+        <div class="credit-row"><span class="role">Director</span><span class="name">Yoriko</span></div>
+        <div class="credit-row"><span class="role">Producer</span><span class="name">Paradigm Shift</span></div>
+        <div class="credit-row"><span class="role">Year</span><span class="name">2024</span></div>
+        <div class="credit-row"><span class="role">Festival</span><span class="name">48HFP London</span></div>
+      </div>
+    </aside>
+  </section>
+
+  <section class="more">
+    <div class="more-label">— You may also like</div>
+    <h2 class="more-title">More from the collection</h2>
+    <div class="more-grid">
+      <a class="more-film" href="film.html?id=smile">
+        <div class="poster">
+          <div class="m-title">@SMILE</div>
+          <div class="m-year">2025</div>
+        </div>
+      </a>
+      <a class="more-film" href="film.html?id=echoes">
+        <div class="poster">
+          <div class="m-title">Echoes</div>
+          <div class="m-year">2024</div>
+        </div>
+      </a>
+      <a class="more-film" href="film.html?id=phoenix">
+        <div class="poster">
+          <div class="m-title">Phoenix</div>
+          <div class="m-year">2024</div>
+        </div>
+      </a>
+      <a class="more-film" href="film.html?id=deja-vu">
+        <div class="poster">
+          <div class="m-title">Déjà Vu</div>
+          <div class="m-year">2023</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <span>© Paradigm Shift · 2026</span>
+  <span>Film Collection</span>
+</footer>
+
+<script>
+  // Simple demo behavior: click "Unlock" button to reveal video
+  const paywall = document.getElementById('paywall');
+  const buyBtn = document.getElementById('pw-buy');
+  const sidebarBuy = document.querySelector('.sidebar-buy');
+  const video = document.getElementById('video');
+
+  function unlock() {
+    paywall.classList.add('hidden');
+    setTimeout(() => {
+      paywall.style.display = 'none';
+      video.play().catch(() => {}); // autoplay may be blocked, user will click play
+    }, 500);
+  }
+
+  buyBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    // Demo: show unlock after a brief pause (simulating payment)
+    buyBtn.innerHTML = '<span>Processing...</span>';
+    setTimeout(unlock, 800);
+  });
+
+  sidebarBuy.addEventListener('click', unlock);
+
+  // Film data for different IDs
+  const films = {
+    'echoes': { title: 'Echoes', em: 'Echoes', code: 'PS 010', year: '2024', dur: '7 min',
+                tagline: '"The sound of what is no longer there."' },
+    'tuner': { title: 'The Tuner', em: 'Tuner', code: 'PS 012', year: '2025', dur: '8 min',
+               tagline: '"A silent room, a single note, a secret."' },
+    'smile': { title: '@SMILE', em: null, code: 'PS 011', year: '2025', dur: '6 min',
+               tagline: '"Your face, filtered, forever."' },
+  };
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id') || 'echoes';
+  if (films[id]) {
+    const f = films[id];
+    document.getElementById('bc-title').textContent = f.title;
+    document.getElementById('pw-title').textContent = f.title;
+    document.getElementById('title').innerHTML = f.em
+      ? f.title.replace(f.em, '<em>' + f.em + '</em>')
+      : f.title;
+    document.getElementById('tagline').textContent = f.tagline;
+    document.querySelector('.paywall-sub').textContent = f.dur + ' · ' + f.year + ' · 日本語 with English subtitles';
+    document.querySelector('.paywall-mark').textContent = '— Paradigm Shift · ' + f.code;
+  }
+</script>
+
+</body>
+</html>
