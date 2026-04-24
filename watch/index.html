@@ -3,109 +3,174 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WATCH | PARADIGM SHIFT</title>
-<meta name="description" content="Paradigm Shift — Film Catalog">
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+<title>Watch · Paradigm Shift</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../common.css">
 <style>
-  /* PAGE WRAP */
-  .page-wrap { padding-top:65px; }
+  .page-wrap { padding-top:68px; }
 
-  /* HERO (watch) */
-  .watch-hero { padding:80px 40px 60px; max-width:1400px; margin:0 auto; position:relative; overflow:hidden; }
-  .watch-hero::before { content:''; position:absolute; top:0; right:40px; width:16px; height:16px; border-top:1px solid var(--red); border-right:1px solid var(--red); opacity:.3; }
-  .watch-hero::after { content:''; position:absolute; bottom:40px; left:40px; width:16px; height:16px; border-bottom:1px solid var(--red); border-left:1px solid var(--red); opacity:.3; }
-  .watch-label { font-size:12px; letter-spacing:4px; color:var(--red); margin-bottom:14px; display:flex; align-items:center; gap:10px; animation:fu .8s ease both; }
-  .watch-label::before { content:''; width:26px; height:1px; background:var(--red); }
-  .watch-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(52px,8vw,110px); line-height:.95; letter-spacing:2px; margin-bottom:24px; animation:fu .9s .1s ease both; }
-  .watch-title .red { color:var(--red); }
-  .watch-desc { font-size:14px; letter-spacing:1px; color:var(--off); max-width:580px; line-height:2; border-left:2px solid var(--red); padding-left:16px; animation:fu 1s .2s ease both; }
-  body.ja .watch-desc { font-family:'Noto Sans JP',sans-serif; font-size:13px; letter-spacing:.4px; }
-  @keyframes fu{ from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
-
-  /* FILTERS */
-  .filters-wrap { max-width:1400px; margin:0 auto; padding:20px 40px 50px; border-top:1px solid var(--border); display:flex; gap:20px; align-items:center; flex-wrap:wrap; }
-  .filter-label { font-size:11px; color:var(--red); letter-spacing:3px; text-transform:uppercase; margin-right:6px; }
-  .filter-btn { background:none; border:1px solid transparent; color:var(--off); font-family:'Share Tech Mono',monospace; font-size:13px; letter-spacing:2px; cursor:pointer; padding:6px 14px; text-transform:uppercase; transition:all .2s; position:relative; }
-  body.ja .filter-btn { font-family:'Noto Sans JP',sans-serif; letter-spacing:.5px; }
-  .filter-btn:hover { color:var(--white); }
-  .filter-btn.active { color:var(--white); border-color:var(--red); background:rgba(224,26,45,.08); }
-
-  /* CATALOG GRID */
-  .catalog { max-width:1400px; margin:0 auto; padding:0 40px 120px; }
-  .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--border); }
-
-  .film { position:relative; aspect-ratio:2/3; overflow:hidden; cursor:pointer; background:#0d0d0d; text-decoration:none; display:block; opacity:0; animation:fadeUp .6s ease forwards; }
-  .film:nth-child(1){animation-delay:.05s} .film:nth-child(2){animation-delay:.1s}
-  .film:nth-child(3){animation-delay:.15s} .film:nth-child(4){animation-delay:.2s}
-  .film:nth-child(5){animation-delay:.25s} .film:nth-child(6){animation-delay:.3s}
-  .film:nth-child(7){animation-delay:.35s} .film:nth-child(8){animation-delay:.4s}
-  .film:nth-child(9){animation-delay:.45s} .film:nth-child(10){animation-delay:.5s}
-  .film:nth-child(11){animation-delay:.55s} .film:nth-child(12){animation-delay:.6s}
-  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-
-  .poster-bg { position:absolute; inset:0; transition:transform .5s ease; }
-  .film:nth-child(1) .poster-bg { background:radial-gradient(ellipse at 40% 60%,rgba(224,26,45,.35),#080008 70%); }
-  .film:nth-child(2) .poster-bg { background:radial-gradient(ellipse at 60% 40%,rgba(200,100,20,.3),#0a0500 70%); }
-  .film:nth-child(3) .poster-bg { background:radial-gradient(ellipse at 35% 65%,rgba(20,90,200,.3),#000810 70%); }
-  .film:nth-child(4) .poster-bg { background:radial-gradient(ellipse at 50% 50%,rgba(180,40,30,.3),#0a0308 70%); }
-  .film:nth-child(5) .poster-bg { background:radial-gradient(ellipse at 45% 55%,rgba(224,60,20,.3),#0a0400 70%); }
-  .film:nth-child(6) .poster-bg { background:radial-gradient(ellipse at 60% 50%,rgba(140,40,100,.3),#0a0308 70%); }
-  .film:nth-child(7) .poster-bg { background:radial-gradient(ellipse at 40% 50%,rgba(80,60,20,.3),#0a0800 70%); }
-  .film:nth-child(8) .poster-bg { background:radial-gradient(ellipse at 55% 45%,rgba(180,30,40,.3),#0a0305 70%); }
-  .film:nth-child(9) .poster-bg { background:radial-gradient(ellipse at 50% 60%,rgba(90,60,160,.3),#050008 70%); }
-  .film:nth-child(10) .poster-bg { background:radial-gradient(ellipse at 45% 50%,rgba(40,100,160,.3),#00050a 70%); }
-  .film:nth-child(11) .poster-bg { background:radial-gradient(ellipse at 55% 55%,rgba(160,80,30,.3),#0a0500 70%); }
-  .film:nth-child(12) .poster-bg { background:radial-gradient(ellipse at 50% 50%,rgba(200,40,60,.3),#0a0305 70%); }
-  .film:hover .poster-bg { transform:scale(1.06); }
-
-  .poster-content { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; z-index:2; }
-  .poster-mark { font-family:'Share Tech Mono',monospace; font-size:11px; color:var(--red); letter-spacing:4px; margin-bottom:14px; opacity:.8; }
-  .poster-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(26px,2.6vw,38px); letter-spacing:2px; color:var(--white); text-align:center; line-height:1; margin-bottom:12px; }
-  .poster-line { width:36px; height:1px; background:var(--red); margin:4px 0 12px; opacity:.7; }
-  .poster-year { font-family:'Share Tech Mono',monospace; font-size:11px; color:var(--off); letter-spacing:3px; }
-
-  .film-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(0,0,0,0) 55%); opacity:0; transition:opacity .3s; z-index:3; }
-  .film:hover .film-overlay { opacity:1; }
-  .watch-cta { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scale(.9); font-family:'Share Tech Mono',monospace; font-size:13px; letter-spacing:4px; color:var(--white); padding:12px 26px; border:1px solid var(--red); background:rgba(224,26,45,.1); opacity:0; transition:all .3s cubic-bezier(.2,.8,.2,1); z-index:4; clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px)); text-transform:uppercase; }
-  .film:hover .watch-cta { opacity:1; transform:translate(-50%,-50%) scale(1); }
-
-  .film-meta { position:absolute; bottom:0; left:0; right:0; padding:16px 18px; display:flex; justify-content:space-between; align-items:flex-end; z-index:4; background:linear-gradient(to top,rgba(0,0,0,.95),transparent); }
-  .film-title { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:1.5px; color:var(--white); line-height:1; }
-  .film-info { font-family:'Share Tech Mono',monospace; font-size:10px; color:var(--off); letter-spacing:2px; text-align:right; line-height:1.7; text-transform:uppercase; }
-  .film-info .price { color:var(--red); font-size:12px; letter-spacing:1px; }
-
-  /* Demo tag */
-  .tag { position:absolute; top:10px; left:10px; background:var(--red); color:var(--white); font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:2px; padding:3px 9px; z-index:5; clip-path:polygon(0 0,calc(100% - 4px) 0,100% 4px,100% 100%,0 100%); display:flex; align-items:center; gap:4px; }
-  .tag::before { content:'●'; font-size:8px; }
-
-  /* RESPONSIVE */
-  @media (max-width:900px) {
-    .watch-hero { padding:60px 24px 40px; }
-    .watch-title { font-size:clamp(44px,12vw,72px); }
-    .filters-wrap { padding:20px 24px 40px; gap:10px; }
-    .catalog { padding:0 24px 80px; }
-    .grid { grid-template-columns:repeat(2,1fr); }
+  .hero-banner {
+    padding:50px 4% 20px;
+    max-width:1600px; margin:0 auto;
   }
-  @media (max-width:560px) {
-    .grid { grid-template-columns:1fr 1fr; gap:2px; }
-    .filter-btn { font-size:12px; padding:5px 10px; }
-    .poster-title { font-size:24px; }
-    .film-title { font-size:15px; }
+  .banner-kicker {
+    font-size:13px; font-weight:600;
+    color:var(--red);
+    margin-bottom:12px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+  }
+  .banner-ttl {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(40px,5vw,64px);
+    line-height:1;
+    letter-spacing:1px;
+    margin-bottom:16px;
+    color:var(--white);
+  }
+  .banner-desc {
+    font-size:16px;
+    color:var(--off);
+    max-width:560px;
+    line-height:1.5;
+  }
+  body.ja .banner-desc { font-size:14px; line-height:1.7; }
+
+  /* Filter bar */
+  .filters {
+    padding:0 4% 30px;
+    max-width:1600px; margin:0 auto;
+    display:flex; gap:10px; align-items:center;
+    flex-wrap:wrap;
+  }
+  .filter-btn {
+    background:transparent; color:var(--text);
+    border:1px solid var(--border-strong);
+    font-family:inherit; font-size:13px; font-weight:500;
+    padding:7px 16px; cursor:pointer;
+    border-radius:20px;
+    transition:all .15s;
+  }
+  .filter-btn:hover { background:rgba(255,255,255,0.08); }
+  .filter-btn.active { background:var(--white); color:#000; border-color:var(--white); }
+
+  /* Catalog */
+  .catalog {
+    padding:0 4% 80px;
+    max-width:1600px; margin:0 auto;
+  }
+  .grid {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+  }
+
+  .film {
+    position:relative;
+    aspect-ratio:16/9;
+    overflow:hidden;
+    border-radius:4px;
+    background:var(--panel);
+    transition:transform .25s ease, box-shadow .25s ease;
+    cursor:pointer;
+    display:block;
+  }
+  .film:hover {
+    transform:scale(1.06);
+    box-shadow:0 10px 30px rgba(0,0,0,0.6);
+    z-index:2;
+  }
+
+  .poster-bg {
+    position:absolute; inset:0;
+    background-size:cover; background-position:center;
+  }
+  /* Fallback gradients when no image */
+  .film:nth-child(1) .poster-bg { background:linear-gradient(135deg, #2a1a2a 0%, #1a2030 100%); }
+  .film:nth-child(2) .poster-bg { background:linear-gradient(135deg, #1a2030 0%, #2a1f35 100%); }
+  .film:nth-child(3) .poster-bg { background:linear-gradient(135deg, #301a1a 0%, #1a1525 100%); }
+  .film:nth-child(4) .poster-bg { background:linear-gradient(135deg, #1a2a20 0%, #0f1f30 100%); }
+  .film:nth-child(5) .poster-bg { background:linear-gradient(135deg, #2a1a15 0%, #1a1020 100%); }
+  .film:nth-child(6) .poster-bg { background:linear-gradient(135deg, #1a1530 0%, #2a1a20 100%); }
+  .film:nth-child(7) .poster-bg { background:linear-gradient(135deg, #30201a 0%, #1a2025 100%); }
+  .film:nth-child(8) .poster-bg { background:linear-gradient(135deg, #251a30 0%, #1a2530 100%); }
+  .film:nth-child(9) .poster-bg { background:linear-gradient(135deg, #1a3020 0%, #2a1525 100%); }
+  .film:nth-child(10) .poster-bg { background:linear-gradient(135deg, #2a2015 0%, #15252a 100%); }
+  .film:nth-child(11) .poster-bg { background:linear-gradient(135deg, #2a1f1a 0%, #201a2a 100%); }
+  .film:nth-child(12) .poster-bg { background:linear-gradient(135deg, #1f1a2a 0%, #2a1a1f 100%); }
+
+  .poster-content {
+    position:absolute; inset:0;
+    display:flex; flex-direction:column;
+    justify-content:center; align-items:center;
+    padding:20px;
+  }
+  .ps-code {
+    font-size:11px; font-weight:600;
+    color:var(--red);
+    letter-spacing:2px;
+    margin-bottom:8px;
+  }
+  .ps-title {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(22px,2vw,32px);
+    letter-spacing:1px;
+    color:var(--white);
+    text-align:center;
+    line-height:1;
+  }
+
+  .film-info-overlay {
+    position:absolute; bottom:0; left:0; right:0;
+    padding:14px 16px 12px;
+    background:linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.3) 70%, transparent 100%);
+    display:flex; justify-content:space-between; align-items:flex-end;
+  }
+  .info-left .title {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:18px;
+    letter-spacing:0.5px;
+    color:var(--white);
+    line-height:1;
+    margin-bottom:4px;
+  }
+  .info-left .year {
+    font-size:12px;
+    color:var(--off);
+  }
+  .info-right {
+    font-size:14px; font-weight:600;
+    color:var(--white);
+  }
+
+  .demo-tag {
+    position:absolute; top:10px; left:10px;
+    background:var(--red); color:var(--white);
+    font-size:10px; font-weight:600;
+    padding:3px 7px;
+    border-radius:2px;
+    letter-spacing:0.5px;
+    z-index:3;
+  }
+
+  @media(max-width:1100px){ .grid { grid-template-columns:repeat(3,1fr); } }
+  @media(max-width:768px){ .grid { grid-template-columns:repeat(2,1fr); gap:10px; } }
+  @media(max-width:480px){
+    .grid { grid-template-columns:1fr; }
+    .hero-banner { padding:40px 4% 16px; }
+    .banner-ttl { font-size:36px; }
   }
 </style>
 </head>
 <body class="en">
 
-<!-- NAV -->
-<nav class="navbar">
-  <a href="../index.html" class="logo">
-    <div class="logo-icon">PS</div>
-    <div class="logo-name">PARADIGM <span>SHIFT</span></div>
-  </a>
+<nav class="navbar" id="navbar">
+  <a href="../index.html" class="logo">PARADIGM<span>SHIFT</span></a>
   <div class="nav-r">
     <div class="nav-links" id="nav-links"></div>
-    <div class="hamburger" onclick="toggleMenu()" id="hamburger"><span></span><span></span><span></span></div>
+    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
     <div class="lswitch">
       <button class="lbtn on" onclick="setLang('en')">EN</button>
       <button class="lbtn" onclick="setLang('ja')">JP</button>
@@ -116,217 +181,165 @@
 
 <div class="page-wrap">
 
-  <!-- HERO -->
-  <section class="watch-hero">
-    <p class="watch-label" id="watch-label"></p>
-    <h1 class="watch-title" id="watch-title"></h1>
-    <p class="watch-desc" id="watch-desc"></p>
+  <section class="hero-banner">
+    <p class="banner-kicker" id="banner-kicker"></p>
+    <h1 class="banner-ttl" id="banner-ttl"></h1>
+    <p class="banner-desc" id="banner-desc"></p>
   </section>
 
-  <!-- FILTERS -->
-  <section class="filters-wrap">
-    <span class="filter-label" id="filter-label"></span>
-    <button class="filter-btn active" data-filter="all" data-en="All Films" data-ja="すべて"></button>
+  <section class="filters">
+    <button class="filter-btn active" data-filter="all" data-en="All" data-ja="すべて"></button>
     <button class="filter-btn" data-filter="2025" data-en="2025" data-ja="2025"></button>
     <button class="filter-btn" data-filter="2024" data-en="2024" data-ja="2024"></button>
     <button class="filter-btn" data-filter="2023" data-en="2023" data-ja="2023"></button>
     <button class="filter-btn" data-filter="earlier" data-en="Earlier" data-ja="それ以前"></button>
   </section>
 
-  <!-- CATALOG -->
   <main class="catalog">
-    <div class="grid" id="grid">
+    <div class="grid">
 
       <a class="film" href="film.html?id=tuner" data-year="2025">
         <div class="poster-bg"></div>
         <div class="poster-content">
-          <div class="poster-mark">// PS 012</div>
-          <div class="poster-title">THE TUNER</div>
-          <div class="poster-line"></div>
-          <div class="poster-year">2025</div>
+          <div class="ps-code">PS 012</div>
+          <div class="ps-title">THE TUNER</div>
         </div>
-        <div class="film-overlay"></div>
-        <div class="watch-cta" data-en="Watch //" data-ja="視聴する //"></div>
-        <div class="film-meta">
-          <div class="film-title">THE TUNER</div>
-          <div class="film-info">2025 · 8 MIN<br><span class="price">£4.99</span></div>
+        <div class="film-info-overlay">
+          <div class="info-left"><div class="title">THE TUNER</div><div class="year">2025 · 8m</div></div>
+          <div class="info-right">£4.99</div>
         </div>
       </a>
 
       <a class="film" href="film.html?id=smile" data-year="2025">
         <div class="poster-bg"></div>
         <div class="poster-content">
-          <div class="poster-mark">// PS 011</div>
-          <div class="poster-title">@SMILE</div>
-          <div class="poster-line"></div>
-          <div class="poster-year">2025</div>
+          <div class="ps-code">PS 011</div>
+          <div class="ps-title">@SMILE</div>
         </div>
-        <div class="film-overlay"></div>
-        <div class="watch-cta" data-en="Watch //" data-ja="視聴する //"></div>
-        <div class="film-meta">
-          <div class="film-title">@SMILE</div>
-          <div class="film-info">2025 · 6 MIN<br><span class="price">£4.99</span></div>
+        <div class="film-info-overlay">
+          <div class="info-left"><div class="title">@SMILE</div><div class="year">2025 · 6m</div></div>
+          <div class="info-right">£4.99</div>
         </div>
       </a>
 
       <a class="film" href="film.html?id=echoes" data-year="2025">
-        <span class="tag" data-en="DEMO" data-ja="DEMO">DEMO</span>
+        <span class="demo-tag">DEMO</span>
         <div class="poster-bg"></div>
         <div class="poster-content">
-          <div class="poster-mark">// PS 010</div>
-          <div class="poster-title">ECHOES</div>
-          <div class="poster-line"></div>
-          <div class="poster-year">2025</div>
+          <div class="ps-code">PS 010</div>
+          <div class="ps-title">ECHOES</div>
         </div>
-        <div class="film-overlay"></div>
-        <div class="watch-cta" data-en="Watch //" data-ja="視聴する //"></div>
-        <div class="film-meta">
-          <div class="film-title">ECHOES</div>
-          <div class="film-info">2025 · 7 MIN<br><span class="price">£4.99</span></div>
+        <div class="film-info-overlay">
+          <div class="info-left"><div class="title">ECHOES</div><div class="year">2025 · 7m</div></div>
+          <div class="info-right">£4.99</div>
         </div>
       </a>
 
       <a class="film" href="film.html?id=southpaw" data-year="2024">
         <div class="poster-bg"></div>
         <div class="poster-content">
-          <div class="poster-mark">// PS 009</div>
-          <div class="poster-title">SOUTHPAW</div>
-          <div class="poster-line"></div>
-          <div class="poster-year">2024</div>
+          <div class="ps-code">PS 009</div>
+          <div class="ps-title">SOUTHPAW</div>
         </div>
-        <div class="film-overlay"></div>
-        <div class="watch-cta" data-en="Watch //" data-ja="視聴する //"></div>
-        <div class="film-meta">
-          <div class="film-title">SOUTHPAW</div>
-          <div class="film-info">2024 · 9 MIN<br><span class="price">£4.99</span></div>
+        <div class="film-info-overlay">
+          <div class="info-left"><div class="title">SOUTHPAW</div><div class="year">2024 · 9m</div></div>
+          <div class="info-right">£4.99</div>
         </div>
       </a>
 
       <a class="film" href="film.html?id=phoenix" data-year="2024">
         <div class="poster-bg"></div>
         <div class="poster-content">
-          <div class="poster-mark">// PS 008</div>
-          <div class="poster-title">PHOENIX</div>
-          <div class="poster-line"></div>
-          <div class="poster-year">2024</div>
+          <div class="ps-code">PS 008</div>
+          <div class="ps-title">PHOENIX</div>
         </div>
-        <div class="film-overlay"></div>
-        <div class="watch-cta" data-en="Watch //" data-ja="視聴する //"></div>
-        <div class="film-meta">
-          <div class="film-title">PHOENIX</div>
-          <div class="film-info">2024 · 8 MIN<br><span class="price">£4.99</span></div>
+        <div class="film-info-overlay">
+          <div class="info-left"><div class="title">PHOENIX</div><div class="year">2024 · 8m</div></div>
+          <div class="info-right">£4.99</div>
         </div>
       </a>
 
       <a class="film" href="film.html?id=deja-vu" data-year="2023">
         <div class="poster-bg"></div>
         <div class="poster-content">
-          <div class="poster-mark">// PS 007</div>
-          <div class="poster-title">DÉJÀ VU</div>
-          <div class="poster-line"></div>
-          <div class="poster-year">2023</div>
+          <div class="ps-code">PS 007</div>
+          <div class="ps-title">DÉJÀ VU</div>
         </div>
-        <div class="film-overlay"></div>
-        <div class="watch-cta" data-en="Watch //" data-ja="視聴する //"></div>
-        <div class="film-meta">
-          <div class="film-title">DÉJÀ VU</div>
-          <div class="film-info">2023 · 7 MIN<br><span class="price">£4.99</span></div>
+        <div class="film-info-overlay">
+          <div class="info-left"><div class="title">DÉJÀ VU</div><div class="year">2023 · 7m</div></div>
+          <div class="info-right">£4.99</div>
         </div>
       </a>
 
       <a class="film" href="film.html?id=baby-train" data-year="2024">
         <div class="poster-bg"></div>
         <div class="poster-content">
-          <div class="poster-mark">// PS 006</div>
-          <div class="poster-title">BABY TRAIN</div>
-          <div class="poster-line"></div>
-          <div class="poster-year">2024</div>
+          <div class="ps-code">PS 006</div>
+          <div class="ps-title">BABY TRAIN</div>
         </div>
-        <div class="film-overlay"></div>
-        <div class="watch-cta" data-en="Watch //" data-ja="視聴する //"></div>
-        <div class="film-meta">
-          <div class="film-title">BABY TRAIN</div>
-          <div class="film-info">2024 · 8 MIN<br><span class="price">£4.99</span></div>
+        <div class="film-info-overlay">
+          <div class="info-left"><div class="title">BABY TRAIN</div><div class="year">2024 · 8m</div></div>
+          <div class="info-right">£4.99</div>
         </div>
       </a>
 
       <a class="film" href="film.html?id=hitman-2" data-year="2024">
         <div class="poster-bg"></div>
         <div class="poster-content">
-          <div class="poster-mark">// PS 005</div>
-          <div class="poster-title">HITMAN 2</div>
-          <div class="poster-line"></div>
-          <div class="poster-year">2024</div>
+          <div class="ps-code">PS 005</div>
+          <div class="ps-title">HITMAN 2</div>
         </div>
-        <div class="film-overlay"></div>
-        <div class="watch-cta" data-en="Watch //" data-ja="視聴する //"></div>
-        <div class="film-meta">
-          <div class="film-title">HITMAN 2</div>
-          <div class="film-info">2024 · 8 MIN<br><span class="price">£4.99</span></div>
+        <div class="film-info-overlay">
+          <div class="info-left"><div class="title">HITMAN 2</div><div class="year">2024 · 8m</div></div>
+          <div class="info-right">£4.99</div>
         </div>
       </a>
 
       <a class="film" href="film.html?id=metamorphose" data-year="earlier">
         <div class="poster-bg"></div>
         <div class="poster-content">
-          <div class="poster-mark">// PS 004</div>
-          <div class="poster-title">MetamoRphose</div>
-          <div class="poster-line"></div>
-          <div class="poster-year">2022</div>
+          <div class="ps-code">PS 004</div>
+          <div class="ps-title">MetamoRphose</div>
         </div>
-        <div class="film-overlay"></div>
-        <div class="watch-cta" data-en="Watch //" data-ja="視聴する //"></div>
-        <div class="film-meta">
-          <div class="film-title">MetamoRphose</div>
-          <div class="film-info">2022 · 9 MIN<br><span class="price">£4.99</span></div>
+        <div class="film-info-overlay">
+          <div class="info-left"><div class="title">MetamoRphose</div><div class="year">2022 · 9m</div></div>
+          <div class="info-right">£4.99</div>
         </div>
       </a>
 
       <a class="film" href="film.html?id=mermaid" data-year="earlier">
         <div class="poster-bg"></div>
         <div class="poster-content">
-          <div class="poster-mark">// PS 003</div>
-          <div class="poster-title">MERMAID</div>
-          <div class="poster-line"></div>
-          <div class="poster-year">2022</div>
+          <div class="ps-code">PS 003</div>
+          <div class="ps-title">MERMAID</div>
         </div>
-        <div class="film-overlay"></div>
-        <div class="watch-cta" data-en="Watch //" data-ja="視聴する //"></div>
-        <div class="film-meta">
-          <div class="film-title">MERMAID</div>
-          <div class="film-info">2022 · 7 MIN<br><span class="price">£4.99</span></div>
+        <div class="film-info-overlay">
+          <div class="info-left"><div class="title">MERMAID</div><div class="year">2022 · 7m</div></div>
+          <div class="info-right">£4.99</div>
         </div>
       </a>
 
       <a class="film" href="film.html?id=postman" data-year="earlier">
         <div class="poster-bg"></div>
         <div class="poster-content">
-          <div class="poster-mark">// PS 002</div>
-          <div class="poster-title">POSTMAN</div>
-          <div class="poster-line"></div>
-          <div class="poster-year">2021</div>
+          <div class="ps-code">PS 002</div>
+          <div class="ps-title">POSTMAN</div>
         </div>
-        <div class="film-overlay"></div>
-        <div class="watch-cta" data-en="Watch //" data-ja="視聴する //"></div>
-        <div class="film-meta">
-          <div class="film-title">POSTMAN</div>
-          <div class="film-info">2021 · 8 MIN<br><span class="price">£4.99</span></div>
+        <div class="film-info-overlay">
+          <div class="info-left"><div class="title">POSTMAN</div><div class="year">2021 · 8m</div></div>
+          <div class="info-right">£4.99</div>
         </div>
       </a>
 
       <a class="film" href="film.html?id=birth-day" data-year="earlier">
         <div class="poster-bg"></div>
         <div class="poster-content">
-          <div class="poster-mark">// PS 001</div>
-          <div class="poster-title">BIRTH DAY</div>
-          <div class="poster-line"></div>
-          <div class="poster-year">2021</div>
+          <div class="ps-code">PS 001</div>
+          <div class="ps-title">BIRTH DAY</div>
         </div>
-        <div class="film-overlay"></div>
-        <div class="watch-cta" data-en="Watch //" data-ja="視聴する //"></div>
-        <div class="film-meta">
-          <div class="film-title">BIRTH DAY</div>
-          <div class="film-info">2021 · 7 MIN<br><span class="price">£4.99</span></div>
+        <div class="film-info-overlay">
+          <div class="info-left"><div class="title">BIRTH DAY</div><div class="year">2021 · 7m</div></div>
+          <div class="info-right">£4.99</div>
         </div>
       </a>
 
@@ -335,64 +348,59 @@
 </div>
 
 <footer>
-  <div class="footer-copy" id="footer-copy"></div>
-  <div class="footer-links">
-    <a href="#">Instagram</a>
-    <a href="#">Vimeo</a>
-    <a href="#">IMDb</a>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="../index.html" data-en="Home" data-ja="ホーム">Home</a>
+      <a href="#">Instagram</a>
+      <a href="#">Vimeo</a>
+      <a href="#">IMDb</a>
+    </div>
+    <div class="footer-copy" id="footer-copy"></div>
   </div>
 </footer>
 
 <script>
 const T = {
   en: {
-    nav: ['Home','Films','Stage','About','Contact','Watch'],
-    watchLabel: '// FILM CATALOG',
-    watchTitle: 'WATCH THE<br><span class="red">FULL COLLECTION</span>',
-    watchDesc: '48 Hour Film Project shorts and original works by Paradigm Shift — 12 films in total.<br>Purchase any title for unlimited viewing access.',
-    filterLabel: 'FILTER //',
-    footer: '© 2026 PARADIGM SHIFT — FILM COLLECTION',
+    nav: ['Home','Films','Stage','About','Contact'],
+    bannerKicker: 'Film Catalog',
+    bannerTtl: 'Watch the Full Collection',
+    bannerDesc: '12 award-winning short films from the 48 Hour Film Project across Tokyo, LA, and London. One-time purchase, stream anytime.',
+    footer: '© 2026 Paradigm Shift',
   },
   ja: {
-    nav: ['ホーム','作品','舞台','概要','お問合せ','視聴'],
-    watchLabel: '// フィルムカタログ',
-    watchTitle: '全作品<br><span class="red">視聴可能</span>',
-    watchDesc: '48時間フィルムプロジェクトを中心とした、Paradigm Shiftのショートフィルム全12作品。<br>各作品の購入で、いつでも本編をお楽しみいただけます。',
-    filterLabel: 'フィルター //',
-    footer: '© 2026 PARADIGM SHIFT — 無断転載禁止',
+    nav: ['ホーム','作品','舞台','概要','お問合せ'],
+    bannerKicker: 'フィルムカタログ',
+    bannerTtl: '全作品視聴',
+    bannerDesc: '東京・ロサンゼルス・ロンドンの48時間映画祭で制作された受賞短編全12作品。買い切り、いつでも視聴可能。',
+    footer: '© 2026 Paradigm Shift',
   }
 };
-
-const NAV_HREFS = ['../index.html','../films.html','../stage.html','../about.html','../contact.html','index.html'];
+const NAV_HREFS = ['../index.html','../films.html','../stage.html','../about.html','../contact.html'];
 
 function render(lang) {
   const t = T[lang];
   document.body.className = lang;
   document.documentElement.lang = lang;
   document.getElementById('nav-links').innerHTML = t.nav.map((n,i)=>
-    `<a href="${NAV_HREFS[i]}" class="nav-link${i===5?' active':''}">${n}</a>`).join('');
-  const mm=document.getElementById('mobile-menu');
-  if(mm) mm.innerHTML=t.nav.map((n,i)=>`<a href="${NAV_HREFS[i]}" class="nav-link${i===5?' active':''}" onclick="document.getElementById('mobile-menu').classList.remove('open')">${n}</a>`).join('');
-  document.getElementById('watch-label').textContent = t.watchLabel;
-  document.getElementById('watch-title').innerHTML = t.watchTitle;
-  document.getElementById('watch-desc').innerHTML = t.watchDesc;
-  document.getElementById('filter-label').textContent = t.filterLabel;
+    `<a href="${NAV_HREFS[i]}" class="nav-link">${n}</a>`).join('');
+  document.getElementById('mobile-menu').innerHTML=t.nav.map((n,i)=>
+    `<a href="${NAV_HREFS[i]}" class="nav-link" onclick="document.getElementById('mobile-menu').classList.remove('open')">${n}</a>`).join('');
+  document.getElementById('banner-kicker').textContent = t.bannerKicker;
+  document.getElementById('banner-ttl').textContent = t.bannerTtl;
+  document.getElementById('banner-desc').textContent = t.bannerDesc;
   document.getElementById('footer-copy').textContent = t.footer;
   document.querySelectorAll('[data-en][data-ja]').forEach(el=>{
     el.textContent = el.dataset[lang];
   });
 }
-
 function setLang(lang) {
   localStorage.setItem('ps-lang', lang);
   render(lang);
   document.querySelectorAll('.lbtn').forEach(b=>b.classList.remove('on'));
   document.querySelector(`.lbtn[onclick="setLang('${lang}')"]`).classList.add('on');
 }
-
-function toggleMenu(){
-  document.getElementById('mobile-menu').classList.toggle('open');
-}
+function toggleMenu(){ document.getElementById('mobile-menu').classList.toggle('open'); }
 
 // Filter
 const buttons = document.querySelectorAll('.filter-btn');
@@ -408,11 +416,16 @@ buttons.forEach(btn => {
   });
 });
 
-// Init
+// Navbar scrolled
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 30) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
 const savedLang = localStorage.getItem('ps-lang') || 'en';
 render(savedLang);
 if(savedLang==='ja') { document.querySelector('.lbtn.on').classList.remove('on'); document.querySelector('.lbtn[onclick="setLang(\'ja\')"]').classList.add('on'); }
 </script>
-
 </body>
 </html>

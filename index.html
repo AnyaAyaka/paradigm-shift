@@ -3,87 +3,207 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PARADIGM SHIFT | Official</title>
+<title>Paradigm Shift</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Bebas+Neue&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Bebas+Neue&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="common.css">
 <style>
+  /* INTRO */
   #intro { position:fixed; inset:0; z-index:9000; background:#000; display:flex; align-items:center; justify-content:center; overflow:hidden; cursor:pointer; }
   #intro video { width:100%; height:100%; object-fit:cover; }
-  #intro-skip { position:absolute; bottom:28px; right:32px; font-family:'Inter',sans-serif; font-size:13px; font-weight:500; letter-spacing:1.5px; color:rgba(255,255,255,0.5); text-transform:uppercase; cursor:pointer; z-index:10; padding:10px; }
+  #intro-skip { position:absolute; bottom:28px; right:32px; font-size:13px; font-weight:500; color:rgba(255,255,255,0.6); cursor:pointer; z-index:10; padding:10px; }
   #intro-skip:hover { color:#fff; }
 
-  .watch-now-btn { display:inline-flex; align-items:center; gap:8px; background:var(--red); color:var(--white); text-decoration:none; font-family:'Inter',sans-serif; font-size:13px; font-weight:600; letter-spacing:1px; padding:10px 18px; border-radius:4px; text-transform:uppercase; transition:all .2s; }
-  body.ja .watch-now-btn { font-family:'Noto Sans JP',sans-serif; letter-spacing:0.5px; }
-  .watch-now-btn:hover { background:var(--red-hover); transform:translateY(-1px); }
+  /* WATCH NOW button */
+  .watch-now-btn {
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--red); color:var(--white);
+    font-size:14px; font-weight:600;
+    padding:8px 18px;
+    border-radius:4px;
+    transition:background .15s;
+  }
+  .watch-now-btn:hover { background:var(--red-hover); }
   .watch-now-btn .wn-play { font-size:10px; }
 
-  .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:100px 32px 80px; position:relative; overflow:hidden; max-width:1400px; margin:0 auto; }
-  .hero-bg { position:absolute; inset:0; background: radial-gradient(ellipse 80% 60% at 30% 40%, rgba(200,50,61,0.08), transparent 60%), var(--bg); z-index:-1; }
-
-  .h-kicker { font-family:'Inter',sans-serif; font-size:13px; font-weight:600; letter-spacing:2.5px; color:var(--red); margin-bottom:20px; text-transform:uppercase; animation:fu .8s ease both; }
-  body.ja .h-kicker { font-family:'Noto Sans JP',sans-serif; letter-spacing:1.5px; font-size:12px; }
-
-  .h-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(56px,9vw,128px); line-height:0.95; letter-spacing:1px; margin-bottom:16px; animation:fu .9s .1s ease both; }
-  .h-title .red { color:var(--red); }
-  .h-title .sub { display:block; font-family:'Inter',sans-serif; font-weight:400; font-size:16px; letter-spacing:1.5px; color:var(--off); margin-top:12px; text-transform:uppercase; }
-  body.ja .h-title .sub { font-family:'Noto Sans JP',sans-serif; font-size:14px; letter-spacing:1px; }
-
-  .h-desc { margin-top:24px; font-size:17px; line-height:1.7; color:var(--off); max-width:560px; animation:fu 1s .2s ease both; }
-  body.ja .h-desc { font-size:15px; line-height:1.8; }
-
-  .h-cta { margin-top:36px; display:flex; gap:14px; align-items:center; flex-wrap:wrap; animation:fu 1s .3s ease both; }
-
-  @keyframes fu { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-
-  .latest-sec { background:var(--panel); }
-  .latest-inner { max-width:1400px; margin:0 auto; }
-  .latest-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
-  .lc { position:relative; aspect-ratio:2/3; overflow:hidden; border-radius:6px; cursor:pointer; background:#0d0d0d; text-decoration:none; display:block; }
-  .lc .lbg { position:absolute; inset:0; transition:transform .5s ease; }
-  .lc:hover .lbg { transform:scale(1.04); }
-  .lov { position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 50%, transparent 100%); display:flex; flex-direction:column; justify-content:flex-end; padding:24px; }
-  .award-badge { position:absolute; top:16px; left:16px; background:var(--red); font-family:'Inter',sans-serif; font-size:11px; font-weight:600; letter-spacing:1px; padding:5px 10px; color:var(--white); border-radius:3px; text-transform:uppercase; }
-  body.ja .award-badge { font-family:'Noto Sans JP',sans-serif; letter-spacing:0.5px; }
-  .lcity { font-family:'Inter',sans-serif; font-size:11px; font-weight:600; letter-spacing:1.5px; color:var(--red); margin-bottom:4px; text-transform:uppercase; }
-  .lyear { font-family:'Inter',sans-serif; font-size:12px; color:var(--off); letter-spacing:0.5px; margin-bottom:8px; }
-  .ltitle { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:1.5px; line-height:1; margin-bottom:8px; color:var(--white); }
-  .lgenre { font-family:'Inter',sans-serif; font-size:13px; color:var(--off); letter-spacing:0.3px; }
-  body.ja .lgenre { font-family:'Noto Sans JP',sans-serif; }
-
-  .view-all { display:flex; justify-content:center; margin-top:48px; }
-
-  #activity { max-width:1400px; margin:0 auto; }
-  .act-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-  .act-cell { background:var(--panel); padding:36px 28px; border-radius:6px; border:1px solid var(--border); transition:all .3s; }
-  .act-cell:hover { border-color:var(--red); transform:translateY(-2px); }
-  .act-cat { font-family:'Inter',sans-serif; font-size:12px; font-weight:600; letter-spacing:2px; color:var(--red); margin-bottom:12px; text-transform:uppercase; }
-  body.ja .act-cat { font-family:'Noto Sans JP',sans-serif; letter-spacing:1px; }
-  .act-title { font-family:'Bebas Neue',sans-serif; font-size:30px; letter-spacing:1.5px; margin-bottom:14px; color:var(--white); }
-  .act-desc { font-size:15px; line-height:1.7; color:var(--off); }
-  body.ja .act-desc { font-size:14px; line-height:1.85; }
-  .act-link { display:inline-flex; align-items:center; gap:6px; margin-top:20px; font-family:'Inter',sans-serif; font-size:13px; font-weight:600; letter-spacing:1px; color:var(--red); text-decoration:none; transition:all .2s; text-transform:uppercase; }
-  body.ja .act-link { font-family:'Noto Sans JP',sans-serif; letter-spacing:0.5px; }
-  .act-link::after { content:'→'; transition:transform .2s; }
-  .act-link:hover { color:var(--red-hover); }
-  .act-link:hover::after { transform:translateX(4px); }
-
-  @media(max-width:768px){
-    .hero { min-height:auto; padding:100px 20px 60px; }
-    .h-title { font-size:clamp(52px,15vw,84px); }
-    .h-desc { font-size:16px; }
-    .latest-grid { grid-template-columns:1fr 1fr; gap:16px; }
-    .ltitle { font-size:22px; }
-    .act-grid { grid-template-columns:1fr; }
-    .watch-now-btn { padding:8px 12px; font-size:11px; gap:6px; }
-    .watch-now-btn .wn-text { display:none; }
-    .watch-now-btn::after { content:'WATCH'; }
-    body.ja .watch-now-btn::after { content:'視聴'; }
+  /* HERO - Netflix billboard style */
+  .hero {
+    position:relative;
+    height:85vh; min-height:560px;
+    display:flex; align-items:flex-end;
+    padding:0 4% 10%;
+    overflow:hidden;
   }
-  @media(max-width:480px){
-    .latest-grid { grid-template-columns:1fr; }
-    .h-title { font-size:64px; }
+  .hero-bg {
+    position:absolute; inset:0;
+    background:
+      linear-gradient(to top, var(--bg) 0%, rgba(20,20,20,0.6) 50%, rgba(20,20,20,0.3) 100%),
+      linear-gradient(to right, rgba(20,20,20,0.85) 0%, rgba(20,20,20,0.4) 60%, rgba(20,20,20,0) 100%),
+      radial-gradient(ellipse at 70% 40%, rgba(229,9,20,0.15), transparent 60%),
+      #0a0a0a;
+    z-index:-1;
+  }
+
+  .hero-content { max-width:640px; animation:fadeUp .8s ease both; }
+  .h-kicker {
+    font-size:13px; font-weight:600;
+    color:var(--red);
+    margin-bottom:16px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+  }
+  .h-title {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:clamp(56px,8vw,108px);
+    line-height:0.95;
+    letter-spacing:1px;
+    margin-bottom:8px;
+    color:var(--white);
+  }
+  .h-subtitle {
+    font-size:18px;
+    color:var(--off);
+    margin-bottom:20px;
+    font-weight:400;
+  }
+  .h-desc {
+    font-size:17px;
+    line-height:1.5;
+    color:var(--text);
+    max-width:540px;
+    margin-bottom:28px;
+    text-shadow:0 2px 8px rgba(0,0,0,0.6);
+  }
+  body.ja .h-desc { font-size:15px; }
+  .h-cta {
+    display:flex; gap:10px;
+    flex-wrap:wrap;
+    animation:fadeUp 1s .2s ease both;
+  }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+  /* CONTENT SECTIONS - Netflix row style */
+  .content-wrap { padding:0 4%; margin-top:-60px; position:relative; z-index:5; }
+  .row { margin-bottom:50px; }
+  .row-ttl {
+    font-size:22px; font-weight:600;
+    color:var(--white);
+    margin-bottom:14px;
+    letter-spacing:-0.2px;
+  }
+  body.ja .row-ttl { font-size:20px; }
+
+  /* Film cards - Netflix card style */
+  .film-grid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+  }
+  .fc {
+    position:relative;
+    aspect-ratio:16/9;
+    overflow:hidden;
+    border-radius:4px;
+    background:var(--panel);
+    transition:transform .25s ease;
+    cursor:pointer;
+    display:block;
+  }
+  .fc:hover { transform:scale(1.04); z-index:2; }
+  .fc-bg {
+    position:absolute; inset:0;
+    background-size:cover; background-position:center;
+  }
+  .fc-overlay {
+    position:absolute; inset:0;
+    background:linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding:18px;
+  }
+  .fc-badge {
+    position:absolute; top:12px; left:12px;
+    background:var(--red); color:var(--white);
+    font-size:11px; font-weight:600;
+    padding:4px 8px;
+    border-radius:2px;
+    letter-spacing:0.3px;
+  }
+  .fc-year {
+    font-size:12px;
+    color:var(--off);
+    margin-bottom:4px;
+  }
+  .fc-ttl {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:26px;
+    letter-spacing:1px;
+    color:var(--white);
+    line-height:1;
+    margin-bottom:6px;
+  }
+  .fc-meta {
+    font-size:13px;
+    color:var(--text);
+  }
+
+  /* ACTIVITY */
+  .act-grid {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-bottom:80px;
+  }
+  .act-cell {
+    background:var(--panel);
+    padding:28px 22px;
+    border-radius:4px;
+    transition:background .2s;
+  }
+  .act-cell:hover { background:var(--panel-2); }
+  .act-cat {
+    font-size:11px; font-weight:600;
+    letter-spacing:1.5px;
+    color:var(--red);
+    margin-bottom:10px;
+    text-transform:uppercase;
+  }
+  .act-title {
+    font-family:'Bebas Neue',sans-serif;
+    font-size:24px;
+    letter-spacing:1px;
+    margin-bottom:12px;
+    color:var(--white);
+    line-height:1.1;
+  }
+  .act-desc {
+    font-size:14px;
+    line-height:1.5;
+    color:var(--off);
+  }
+  body.ja .act-desc { font-size:13px; line-height:1.7; }
+  .act-link {
+    display:inline-flex; align-items:center; gap:4px;
+    margin-top:16px;
+    font-size:13px; font-weight:500;
+    color:var(--white);
+    transition:gap .2s;
+  }
+  .act-link::after { content:'›'; font-size:16px; }
+  .act-link:hover { gap:8px; }
+
+  @media(max-width:900px){
+    .hero { height:70vh; min-height:440px; padding:0 4% 80px; }
+    .h-title { font-size:clamp(48px,10vw,72px); }
+    .h-desc { font-size:15px; }
+    .film-grid { grid-template-columns:1fr 1fr; }
+    .act-grid { grid-template-columns:1fr 1fr; }
+  }
+  @media(max-width:600px){
+    .hero { height:auto; min-height:auto; padding:120px 4% 50px; }
+    .film-grid { grid-template-columns:1fr; }
+    .act-grid { grid-template-columns:1fr; }
+    .h-cta .btn, .h-cta .btn-g { font-size:14px; padding:10px 20px; }
   }
 </style>
 </head>
@@ -91,21 +211,18 @@
 
 <div id="intro" onclick="introClick()">
   <video id="intro-video" src="intro.mp4" playsinline muted preload="auto"></video>
-  <div id="intro-skip" onclick="event.stopPropagation(); endIntro();">Skip intro</div>
+  <div id="intro-skip" onclick="event.stopPropagation(); endIntro();">Skip</div>
 </div>
 
-<nav class="navbar">
-  <a href="index.html" class="logo">
-    <div class="logo-icon">PS</div>
-    <div class="logo-name">PARADIGM <span>SHIFT</span></div>
-  </a>
+<nav class="navbar" id="navbar">
+  <a href="index.html" class="logo">PARADIGM<span>SHIFT</span></a>
   <div class="nav-r">
     <div class="nav-links" id="nav-links"></div>
     <a href="watch/index.html" class="watch-now-btn">
       <span class="wn-play">▶</span>
-      <span class="wn-text" data-en="WATCH NOW" data-ja="今すぐ視聴">WATCH NOW</span>
+      <span class="wn-text" data-en="Watch" data-ja="視聴">Watch</span>
     </a>
-    <div class="hamburger" onclick="toggleMenu()" id="hamburger"><span></span><span></span><span></span></div>
+    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
     <div class="lswitch">
       <button class="lbtn on" onclick="setLang('en')">EN</button>
       <button class="lbtn" onclick="setLang('ja')">JP</button>
@@ -114,88 +231,103 @@
 </nav>
 <div class="mobile-menu" id="mobile-menu"></div>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <p class="h-kicker" id="hero-kicker"></p>
-  <h1 class="h-title">PARADIGM<br><span class="red">SHIFT</span><span class="sub" id="hero-sub"></span></h1>
-  <p class="h-desc" id="hero-desc"></p>
-  <div class="h-cta" id="hero-cta"></div>
-</section>
-
-<section class="latest-sec">
-  <div class="latest-inner">
-    <div class="sec-lbl" id="latest-lbl"></div>
-    <h2 class="sec-ttl" id="latest-ttl"></h2>
-    <div class="latest-grid">
-      <a href="films.html" class="lc">
-        <div class="lbg" style="background-image:url('tuner.jpg');background-size:cover;background-position:center;"></div>
-        <div class="award-badge" id="l1-badge"></div>
-        <div class="lov">
-          <div class="ltitle">THE TUNER</div>
-          <div class="lgenre" id="l1-genre"></div>
-        </div>
+  <div class="hero-content">
+    <p class="h-kicker" id="hero-kicker"></p>
+    <h1 class="h-title">PARADIGM SHIFT</h1>
+    <p class="h-subtitle" id="hero-subtitle"></p>
+    <p class="h-desc" id="hero-desc"></p>
+    <div class="h-cta">
+      <a href="watch/index.html" class="btn-white">
+        <span>▶</span>
+        <span data-en="Watch Films" data-ja="作品を見る">Watch Films</span>
       </a>
-      <a href="films.html" class="lc">
-        <div class="lbg" style="background-image:url('smile.jpg');background-size:cover;background-position:center;"></div>
-        <div class="lov">
-          <div class="lcity">LOS ANGELES · 2025</div>
-          <div class="ltitle">@SMILE</div>
-          <div class="lgenre" id="l2-genre"></div>
-        </div>
-      </a>
-      <a href="films.html" class="lc">
-        <div class="lbg" style="background-image:url('echoes.jpg');background-size:cover;background-position:center top;"></div>
-        <div class="award-badge" id="l3-badge"></div>
-        <div class="lov">
-          <div class="lcity">LOS ANGELES · 2025</div>
-          <div class="ltitle">ECHOES</div>
-          <div class="lgenre" id="l3-genre"></div>
-        </div>
-      </a>
-    </div>
-    <div class="view-all">
-      <a href="films.html" class="btn" id="view-all-btn"></a>
+      <a href="about.html" class="btn-g" data-en="About the Director" data-ja="監督について">About the Director</a>
     </div>
   </div>
 </section>
 
-<section id="activity">
-  <div class="sec-lbl" id="act-lbl"></div>
-  <h2 class="sec-ttl" id="act-ttl"></h2>
-  <div class="act-grid">
-    <div class="act-cell">
-      <div class="act-cat" id="act1-cat"></div>
-      <div class="act-title">48 HOUR FILM PROJECT</div>
-      <div class="act-desc" id="act1-desc"></div>
-      <a href="films.html" class="act-link" id="act1-link"></a>
-    </div>
-    <div class="act-cell">
-      <div class="act-cat" id="act2-cat"></div>
-      <div class="act-title" id="act2-title"></div>
-      <div class="act-desc" id="act2-desc"></div>
-      <a href="stage.html" class="act-link" id="act2-link"></a>
-    </div>
-    <div class="act-cell">
-      <div class="act-cat" id="act3-cat"></div>
-      <div class="act-title" id="act3-title"></div>
-      <div class="act-desc" id="act3-desc"></div>
-      <a href="about.html" class="act-link" id="act3-link"></a>
-    </div>
-    <div class="act-cell">
-      <div class="act-cat" id="act4-cat"></div>
-      <div class="act-title" id="act4-title"></div>
-      <div class="act-desc" id="act4-desc"></div>
-      <a href="contact.html" class="act-link" id="act4-link"></a>
+<div class="content-wrap">
+
+  <!-- RECENT FILMS -->
+  <div class="row">
+    <h2 class="row-ttl" id="row-films-ttl"></h2>
+    <div class="film-grid">
+      <a href="watch/film.html?id=tuner" class="fc">
+        <div class="fc-bg" style="background-image:url('tuner.jpg');"></div>
+        <div class="fc-badge" id="fc1-badge"></div>
+        <div class="fc-overlay">
+          <div class="fc-year">2025</div>
+          <div class="fc-ttl">THE TUNER</div>
+          <div class="fc-meta" id="fc1-meta"></div>
+        </div>
+      </a>
+      <a href="watch/film.html?id=smile" class="fc">
+        <div class="fc-bg" style="background-image:url('smile.jpg');"></div>
+        <div class="fc-overlay">
+          <div class="fc-year">2025 · Los Angeles</div>
+          <div class="fc-ttl">@SMILE</div>
+          <div class="fc-meta" id="fc2-meta"></div>
+        </div>
+      </a>
+      <a href="watch/film.html?id=echoes" class="fc">
+        <div class="fc-bg" style="background-image:url('echoes.jpg');"></div>
+        <div class="fc-badge" id="fc3-badge"></div>
+        <div class="fc-overlay">
+          <div class="fc-year">2025 · Los Angeles</div>
+          <div class="fc-ttl">ECHOES</div>
+          <div class="fc-meta" id="fc3-meta"></div>
+        </div>
+      </a>
     </div>
   </div>
-</section>
+
+  <!-- NOTE: update image paths - current HTML uses tuner.jpg (assumes at root). If in root, use 'tuner.jpg' -->
+
+  <!-- ACTIVITY -->
+  <div class="row">
+    <h2 class="row-ttl" id="act-ttl"></h2>
+    <div class="act-grid">
+      <div class="act-cell">
+        <div class="act-cat" id="act1-cat"></div>
+        <div class="act-title">48 HOUR FILM PROJECT</div>
+        <div class="act-desc" id="act1-desc"></div>
+        <a href="films.html" class="act-link" id="act1-link"></a>
+      </div>
+      <div class="act-cell">
+        <div class="act-cat" id="act2-cat"></div>
+        <div class="act-title" id="act2-title"></div>
+        <div class="act-desc" id="act2-desc"></div>
+        <a href="stage.html" class="act-link" id="act2-link"></a>
+      </div>
+      <div class="act-cell">
+        <div class="act-cat" id="act3-cat"></div>
+        <div class="act-title" id="act3-title"></div>
+        <div class="act-desc" id="act3-desc"></div>
+        <a href="about.html" class="act-link" id="act3-link"></a>
+      </div>
+      <div class="act-cell">
+        <div class="act-cat" id="act4-cat"></div>
+        <div class="act-title" id="act4-title"></div>
+        <div class="act-desc" id="act4-desc"></div>
+        <a href="contact.html" class="act-link" id="act4-link"></a>
+      </div>
+    </div>
+  </div>
+
+</div>
 
 <footer>
-  <div class="footer-copy" id="footer-copy"></div>
-  <div class="footer-links">
-    <a href="#">Instagram</a>
-    <a href="#">Vimeo</a>
-    <a href="#">IMDb</a>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="#">Instagram</a>
+      <a href="#">Vimeo</a>
+      <a href="#">IMDb</a>
+      <a href="contact.html" data-en="Contact" data-ja="お問合せ">Contact</a>
+    </div>
+    <div class="footer-copy" id="footer-copy"></div>
   </div>
 </footer>
 
@@ -203,42 +335,59 @@
 const T = {
   en: {
     nav: ['Home','Films','Stage','About','Contact'],
-    heroKicker: 'Independent Film Collective · Tokyo · LA · London',
-    heroSub: 'by Jun Yoriko',
+    heroKicker: 'Independent Film Collective',
+    heroSubtitle: 'by Jun Yoriko · Tokyo · LA · London',
     heroDesc: 'Award-winning short films made in 48 hours. Three cities, one vision — cinematic storytelling without limits.',
-    heroCta: '<a href="films.html" class="btn">View Films</a><a href="about.html" class="btn-g">About the Director</a>',
-    latestLbl: 'Latest Works', latestTtl: 'RECENT FILMS',
-    l1Badge: '★ Filmapalooza 2026', l1Genre: 'Supernatural',
-    l2Genre: 'Action Thriller',
-    l3Badge: '★ BEST FILM', l3Genre: 'Adventure / Sci-Fi',
-    viewAll: 'View All Films',
-    actLbl: 'What We Do', actTtl: 'ACTIVITIES',
-    act1Cat: 'Short Film', act1Desc: 'Competing in the 48 Hour Film Project across Tokyo, Los Angeles, and London — writing, shooting, editing, and scoring a complete short film in just 48 hours.', act1Link: 'View Films',
-    act2Cat: 'Stage', act2Title: 'STAGE WORKS', act2Desc: 'Jun Yoriko directs and writes for major stage productions — from Biohazard: The Stage to Mononoke, 2FATE, and Gin\'eiyuudensetsu.', act2Link: 'View Stage',
-    act3Cat: 'Director', act3Title: 'JUN YORIKO', act3Desc: 'Director, writer, cinematographer and stage director. Born 1973 in Tokyo. Over 20 years of experience across film, stage, and live entertainment.', act3Link: 'About',
-    act4Cat: 'Contact', act4Title: 'GET IN TOUCH', act4Desc: 'Collaborations, screening requests, press enquiries and project opportunities welcome.', act4Link: 'Contact',
-    footer: '© 2026 PARADIGM SHIFT',
+    rowFilms: 'Recent Films',
+    fc1Badge: 'Filmapalooza 2026', fc1Meta: 'Supernatural',
+    fc2Meta: 'Action Thriller',
+    fc3Badge: 'Best Film', fc3Meta: 'Adventure · Sci-Fi',
+    actTtl: 'What We Do',
+    act1Cat: 'Short Film',
+    act1Desc: 'Competing in the 48 Hour Film Project across Tokyo, LA, and London — writing, shooting, editing, and scoring in just 48 hours.',
+    act1Link: 'View Films',
+    act2Cat: 'Stage',
+    act2Title: 'STAGE WORKS',
+    act2Desc: 'Jun Yoriko directs and writes major stage productions — Biohazard: The Stage, Mononoke, 2FATE, Gin\'eiyuudensetsu.',
+    act2Link: 'View Stage',
+    act3Cat: 'Director',
+    act3Title: 'JUN YORIKO',
+    act3Desc: 'Director, writer and stage director. Born in Tokyo. Over 20 years of experience across film, stage, and live entertainment.',
+    act3Link: 'About',
+    act4Cat: 'Contact',
+    act4Title: 'GET IN TOUCH',
+    act4Desc: 'Collaborations, screening requests, press enquiries and project opportunities welcome.',
+    act4Link: 'Contact',
+    footer: '© 2026 Paradigm Shift',
   },
   ja: {
     nav: ['ホーム','作品','舞台','概要','お問合せ'],
-    heroKicker: '独立系映画集団 · 東京 · LA · ロンドン',
-    heroSub: 'ヨリコジュン 監督',
+    heroKicker: '独立系映画集団',
+    heroSubtitle: 'ヨリコジュン 監督 · 東京 · LA · ロンドン',
     heroDesc: '48時間で作る受賞短編映画。3都市、ひとつのビジョン——限界なき映画的表現を追求する。',
-    heroCta: '<a href="films.html" class="btn">作品を見る</a><a href="about.html" class="btn-g">監督について</a>',
-    latestLbl: '最新作品', latestTtl: 'RECENT FILMS',
-    l1Badge: '★ Filmapalooza 2026', l1Genre: 'スーパーナチュラル',
-    l2Genre: 'アクション・スリラー',
-    l3Badge: '★ 最優秀作品賞', l3Genre: 'アドベンチャー / SF',
-    viewAll: '全作品を見る',
-    actLbl: '活動内容', actTtl: 'ACTIVITIES',
-    act1Cat: '短編映画', act1Desc: '東京、ロサンゼルス、ロンドンの48時間映画祭に参加。48時間で脚本・撮影・編集・音楽をすべて完成させる。', act1Link: '作品を見る',
-    act2Cat: '舞台', act2Title: 'STAGE WORKS', act2Desc: 'ヨリコジュンはバイオハザード THE STAGE、モノノ怪、2FATE、銀河英雄伝説など多数の舞台作品の脚本・演出を担当。', act2Link: '舞台作品を見る',
-    act3Cat: '監督', act3Title: 'JUN YORIKO', act3Desc: '監督・脚本・撮影・演出家。1973年東京生まれ。映画・舞台・ライブエンタメと幅広く活動。', act3Link: '詳細を見る',
-    act4Cat: 'コンタクト', act4Title: 'CONTACT', act4Desc: 'コラボレーション、上映依頼、取材・プロジェクトのご相談はこちら。', act4Link: 'お問い合わせ',
-    footer: '© 2026 PARADIGM SHIFT',
+    rowFilms: '最新作品',
+    fc1Badge: 'Filmapalooza 2026', fc1Meta: 'スーパーナチュラル',
+    fc2Meta: 'アクション・スリラー',
+    fc3Badge: '最優秀作品賞', fc3Meta: 'アドベンチャー · SF',
+    actTtl: '活動内容',
+    act1Cat: '短編映画',
+    act1Desc: '東京、ロサンゼルス、ロンドンの48時間映画祭に参加。48時間で脚本・撮影・編集・音楽をすべて完成させる。',
+    act1Link: '作品を見る',
+    act2Cat: '舞台',
+    act2Title: 'STAGE WORKS',
+    act2Desc: 'バイオハザード THE STAGE、モノノ怪、2FATE、銀河英雄伝説など多数の舞台作品の脚本・演出を担当。',
+    act2Link: '舞台を見る',
+    act3Cat: '監督',
+    act3Title: 'JUN YORIKO',
+    act3Desc: '監督・脚本・演出家。東京生まれ。映画・舞台・ライブエンタメと幅広く活動。',
+    act3Link: '詳細を見る',
+    act4Cat: 'お問い合わせ',
+    act4Title: 'CONTACT',
+    act4Desc: 'コラボレーション、上映依頼、取材、プロジェクトのご相談はこちら。',
+    act4Link: 'お問い合わせ',
+    footer: '© 2026 Paradigm Shift',
   }
 };
-
 const NAV_HREFS = ['index.html','films.html','stage.html','about.html','contact.html'];
 
 function render(lang) {
@@ -247,20 +396,17 @@ function render(lang) {
   document.documentElement.lang = lang;
   document.getElementById('nav-links').innerHTML = t.nav.map((n,i)=>
     `<a href="${NAV_HREFS[i]}" class="nav-link${i===0?' active':''}">${n}</a>`).join('');
-  if(document.getElementById('mobile-menu')) document.getElementById('mobile-menu').innerHTML=t.nav.map((n,i)=>`<a href="${NAV_HREFS[i]}" class="nav-link${i===0?' active':''}" onclick="document.getElementById('mobile-menu').classList.remove('open')">${n}</a>`).join('');
+  document.getElementById('mobile-menu').innerHTML=t.nav.map((n,i)=>
+    `<a href="${NAV_HREFS[i]}" class="nav-link${i===0?' active':''}" onclick="document.getElementById('mobile-menu').classList.remove('open')">${n}</a>`).join('');
   document.getElementById('hero-kicker').textContent = t.heroKicker;
-  document.getElementById('hero-sub').textContent = t.heroSub;
+  document.getElementById('hero-subtitle').textContent = t.heroSubtitle;
   document.getElementById('hero-desc').textContent = t.heroDesc;
-  document.getElementById('hero-cta').innerHTML = t.heroCta;
-  document.getElementById('latest-lbl').textContent = t.latestLbl;
-  document.getElementById('latest-ttl').textContent = t.latestTtl;
-  document.getElementById('l1-badge').textContent = t.l1Badge;
-  document.getElementById('l1-genre').textContent = t.l1Genre;
-  document.getElementById('l2-genre').textContent = t.l2Genre;
-  document.getElementById('l3-badge').textContent = t.l3Badge;
-  document.getElementById('l3-genre').textContent = t.l3Genre;
-  document.getElementById('view-all-btn').textContent = t.viewAll;
-  document.getElementById('act-lbl').textContent = t.actLbl;
+  document.getElementById('row-films-ttl').textContent = t.rowFilms;
+  document.getElementById('fc1-badge').textContent = t.fc1Badge;
+  document.getElementById('fc1-meta').textContent = t.fc1Meta;
+  document.getElementById('fc2-meta').textContent = t.fc2Meta;
+  document.getElementById('fc3-badge').textContent = t.fc3Badge;
+  document.getElementById('fc3-meta').textContent = t.fc3Meta;
   document.getElementById('act-ttl').textContent = t.actTtl;
   document.getElementById('act1-cat').textContent = t.act1Cat;
   document.getElementById('act1-desc').textContent = t.act1Desc;
@@ -288,20 +434,30 @@ function setLang(lang) {
   document.querySelectorAll('.lbtn').forEach(b=>b.classList.remove('on'));
   document.querySelector(`.lbtn[onclick="setLang('${lang}')"]`).classList.add('on');
 }
+function toggleMenu(){ document.getElementById('mobile-menu').classList.toggle('open'); }
+
+// Navbar bg on scroll
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 60) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+// INTRO
 const introEl = document.getElementById('intro');
 const introVideo = document.getElementById('intro-video');
 function endIntro() {
-  introEl.style.transition = 'opacity 0.6s ease';
+  introEl.style.transition = 'opacity 0.5s ease';
   introEl.style.opacity = '0';
-  setTimeout(()=>{ introEl.style.display='none'; introEl.remove(); }, 650);
+  setTimeout(()=>{ introEl.style.display='none'; introEl.remove(); }, 550);
 }
 function introClick() { if(introVideo.paused) introVideo.play(); }
 introVideo.addEventListener('ended', endIntro);
 introVideo.play().catch(()=>{});
+
 const savedLang = localStorage.getItem('ps-lang') || 'en';
 render(savedLang);
 if(savedLang==='ja') { document.querySelector('.lbtn.on').classList.remove('on'); document.querySelector('.lbtn[onclick="setLang(\'ja\')"]').classList.add('on'); }
-function toggleMenu(){ document.getElementById('mobile-menu').classList.toggle('open'); }
 </script>
 </body>
 </html>
